@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "netlify-cms-proxy": "npx netlify-cms-proxy-server"
   },
   "dependencies": {
     "autoprefixer": "10.4.14",
@@ -21,6 +22,7 @@
     "tailwindcss": "3.3.2"
   },
   "devDependencies": {
+    "npm-run-all": "^4.1.5",
     "prettier": "2.8.8"
   }
 }
