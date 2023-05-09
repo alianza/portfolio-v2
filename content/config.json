@@ -1,0 +1,22 @@
+{
+  "siteHeading": "Jan-Willem van Bremen",
+  "siteTitle": "Jan-Willem van Bremen - Portfolio",
+  "siteDescription": "Jan-Willem van Bremen's personal portfolio website.",
+  "accounts": [
+    {
+      "name": "Instagram",
+      "url": "https://instagram.com/leacandle",
+      "icon": "/images/5ecec78673e4440004f09e77-1-.png"
+    },
+    {
+      "name": "Medium",
+      "url": "https://medium.com/@leacandle",
+      "icon": "/images/medium.png"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "linkedin.com/in/lea-shamaa-014ab8195",
+      "icon": "/images/new-linkedin-logo-white-black-png.png"
+    }
+  ]
+}
