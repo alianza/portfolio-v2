@@ -3,26 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "netlify-cms-proxy": "npx netlify-cms-proxy-server"
+    "dev": "run-p next:dev netlify-cms-proxy watch-styles:*",
+    "next:dev": "next dev",
+    "next:build": "next build",
+    "next:start": "next start",
+    "next:lint": "next lint",
+    "netlify-cms-proxy": "npx netlify-cms-proxy-server",
+    "watch-styles:content": "sass components/mdContent/mdContent.module.scss ./public/styles/content.module.css --no-source-map --watch",
+    "build-styles:content": "sass components/mdContent/mdContent.module.scss ./public/styles/content.module.css --no-source-map"
   },
   "dependencies": {
     "autoprefixer": "10.4.14",
     "eslint": "8.40.0",
-    "eslint-config-next": "13.4.1",
     "next": "13.4.1",
     "nextjs-progressbar": "^0.0.16",
     "postcss": "8.4.23",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "sass": "^1.62.1",
-    "tailwindcss": "3.3.2"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5",
-    "prettier": "2.8.8"
+    "js-yaml": "^4.1.0",
+    "marked": "^4.3.0",
+    "gray-matter": "^4.0.3",
+    "autoprefixer": "^10.4.14",
+    "prop-types": "^15.8.1",
+    "prettier": "2.8.8",
+    "tailwindcss": "3.3.2",
+    "sass": "^1.62.1",
+    "eslint-config-next": "13.4.1"
   }
 }
