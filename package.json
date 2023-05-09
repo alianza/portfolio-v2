@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "run-p next:dev netlify-cms-proxy watch-styles",
-    "build": "run-p build-cms-styles copy-config next:build",
+    "build": "run-p build-styles next:build",
     "analyze": "cross-env ANALYZE=true yarn build",
     "next:dev": "next dev",
     "next:build": "next build",
