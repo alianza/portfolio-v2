@@ -1,0 +1,52 @@
+backend:
+  name: git-gateway
+  branch: main
+  repo: alianza/portfolio-lea
+
+local_backend: true
+site_url: https://jw-portfolio-v2.netlify.app/
+display_url: https://jw-portfolio-v2.netlify.app/
+media_folder: public/images
+public_folder: /images
+publish_mode: editorial_workflow
+logo_url: https://jw-portfolio-v2.netlify.app/admin/cms_img.jpg
+
+collections:
+  - name: "config"
+    label: "Config"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "config"
+        label: "Site Config"
+        file: "content/config.json"
+        description: "General site settings"
+        fields:
+          - { label: "Site heading", name: "siteHeading", widget: "string" }
+          - { label: "Site title", name: "siteTitle", widget: "string", hint: "The title of the site (Also tab bar)" }
+          - { label: "Site description", name: "siteDescription", widget: "text", hint: "Used for meta description" }
+          - { label: "Medium username", name: "usernameMedium", widget: "string", hint: "To retrieve medium articles" }
+          - label: "Online accounts"
+            name: "accounts"
+            label_singular: "Online account"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Social media name", name: "name", widget: "string" }
+              - { label: "Url", name: "url", widget: "string" }
+              - { label: "Icon", name: "icon", widget: "image" }
+
+  - label: 'Experiences'
+    name: 'experience'
+    label_singular: 'Experience'
+    folder: 'content/experiences'
+    create: true
+    slug: '{{day}}-{{month}}-{{year}}_{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Start Date', name: 'startDate', widget: 'datetime', format: "DD-MM-YYYY", date_format: "DD-MM-YYYY", time_format: false }
+      - { label: 'End Date', name: 'endDate', widget: 'datetime', format: "DD-MM-YYYY", date_format: "DD-MM-YYYY", time_format: false, required: false, hint: "Leave empty if still working (present)" }
+      - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
+      - { label: 'Description', name: 'description', widget: 'text' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
