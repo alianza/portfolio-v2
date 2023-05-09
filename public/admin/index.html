@@ -20,6 +20,31 @@
 <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
 
 <script type="module">
+  CMS.registerPreviewStyle("../styles/content.module.css");
+
+  const projectPreview = createClass({
+    render: function () {
+      const entry = this.props.entry;
+      const image = entry.getIn(['data', 'thumbnail']);
+      const bg = this.props.getAsset(image);
+      return h("div", { className: "content" },
+        h("h1", { className: "mainTitle" }, entry.getIn(["data", "title"])),
+        h("div", { className: "metaData" },
+          entry.getIn(["data", "date"]) ?
+            h("time", {}, entry.getIn(["data", "date"])) :
+            h("div", {  className: 'startEndDateLabel'},
+              h("time", {}, entry.getIn(["data", "startDate"])),
+              h("span", {}, "-"),
+              h("time", {}, entry.getIn(["data", "endDate"]) || "Present")),
+        ),
+        h("img", { src: bg.toString() }),
+        h("div", {}, this.props.widgetFor("body"))
+      );
+    },
+  });
+
+  CMS.registerPreviewTemplate("projects", projectPreview);
+
   const getYoutubeFragment = (videoId) => `<div class="video-container"><iframe class="youtube-embed" src="https://www.youtube.com/embed/${videoId}" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen> </iframe></div>`;
 
   CMS.registerEditorComponent({

@@ -3,7 +3,7 @@ backend:
   branch: main
   repo: alianza/portfolio-lea
 
-local_backend: false
+local_backend: true
 site_url: https://jw-portfolio-v2.netlify.app/
 display_url: https://jw-portfolio-v2.netlify.app/
 media_folder: public/images
@@ -37,10 +37,10 @@ collections:
               - { label: "Url", name: "url", widget: "string" }
               - { label: "Icon", name: "icon", widget: "image" }
 
-  - label: 'Experiences'
-    name: 'experience'
-    label_singular: 'Experience'
-    folder: 'content/experiences'
+  - label: 'Projects'
+    name: 'projects'
+    label_singular: 'Project'
+    folder: 'content/projects'
     create: true
     slug: '{{day}}-{{month}}-{{year}}_{{slug}}'
     fields:
