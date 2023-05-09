@@ -77,7 +77,7 @@
     font-weight: 200;
     margin: 0 auto 1em;
     position: relative;
-    @apply text-neutral-900;
+    @apply text-neutral-900 dark:text-neutral-50;
 
     .metaData {
         display: flex;
