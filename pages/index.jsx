@@ -8,6 +8,6 @@ function Home() {
   );
 }
 
-Home.getLayout = (children) => <Layout>{children}</Layout>;
+Home.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default Home;
