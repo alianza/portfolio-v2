@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "run-p next:dev netlify-cms-proxy watch-styles:*",
+    "dev": "run-p next:dev netlify-cms-proxy watch-styles",
     "next:dev": "next dev",
     "next:build": "next build",
     "next:start": "next start",
     "next:lint": "next lint",
     "netlify-cms-proxy": "npx netlify-cms-proxy-server",
-    "watch-styles:content": "sass components/mdContent/mdContent.module.scss ./public/styles/content.module.css --no-source-map --watch",
-    "build-styles:content": "sass components/mdContent/mdContent.module.scss ./public/styles/content.module.css --no-source-map"
+    "watch-styles": "run-p watch-tw-styles:content watch-compile-styles:content",
+    "build-styles": "run-p build-tw-styles:content build-compile-styles:content",
+    "build-tw-styles:content": "npx tailwindcss -i ./public/styles/content.module.css -o ./public/styles/content.module.css",
+    "watch-tw-styles:content": "npx tailwindcss -i ./public/styles/content.module.css -o ./public/styles/content.module.css --watch",
+    "watch-compile-styles:content": "sass components/mdContent/mdContent.module.scss ./public/styles/content.module.css --no-source-map --watch",
+    "build-compile-styles:content": "sass components/mdContent/mdContent.module.scss ./public/styles/content.module.css --no-source-map"
   },
   "dependencies": {
     "autoprefixer": "10.4.14",
