@@ -57,13 +57,23 @@ This layout pattern enables state persistence because the React component tree i
 
 > **Note**: This process is called [reconciliation](https://react.dev/learn/preserving-and-resetting-state), which is how React understands which elements have changed.
 
-### [With TypeScript](https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts#with-typescript)
+### [With TypeScript as you should](https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts#with-typescript)
 
 When using TypeScript, you must first create a new type for your pages which includes a `getLayout` function. Then, you must create a new type for your `AppProps` which overrides the `Component` property to use the previously created type.
 
 pages/index.tsx
 
 pages/_app.tsx
+
+```javascript
+ if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', (user) => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => {
+            document.location.href = '/admin/';
+          });
+        }
+```
 
 ### [Data Fetching](https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts#data-fetching)
 
