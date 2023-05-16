@@ -2,7 +2,7 @@
 title: Team Rockstars IT
 startDate: 09-05-2023
 endDate: 18-05-2023
-thumbnail: /images/hubble_ultra_deep_field.jpg
+thumbnail: /images/schermafbeelding-2023-05-09-135800.png
 description: My first real cool job at a real company making bog moneys adrerie.
 ---
 a [React Component](https://react.dev/learn/your-first-component) exported from a `.js`, `.jsx`, `.ts`, or `.tsx` file in the `pages` directory. Each page is associated with a route based on its file name.
