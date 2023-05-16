@@ -21,8 +21,6 @@ export async function getStaticProps() {
 function Home({ projects }) {
   useNetlifyIdentityRedirectHook();
 
-  console.log(`projects`, projects);
-
   return (
     <main className="flex flex-col items-center justify-between p-24">
       <h1 className="text-4xl font-bold text-center">Welcome to my personal portfolio website!</h1>
