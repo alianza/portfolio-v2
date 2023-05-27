@@ -41,11 +41,11 @@ function Home({ projects }) {
               />
             </Link>
             <div>
-              <Link href={`/projects/${project.id}`} className={`${utilStyles.link} text-2xl`}>
+              <Link href={`/projects/${project.id}`} className={`${utilStyles.link} text-2xl font-bold`}>
                 {project.data.title}
               </Link>
               <StartEndDateLabel startDate={project.data.startDate} endDate={project.data.endDate} />
-              <p>{project.data.description}</p>
+              <p className="font-light">{project.data.description}</p>
             </div>
           </TransitionScroll>
         ))}

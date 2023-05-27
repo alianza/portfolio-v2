@@ -14,7 +14,7 @@ export default function Header({}) {
   const toggleMenu = () => setMenuOpen((wasOpen) => !wasOpen);
 
   const getMenuList = (additionalClasses = '') => (
-    <ul className={`${additionalClasses} flex gap-4 sm:gap-4 flex-nowrap whitespace-nowrap`}>
+    <ul className={`${additionalClasses} flex gap-4 sm:gap-4 flex-nowrap whitespace-nowrap font-medium`}>
       <li>
         <Link className={`${utilStyles.link} py-4 sm:py-0`} href="/#about">
           About me
@@ -39,8 +39,8 @@ export default function Header({}) {
   );
 
   return (
-    <header id="header" className="h-16 px-4 flex gap-2 items-center justify-between bg-amber-700">
-      <Link href="/" className={`${utilStyles.link} text-3xl font-bold whitespace-nowrap`}>
+    <header id="header" className="sticky top-0 z-10 h-16 px-4 flex gap-2 items-center justify-between bg-amber-700">
+      <Link href="/" className={`${utilStyles.link} text-3xl font-extrabold whitespace-nowrap`}>
         <h1 className="sm:hidden">J.W.</h1>
         <h1 className="hidden sm:block md:hidden">J.W. van Bremen</h1>
         <h1 className="hidden md:block">Jan-Willem van Bremen</h1>
