@@ -107,6 +107,7 @@ components/layout.js
 
 
 
+
 </div>
 </details>
 
@@ -119,3 +120,5 @@ Hello, loose image:
 <img src="/images/hubble_ultra_deep_field.jpg" />
 <img src="/images/schermafbeelding-2023-05-09-144144.png" />
 </div>
+
+<video playsinline controls src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
