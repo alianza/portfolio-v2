@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import contentStyles from './mdContent.module.scss';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
-import { useDetailTagsAnimation } from '@/lib/markdownEnrichment';
+import { useDetailTagsAnimation, useImageZoom } from '@/lib/markdownEnrichment';
 import { useDarkMode } from '@/lib/customHooks';
 import Image from 'next/image';
+
+const contentId = 'article-content';
 
 const MdContent = ({ content: { title, date, startDate, endDate, thumbnail, content }, noDate }) => {
   const darkMode = useDarkMode();
 
   useDetailTagsAnimation();
+
+  useImageZoom(contentId);
 
   useEffect(() => {
     if (darkMode === undefined) return;
@@ -40,7 +44,7 @@ const MdContent = ({ content: { title, date, startDate, endDate, thumbnail, cont
           blurDataURL={`/_next/image?url=${thumbnail}&w=16&q=1`}
         />
       )}
-      <div className="relative z-[1]" dangerouslySetInnerHTML={{ __html: content }} />
+      <div id={contentId} className={contentStyles.markdown} dangerouslySetInnerHTML={{ __html: content }} />
     </article>
   );
 };
