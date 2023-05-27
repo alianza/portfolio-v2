@@ -22,7 +22,7 @@ function Home({ projects }) {
   useNetlifyIdentityRedirect();
 
   return (
-    <main className="flex flex-col items-center justify-between p-24">
+    <main className="flex flex-col items-center justify-between p-12 max-w-7xl mx-auto">
       <h1 className="text-4xl font-bold text-center">Welcome to my personal portfolio website!</h1>
       <div className="w-full h-full grid grid-cols-3 grid-rows-1 gap-4 mt-6">
         {projects.map((project) => (
