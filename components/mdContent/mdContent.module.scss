@@ -37,35 +37,27 @@
     }
 
     .mainTitle {
-        @apply m-0 text-4xl
+        @apply m-0 text-4xl;
     }
 
     img {
         @apply max-w-full;
     }
 
-    code,
     pre {
-        @apply bg-neutral-100 dark:bg-neutral-500 rounded-md border border-gray-300 font-mono text-xs px-2 py-0.5 whitespace-pre;
-    }
-
-    pre code {
-        @apply border-0 m-0 p-0 whitespace-pre;
+        @apply m-0 p-0 shadow-sm;
     }
 
 
     details {
-        margin: 1em 0;
+        @apply my-4;
 
         summary {
-            cursor: pointer;
-            font-size: 1.5em;
-            font-weight: bold;
-            overflow-wrap: break-word;
+            @apply cursor-pointer text-2xl font-bold break-words;
         }
 
         div {
-            margin: .5em 0;
+            @apply my-2;
         }
     }
 
