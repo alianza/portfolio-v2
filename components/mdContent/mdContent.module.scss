@@ -42,8 +42,12 @@
 
     .markdown {
 
+        figure, img, video, iframe {
+            @apply max-w-full shadow rounded;
+        }
+
         img {
-            @apply max-w-full shadow rounded cursor-pointer transition-[transform,shadow] hover:duration-75 active:scale-[0.99] hover:scale-[1.01] hover:shadow-xl;
+            @apply cursor-pointer transition-[transform,shadow] hover:duration-75 active:scale-[0.99] hover:scale-[1.01] hover:shadow-xl;
         }
 
         pre {
