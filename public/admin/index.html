@@ -24,23 +24,23 @@
   CMS.registerPreviewStyle("../styles/tailwindBase.css");
 
   const projectPreview = createClass({
-    render: function () {
-      const entry = this.props.entry;
-      const image = entry.getIn(['data', 'thumbnail']);
-      const bg = this.props.getAsset(image);
+    render() {
+      const entry = this.props.entry
+      const image = entry.getIn(['data', 'thumbnail'])
+      const bg = this.props.getAsset(image)
       return h("div", { className: "content" },
         h("h1", { className: "mainTitle" }, entry.getIn(["data", "title"])),
         h("div", { className: "metaData" },
           entry.getIn(["data", "date"]) ?
             h("time", {}, entry.getIn(["data", "date"])) :
-            h("div", {  className: 'startEndDateLabel'},
+            h("div", { className: 'startEndDateLabel' },
               h("time", {}, entry.getIn(["data", "startDate"])),
               h("span", {}, "-"),
               h("time", {}, entry.getIn(["data", "endDate"]) || "Present")),
         ),
         h("img", { src: bg.toString() }),
-        h("div", {}, this.props.widgetFor("body"))
-      );
+        h("div", { className: 'markdown' }, this.props.widgetFor("body"))
+      )
     },
   });
 
@@ -67,6 +67,16 @@
     toPreview: () => `<hr />`
   });
 
+    const getCollapsableNoteFragment = (summary, details) =>
+`<details>
+<summary>${summary || 'Title...'}</summary>
+<div>
+
+${details || 'Details...'}
+
+</div>
+</details>`
+
   CMS.registerEditorComponent({
     id: "collapsable-note",
     label: "Collapsable Note",
@@ -74,28 +84,41 @@
       { name: 'summary', label: 'Summary', widget: 'string' },
       { name: 'details', label: 'Details', widget: 'markdown' }
     ],
-    pattern: /^<details>$\s*?<summary>(.*?)<\/summary>\n<div>\n(.*?)\n<\/div>\n<\/details>$/ms,
+    pattern: /^<details>[\s\S]*<summary>(.*?)<\/summary>[\s\S]<div>\n*(.*?)\n<\/div>\n<\/details>$/ms,
     fromBlock: match => ({
         summary: match[1],
         details: match[2]
     }),
-    toBlock: data => `
-<details>
-  <summary>${data.summary || 'Title'}</summary>
-<div>
-
-${data.details}
-</div>
-</details>`,
-    toPreview: data => `
-<details>
-  <summary>${data.summary  || 'Title'}</summary>
-<div>
-
-${data.details}
-</div>
-</details>`
+    toBlock: data => getCollapsableNoteFragment(data.summary, data.details),
+    toPreview: data => getCollapsableNoteFragment(data.summary, data.details)
   });
+
+    const getImagesGridFragment = (images) => {
+        const imagesHtml = images?.map(image => `<img src="${image}" />`).join('\n');
+        const fragment =
+`<div class="images-grid">
+${imagesHtml}
+</div>`;
+        return fragment
+    }
+
+  CMS.registerEditorComponent({
+    id: "images-grid",
+    label: "Images Grid",
+    fields: [
+      { name: 'images', label: 'Images', widget: 'list', field: { name: "image", label: "Image", widget: 'image' } }
+    ],
+    pattern: /^<div class="images-grid">\n(.*?)<\/div>$/ms,
+    fromBlock(match) {
+      const images = match[1].split('\n').filter(Boolean)
+      return ({
+        images: images.map(image => image.match(/<img[\s\S]*src="(.*?)"[\s\S]*\/>/)[1])
+      })
+    },
+    toBlock: (data) => getImagesGridFragment(data.images),
+    toPreview: (data) => getImagesGridFragment(data.images)
+  })
+
 </script>
 </body>
 </html>
