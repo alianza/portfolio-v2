@@ -73,6 +73,8 @@ pages/_app.tsx
             document.location.href = '/admin/';
           });
         }
+      });
+    }
 ```
 
 ### [Data Fetching](https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts#data-fetching)
