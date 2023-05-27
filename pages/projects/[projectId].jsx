@@ -1,4 +1,3 @@
-import utils from '../../styles/utils.module.scss';
 import Layout from '../../components/layout/layout/layout';
 import MdContent from '../../components/mdContent/mdContent';
 import { getProject, getProjectIds } from '@/lib/services/projectsService';
@@ -23,7 +22,7 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
-const Experience = ({ project }) => {
+const Project = ({ project }) => {
   return (
     <>
       <Head item={project} />
@@ -34,6 +33,6 @@ const Experience = ({ project }) => {
   );
 };
 
-Experience.getLayout = (page) => <Layout>{page}</Layout>;
+Project.getLayout = (page) => <Layout>{page}</Layout>;
 
-export default Experience;
+export default Project;
