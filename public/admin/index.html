@@ -81,15 +81,17 @@
     }),
     toBlock: data => `
 <details>
-  <summary>${data.summary}</summary>
+  <summary>${data.summary || 'Title'}</summary>
 <div>
+
 ${data.details}
 </div>
 </details>`,
     toPreview: data => `
 <details>
-  <summary>${data.summary}</summary>
+  <summary>${data.summary  || 'Title'}</summary>
 <div>
+
 ${data.details}
 </div>
 </details>`
