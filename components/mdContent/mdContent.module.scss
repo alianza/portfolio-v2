@@ -1,36 +1,28 @@
-.frame-content {
+.frame-content { // For Decap CMS Markdown content container
     @apply m-2 my-8 bg-neutral-50 dark:bg-neutral-900 shadow-cmsPreviewFrame shadow-neutral-50 dark:shadow-neutral-900; // as in global.scss
-}
-
-@mixin video-container {
-    @apply relative w-full my-4;
-    padding-bottom: 56.25%;
-}
-
-@mixin video-embed {
-    @apply absolute top-0 left-0 w-full h-full border-0;
 }
 
 @mixin widgetStyles {
     .video-container {
-        @include video-container;
+        @apply relative w-full my-4;
+        padding-bottom: 56.25%;
 
         .youtube-embed {
-            @include video-embed;
+            @apply absolute top-0 left-0 w-full h-full border-0;
+        }
+    }
+
+    .images-grid {
+        @apply grid grid-cols-2 gap-5;
+
+        img {
+            @apply w-full m-0 last:odd:col-span-2;
         }
     }
 }
 
-.startEndDateLabel {
-    @apply flex items-center gap-1 flex-wrap font-light;
-
-    time {
-        @apply m-0 whitespace-nowrap;
-    }
-}
-
 .content {
-    @apply text-neutral-900 dark:text-neutral-50 prose dark:prose-invert relative mx-auto my-4 antialiased;
+    @apply text-neutral-900 dark:text-neutral-50 lg:prose-xl prose dark:prose-invert relative mx-auto my-4 antialiased;
 
     .metaData {
         @apply flex w-full justify-between items-center mb-2;
@@ -40,48 +32,48 @@
         @apply m-0 text-4xl;
     }
 
-    img {
-        @apply max-w-full;
-    }
+    .startEndDateLabel {
+        @apply flex items-center gap-1 flex-wrap font-light;
 
-    pre {
-        @apply m-0 p-0 shadow-sm;
-    }
-
-
-    details {
-        @apply my-4;
-
-        summary {
-            @apply cursor-pointer text-2xl font-bold break-words;
-        }
-
-        div {
-            @apply my-2;
+        time {
+            @apply m-0 whitespace-nowrap;
         }
     }
 
-    // Netlify CMS widget styles
-    @include widgetStyles;
+    .markdown {
 
-    // App widget styles
-    :global {
-        @include widgetStyles;
-    }
-}
+        img {
+            @apply max-w-full shadow rounded cursor-pointer transition-[transform,shadow] hover:duration-75 active:scale-[0.99] hover:scale-[1.01] hover:shadow-xl;
+        }
 
-@media (min-width: 769px) {
-    .content {
-        h2 {
-            @apply relative;
+        pre {
+            @apply m-0 p-0 shadow-sm;
+        }
 
-            &::before {
-                @apply block;
+        code + :not(pre) {
+            @apply bg-neutral-100 dark:bg-neutral-500 rounded-md border border-gray-300 font-mono text-xs px-2 py-0.5 whitespace-pre;
+        }
+
+        details {
+            @apply my-4;
+
+            summary {
+                @apply cursor-pointer text-2xl font-bold break-words;
+            }
+
+            div {
+                @apply my-2;
             }
         }
 
-        h3, h4, h5 {
-            @apply relative;
+        // Netlify CMS widget styles
+        @include widgetStyles;
+
+        // App widget styles
+        :global {
+            @include widgetStyles;
         }
     }
+
 }
+
