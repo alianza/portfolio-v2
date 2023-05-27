@@ -1,5 +1,5 @@
 import Layout from '@/components/layout/layout/layout';
-import { useNetlifyIdentityRedirectHook } from '@/lib/customHooks';
+import { useNetlifyIdentityRedirect } from '@/lib/customHooks';
 import { hiddenStyle, transitionBaseStyle } from '@/lib/utils';
 import { TransitionScroll } from 'react-transition-scroll';
 import Image from 'next/image';
@@ -19,7 +19,7 @@ export async function getStaticProps() {
 }
 
 function Home({ projects }) {
-  useNetlifyIdentityRedirectHook();
+  useNetlifyIdentityRedirect();
 
   return (
     <main className="flex flex-col items-center justify-between p-24">
