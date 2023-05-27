@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        xs: '320px',
+        xs: '480px',
       },
       boxShadow: {
         cmsPreviewFrame: '0 0 0 64px',
