@@ -82,3 +82,23 @@ pages/_app.tsx
 Inside your layout, you can fetch data on the client-side using `useEffect` or a library like [SWR](https://swr.vercel.app/). Because this file is not a [Page](https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts), you cannot use `getStaticProps` or `getServerSideProps` currently.
 
 components/layout.js
+
+
+<details>
+  <summary>Hello! Expand me!</summary>
+<div>
+# Hello I'm an expandable block!
+
+```javascript
+ if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', (user) => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+```
+</div>
+</details>
