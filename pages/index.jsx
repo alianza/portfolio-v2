@@ -22,35 +22,53 @@ function Home({ projects }) {
   useNetlifyIdentityRedirect();
 
   return (
-    <main className="flex flex-col items-center justify-between p-12 max-w-7xl mx-auto">
-      <h1 className="text-4xl font-bold text-center">Welcome to my personal portfolio website!</h1>
-      <div className="w-full h-full grid grid-cols-3 grid-rows-1 gap-4 mt-6">
-        {projects.map((project) => (
-          <TransitionScroll key={project.id} className="" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
-            <Link
-              href={`/projects/${project.id}`}
-              className={`relative block aspect-video ${utilStyles.hoverEffectSlight}`}
-            >
-              <Image
-                fill
-                sizes="100vw"
-                alt={`${project.data.title} thumbnail`}
-                src={project.data.thumbnail}
-                placeholder="blur"
-                blurDataURL={`/_next/image?url=${project.data.thumbnail}&w=16&q=1`}
-              />
-            </Link>
-            <div>
-              <Link href={`/projects/${project.id}`} className={`${utilStyles.link} text-2xl font-bold`}>
-                {project.data.title}
-              </Link>
-              <StartEndDateLabel startDate={project.data.startDate} endDate={project.data.endDate} />
-              <p className="font-light">{project.data.description}</p>
-            </div>
-          </TransitionScroll>
-        ))}
+    <>
+      <div className="w-full">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5">
+          <h1 className="text-5xl font-bold drop-shadow-lg">Jan-Willem van Bremen</h1>
+          <h2 className="text-3xl drop-shadow-lg">Software developer, Skateboarder & Model!</h2>
+        </div>
+        <video
+          className="object-cover pointer-events-none w-full h-[calc(100vh-theme(spacing.header))]"
+          autoPlay
+          playsInline
+          muted
+          loop
+        >
+          <source src="/cover_video.webm" type="video/webm" />
+          <source src="/cover_video.mp4" type="video/mp4" />
+        </video>
       </div>
-    </main>
+      <main className="flex flex-col items-center justify-between p-12 max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-center">Welcome to my personal portfolio website!</h1>
+        <div className="w-full h-full grid grid-cols-3 grid-rows-1 gap-4 mt-6">
+          {projects.map((project) => (
+            <TransitionScroll key={project.id} className="" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+              <Link
+                href={`/projects/${project.id}`}
+                className={`relative block aspect-video ${utilStyles.hoverEffectSlight}`}
+              >
+                <Image
+                  fill
+                  sizes="100vw"
+                  alt={`${project.data.title} thumbnail`}
+                  src={project.data.thumbnail}
+                  placeholder="blur"
+                  blurDataURL={`/_next/image?url=${project.data.thumbnail}&w=16&q=1`}
+                />
+              </Link>
+              <div>
+                <Link href={`/projects/${project.id}`} className={`${utilStyles.link} text-2xl font-bold`}>
+                  {project.data.title}
+                </Link>
+                <StartEndDateLabel startDate={project.data.startDate} endDate={project.data.endDate} />
+                <p className="font-light">{project.data.description}</p>
+              </div>
+            </TransitionScroll>
+          ))}
+        </div>
+      </main>
+    </>
   );
 }
 
