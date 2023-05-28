@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      spacing: {
+        header: '64px',
+      },
       screens: {
         xs: '480px',
       },
