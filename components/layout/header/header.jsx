@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import utilStyles from '../../../styles/utils.module.scss';
 
@@ -11,27 +11,35 @@ export default function Header({}) {
     visibility: menuOpen ? 'visible' : 'hidden',
   };
 
-  const toggleMenu = () => setMenuOpen((wasOpen) => !wasOpen);
+  useEffect(() => {
+    menuOpen ? document.body.classList.add('no-scroll') : document.body.classList.remove('no-scroll');
+  }, [menuOpen]);
+
+  const toggleMenu = () => {
+    setMenuOpen((wasOpen) => !wasOpen);
+  };
 
   const getMenuList = (additionalClasses = '') => (
-    <ul className={`${additionalClasses} flex gap-4 sm:gap-4 flex-nowrap whitespace-nowrap font-medium`}>
+    <ul
+      className={`${additionalClasses} flex sm:gap-2 gap-4 justify-between flex-nowrap whitespace-nowrap font-medium`}
+    >
       <li>
-        <Link className={`${utilStyles.link} py-4 sm:py-0`} href="/#about">
+        <Link className={`${utilStyles.link} py-4`} href="/#about">
           About me
         </Link>
       </li>
       <li>
-        <Link className={`${utilStyles.link} py-4 sm:py-0`} href="/#experiences">
+        <Link className={`${utilStyles.link} py-4`} href="/#experiences">
           Experiences
         </Link>
       </li>
       <li>
-        <Link className={`${utilStyles.link} py-4 sm:py-0`} href="/#cv">
+        <Link className={`${utilStyles.link} py-4`} href="/#cv">
           Curriculum Vitae
         </Link>
       </li>
       <li>
-        <Link className={`${utilStyles.link} py-4 sm:py-0`} href="/#contact">
+        <Link className={`${utilStyles.link} py-4`} href="/#contact">
           Contact
         </Link>
       </li>
@@ -52,7 +60,7 @@ export default function Header({}) {
 
       <nav
         style={menuStyle}
-        className="absolute flex z-20 text-3xl justify-center items-center bg-neutral-900 bg-opacity-80 left-0 bottom-0 w-full h-full transition-[opacity,visibility] xs:hidden"
+        className="absolute flex z-20 text-3xl justify-center items-center bg-neutral-900 bg-opacity-80 left-0 top-0 w-full h-screen transition-[opacity,visibility] xs:hidden"
         onClick={toggleMenu}
       >
         {getMenuList('flex-col -mt-32')}
