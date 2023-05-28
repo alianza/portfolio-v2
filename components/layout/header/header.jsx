@@ -47,7 +47,10 @@ export default function Header({}) {
   );
 
   return (
-    <header id="header" className="sticky top-0 z-10 h-16 px-4 flex gap-2 items-center justify-between bg-amber-700">
+    <header
+      id="header"
+      className="sticky top-0 z-10 h-header px-4 flex gap-2 items-center justify-between bg-amber-700"
+    >
       <Link href="/" className={`${utilStyles.link} text-3xl font-extrabold whitespace-nowrap`}>
         <h1 className="sm:hidden">J.W.</h1>
         <h1 className="hidden sm:block md:hidden">J.W. van Bremen</h1>
