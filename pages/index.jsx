@@ -21,8 +21,6 @@ export async function getStaticProps() {
 function Home({ projects }) {
   useNetlifyIdentityRedirect();
 
-  const coverVideoName = `cover_video_${Math.floor(Math.random() * 2) + 1}`;
-
   return (
     <>
       <div className="w-full">
@@ -37,8 +35,8 @@ function Home({ projects }) {
           muted
           loop
         >
-          <source src={`/${coverVideoName}.webm`} type="video/webm" />
-          <source src={`/${coverVideoName}.mp4`} type="video/mp4" />
+          <source src={`/${`cover_video_${Math.floor(Math.random() * 2) + 1}`}.webm`} type="video/webm" />
+          <source src={`/${`cover_video_${Math.floor(Math.random() * 2) + 1}`}.mp4`} type="video/mp4" />
         </video>
       </div>
 
