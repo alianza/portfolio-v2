@@ -1,8 +1,8 @@
 ---
 title: Team Rockstars IT
-startDate: 09-05-2023
-endDate: 18-05-2023
-thumbnail: /images/hubble_ultra_deep_field.jpg
+startDate: 2023-04-19
+endDate: 2023-05-01
+thumbnail: /assets/hubble_ultra_deep_field.jpg
 description: My first real cool job at a real company making bog moneys adrerie.
 ---
 a [React Component](https://react.dev/learn/your-first-component) exported from a `.js`, `.jsx`, `.ts`, or `.tsx` file in the `pages` directory. Each page is associated with a route based on its file name.
@@ -113,12 +113,12 @@ components/layout.js
 
 Hello, loose image:
 
-![Faka](/images/schermafbeelding-2023-05-15-165328.png "Title")
+![Faka](/assets/schermafbeelding-2023-05-15-165328.png "Title")
 
 <div class="images-grid">
-<img src="/images/schermafbeelding-2023-05-09-130751.png" />
-<img src="/images/hubble_ultra_deep_field.jpg" />
-<img src="/images/schermafbeelding-2023-05-09-144144.png" />
+<img src="/assets/schermafbeelding-2023-05-09-130751.png" />
+<img src="/assets/hubble_ultra_deep_field.jpg" />
+<img src="/assets/schermafbeelding-2023-05-09-144144.png" />
 </div>
 
 <video playsinline controls src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
