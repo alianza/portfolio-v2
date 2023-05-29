@@ -1,5 +1,5 @@
 .frame-content { // For Decap CMS Markdown content container
-    @apply m-2 my-8 bg-neutral-50 dark:bg-neutral-900 shadow-cmsPreviewFrame shadow-neutral-50 dark:shadow-neutral-900; // as in global.scss
+    @apply m-2 my-8 flex bg-neutral-50 dark:bg-neutral-900 shadow-cmsPreviewFrame shadow-neutral-50 dark:shadow-neutral-900 min-h-screen; // as in global.scss
 }
 
 @mixin widgetStyles {
@@ -21,6 +21,14 @@
     }
 }
 
+.startEndDateLabel {
+    @apply flex items-center gap-1 flex-wrap font-light;
+
+    time {
+        @apply m-0 whitespace-nowrap;
+    }
+}
+
 .content {
     @apply text-neutral-900 dark:text-neutral-50 lg:prose-xl prose dark:prose-invert relative mx-auto my-4 antialiased;
 
@@ -30,14 +38,6 @@
 
     .mainTitle {
         @apply m-0 text-4xl;
-    }
-
-    .startEndDateLabel {
-        @apply flex items-center gap-1 flex-wrap font-light;
-
-        time {
-            @apply m-0 whitespace-nowrap;
-        }
     }
 
     .markdown {
