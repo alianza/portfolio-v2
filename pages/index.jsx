@@ -48,7 +48,7 @@ function Home({ projects }) {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             <div className="flex flex-col">
               <Image
-                src="/assets/portrait.webp"
+                src="/portrait.webp"
                 alt="Portrait of Jan-Willem van Bremen"
                 className="w-full rounded shadow"
                 quality={100}
@@ -80,7 +80,7 @@ function Home({ projects }) {
             </div>
             <div className="flex flex-col sm:last-of-type:odd:col-span-full md:last-of-type:odd:col-span-1">
               <Image
-                src="/assets/fun.webp"
+                src="/fun.webp"
                 alt="Portrait of Jan-Willem van Bremen"
                 className="w-full rounded shadow"
                 quality={100}
