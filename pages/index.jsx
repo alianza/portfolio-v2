@@ -43,7 +43,7 @@ function Home({ projects }) {
           loop
         >
           {videoId &&
-            [[`cover_video_${videoId}.webp`], [`cover_video_${videoId}.mp4`]].map(([src]) => (
+            [[`cover_video_${videoId}.webm`], [`cover_video_${videoId}.mp4`]].map(([src]) => (
               <source key={src} src={`/${src}`} type={`video/${src.split('.').pop()}`} />
             ))}
         </video>
