@@ -5,7 +5,7 @@ export default function StartEndDateLabel({ startDate, endDate, centered }) {
   return (
     <div className={`${contentStyles.startEndDateLabel} ${centered ? 'justify-center' : ''}`}>
       <time>{startDate}</time>
-      {'-'}
+      <span>-</span>
       <time>{endDate || 'Present'}</time>
     </div>
   );
