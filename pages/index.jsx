@@ -60,9 +60,9 @@ function Home({ projects }) {
               <div className="mt-1">
                 <p className="text-2xl font-bold">Wo I am</p>
                 <p>
-                  My name is Jan-Willem van Bremen. I'm a {yearsSinceDate('10-10-1998')} year old software engineer,
-                  skateboarder and model from Amsterdam! I'm a very social, diligent and precise person who can
-                  concentrate for long periods of time. I work well both solo and in development teams!
+                  My name is Jan-Willem van Bremen. I&apos;m a {yearsSinceDate('10-10-1998')} year old software
+                  engineer, skateboarder and model from Amsterdam! I&apos;m a very social, diligent and precise person
+                  who can concentrate for long periods of time. I work well both solo and in development teams!
                 </p>
               </div>
             </div>
