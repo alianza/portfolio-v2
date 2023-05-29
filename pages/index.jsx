@@ -8,7 +8,6 @@ import utilStyles from '@/styles/utils.module.scss';
 import Link from 'next/link';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
 import { useEffect, useState } from 'react';
-import { use } from 'marked';
 
 export async function getStaticProps() {
   const projects = await getProjects({ content: false });
