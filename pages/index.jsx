@@ -19,6 +19,7 @@ export async function getStaticProps() {
 }
 
 function Home({ projects }) {
+  const [coverVideoName] = React.useState(`cover_video_${Math.floor(Math.random() * 2) + 1}`);
   useNetlifyIdentityRedirect();
 
   return (
@@ -35,8 +36,8 @@ function Home({ projects }) {
           muted
           loop
         >
-          <source src={`/${`cover_video_${Math.floor(Math.random() * 2) + 1}`}.webm`} type="video/webm" />
-          <source src={`/${`cover_video_${Math.floor(Math.random() * 2) + 1}`}.mp4`} type="video/mp4" />
+          <source src={`/${coverVideoName}.webm`} type="video/webm" />
+          <source src={`/${coverVideoName}.mp4`} type="video/mp4" />
         </video>
       </div>
 
