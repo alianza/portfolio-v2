@@ -32,7 +32,7 @@ export default function Layout({ children }) {
 
       <Footer />
 
-      <NextNProgress color={darkMode ? '#000' : '#fff'} />
+      <NextNProgress color={darkMode ? '#eee' : '#333'} />
     </div>
   );
 }
