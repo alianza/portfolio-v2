@@ -84,7 +84,7 @@ ${details || 'Details...'}
       { name: 'summary', label: 'Summary', widget: 'string' },
       { name: 'details', label: 'Details', widget: 'markdown' }
     ],
-    pattern: /^<details>[\s\S]*<summary>(.*?)<\/summary>[\s\S]<div>\n*(.*?)\n<\/div>\n<\/details>$/ms,
+    pattern: /^<details>\n<summary>(.*?)<\/summary>\n<div>\n*(.*?)\n<\/div>\n<\/details>$/ms,
     fromBlock: match => ({
         summary: match[1],
         details: match[2]
@@ -129,7 +129,7 @@ ${imagesHtml}
       fields: [
         { name: 'video', label: 'Video', widget: 'file' }
       ],
-      pattern: /^<video[\s\S]*src="(.*?)"[\s\S]*\/>$/ms,
+      pattern: /^<video playsInline controls src="(.*?)"\/>$/ms,
       fromBlock: match => ({ video: match[1] }),
       toBlock: data => getVideoFragment(data.video),
       toPreview: data => getVideoFragment(data.video)
