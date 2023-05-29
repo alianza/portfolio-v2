@@ -7,7 +7,8 @@ import { getProjects } from '@/lib/services/projectsService';
 import utilStyles from '@/styles/utils.module.scss';
 import Link from 'next/link';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { use } from 'marked';
 
 export async function getStaticProps() {
   const projects = await getProjects({ content: false, limit: 3 });
@@ -20,8 +21,12 @@ export async function getStaticProps() {
 }
 
 function Home({ projects }) {
-  const [coverVideoName] = useState(`cover_video_${Math.floor(Math.random() * 2) + 1}`);
   useNetlifyIdentityRedirect();
+  const [videoId, setVideoId] = useState(null);
+
+  useEffect(() => {
+    setVideoId(Math.floor(Math.random() * 2) + 1);
+  }, []);
 
   return (
     <>
@@ -37,8 +42,10 @@ function Home({ projects }) {
           muted
           loop
         >
-          <source src={`/${coverVideoName}.webm`} type="video/webm" />
-          <source src={`/${coverVideoName}.mp4`} type="video/mp4" />
+          {videoId &&
+            [[`cover_video_${videoId}.mp4`], [`cover_video_${videoId}.webm`]].map(([src]) => (
+              <source key={src} src={`/${src}`} type={`video/${src.split('.').pop()}`} />
+            ))}
         </video>
       </div>
 
