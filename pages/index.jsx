@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { use } from 'marked';
 
 export async function getStaticProps() {
-  const projects = await getProjects({ content: false, limit: 3 });
+  const projects = await getProjects({ content: false });
 
   return {
     props: {
@@ -55,7 +55,7 @@ function Home({ projects }) {
             About me
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-            <div className="flex flex-col">
+            <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle} className="flex flex-col">
               <Image
                 src="/portrait.webp"
                 alt="Portrait of Jan-Willem van Bremen"
@@ -72,8 +72,8 @@ function Home({ projects }) {
                   who can concentrate for long periods of time. I work well both solo and in development teams!
                 </p>
               </div>
-            </div>
-            <div className="flex flex-col">
+            </TransitionScroll>
+            <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle} className="flex flex-col">
               <video autoPlay playsInline muted loop className="w-full rounded shadow">
                 <source src="/professional.webm" type="video/webm" />
                 <source src="/professional.mp4" type="video/mp4" />
@@ -86,8 +86,12 @@ function Home({ projects }) {
                   Next.js), Git(hub), Agile Scrum and more! Check out some of my experiences & projects!
                 </p>
               </div>
-            </div>
-            <div className="flex flex-col sm:last-of-type:odd:col-span-full md:last-of-type:odd:col-span-1">
+            </TransitionScroll>
+            <TransitionScroll
+              baseStyle={transitionBaseStyle}
+              hiddenStyle={hiddenStyle}
+              className="flex flex-col sm:last-of-type:odd:col-span-full md:last-of-type:odd:col-span-1"
+            >
               <Image
                 src="/fun.webp"
                 alt="Portrait of Jan-Willem van Bremen"
@@ -104,7 +108,7 @@ function Home({ projects }) {
                   that I also do some model work for various street wear brands in Amsterdam.
                 </p>
               </div>
-            </div>
+            </TransitionScroll>
           </div>
         </section>
 
@@ -117,7 +121,7 @@ function Home({ projects }) {
               <TransitionScroll key={id} className="" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
                 <Link href={`/projects/${id}`} className={`relative block ${utilStyles.hoverEffectSlight}`}>
                   <Image
-                    className="aspect-square rounded object-cover"
+                    className="aspect-square w-full rounded object-cover"
                     alt={`${data.title} thumbnail`}
                     width={500}
                     height={500}
@@ -142,19 +146,46 @@ function Home({ projects }) {
           <h2 id="contact" className="scroll-header-offset text-center text-4xl font-bold sm:text-left">
             Contact me
           </h2>
-          <div className="mt-6 grid h-full w-full grid-cols-1 grid-rows-1 gap-4 md:grid-cols-3">
-            <h3>Send me a message!</h3>
-            <form name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true">
-              <input placeholder="Name..." name="name" className="" />
-              <input placeholder="Email..." name="email" className="" />
-              <textarea placeholder="Message..." name="message" className="" />
-              <div data-netlify-recaptcha="true" />
+          <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+            <h3 className="my-2 text-2xl">Send me a message!</h3>
+            <form
+              className="my-6 grid grid-cols-2 grid-rows-[repeat(2,_minmax(0,_1fr))_repeat(2,_48px)] gap-4 text-neutral-700"
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              data-netlify-recaptcha="true"
+            >
+              <input
+                placeholder="Name..."
+                name="name"
+                className="h-12 p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+              />
+              <textarea
+                placeholder="Message..."
+                name="message"
+                className="row-span-2 min-h-[112px] p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+              />
+              <input
+                placeholder="Email..."
+                name="email"
+                className="mt-auto h-12 p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+              />
+              <button
+                className={`${utilStyles.button} ${utilStyles.green} col-span-full mx-auto h-12 w-1/5`}
+                type="submit"
+              >
+                Send
+              </button>
+              <div className="col-span-full" data-netlify-recaptcha="true" />
             </form>
-          </div>
+          </TransitionScroll>
           <div>
-            <TransitionScroll className="" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
-              <h3>
-                Or, Email me directly! @ <a href="mailto:janwillemvanbremen@live.nl">janwillemvanbremen@live.nl</a>
+            <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+              <h3 className="font-semibold">
+                Or, Email me directly! @{' '}
+                <a className={`font-bold text-blue-500 underline`} href="mailto:janwillemvanbremen@live.nl">
+                  janwillemvanbremen@live.nl
+                </a>
               </h3>
             </TransitionScroll>
           </div>
