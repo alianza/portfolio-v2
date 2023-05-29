@@ -50,7 +50,7 @@ function Home({ projects }) {
       </div>
 
       <main className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:p-12">
-        <section className="flex flex-col gap-4">
+        <section className="flex w-full flex-col gap-4">
           <h2 id="about" className="scroll-header-offset text-center text-4xl font-bold sm:text-left">
             About me
           </h2>
@@ -108,11 +108,10 @@ function Home({ projects }) {
           </div>
         </section>
 
-        <section>
+        <section className="w-full">
           <h2 id="experiences" className="scroll-header-offset text-center text-4xl font-bold sm:text-left">
             Experiences & Projects
           </h2>
-
           <div className="mt-6 grid h-full w-full grid-cols-1 grid-rows-1 gap-4 md:grid-cols-3">
             {projects.map(({ data, id }) => (
               <TransitionScroll key={id} className="" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
@@ -136,6 +135,28 @@ function Home({ projects }) {
                 </div>
               </TransitionScroll>
             ))}
+          </div>
+        </section>
+
+        <section className="w-full">
+          <h2 id="contact" className="scroll-header-offset text-center text-4xl font-bold sm:text-left">
+            Contact me
+          </h2>
+          <div className="mt-6 grid h-full w-full grid-cols-1 grid-rows-1 gap-4 md:grid-cols-3">
+            <h3>Send me a message!</h3>
+            <form name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true">
+              <input placeholder="Name..." name="name" className="" />
+              <input placeholder="Email..." name="email" className="" />
+              <textarea placeholder="Message..." name="message" className="" />
+              <div data-netlify-recaptcha="true" />
+            </form>
+          </div>
+          <div>
+            <TransitionScroll className="" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+              <h3>
+                Or, Email me directly! @ <a href="mailto:janwillemvanbremen@live.nl">janwillemvanbremen@live.nl</a>
+              </h3>
+            </TransitionScroll>
           </div>
         </section>
       </main>
