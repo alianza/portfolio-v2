@@ -19,51 +19,44 @@ export default function Header({}) {
     setMenuOpen((wasOpen) => !wasOpen);
   };
 
-  const getMenuList = (additionalClasses = '') => (
-    <ul
-      className={`${additionalClasses} flex sm:gap-2 gap-4 justify-between flex-nowrap whitespace-nowrap font-medium`}
-    >
-      <li>
-        <Link className={`${utilStyles.link} py-4`} href="/#about">
-          About me
-        </Link>
-      </li>
-      <li>
-        <Link className={`${utilStyles.link} py-4`} href="/#experiences">
-          Experiences
-        </Link>
-      </li>
-      <li>
-        <Link className={`${utilStyles.link} py-4`} href="/#cv">
-          Curriculum Vitae
-        </Link>
-      </li>
-      <li>
-        <Link className={`${utilStyles.link} py-4`} href="/#contact">
-          Contact
-        </Link>
-      </li>
+  const getMenuList = (extraClasses = '') => (
+    <ul className={`${extraClasses} flex flex-nowrap justify-between gap-4 whitespace-nowrap font-medium sm:gap-2`}>
+      {[
+        ['#about', 'About me'],
+        ['#experiences', 'Experiences'],
+        ['#cv', 'Curriculum Vitae'],
+        ['#contact', 'Contact'],
+      ].map(([href, text]) => (
+        <li key={href}>
+          <Link href={href} className={`${utilStyles.link} py-4`}>
+            {text}
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 
   return (
     <header
       id="header"
-      className="sticky top-0 z-10 h-header px-4 flex gap-2 items-center justify-between bg-amber-700"
+      className="sticky top-0 z-10 flex h-header items-center justify-between gap-2 bg-neutral-800 px-4 text-neutral-50"
     >
-      <Link href="/" className={`${utilStyles.link} text-3xl font-extrabold whitespace-nowrap`}>
+      <Link href="/" className={`${utilStyles.link} whitespace-nowrap text-3xl font-extrabold`}>
         <h1 className="sm:hidden">J.W.</h1>
         <h1 className="hidden sm:block md:hidden">J.W. van Bremen</h1>
         <h1 className="hidden md:block">Jan-Willem van Bremen</h1>
       </Link>
 
-      <button className={`${utilStyles.hoverEffectStrong} xs:hidden text-3xl`} onClick={toggleMenu}>
-        ☰
+      <button
+        className={`${utilStyles.hoverEffectStrong} z-30 text-3xl hover:duration-75 xs:hidden`}
+        onClick={toggleMenu}
+      >
+        {!menuOpen ? '☰' : '✕'}
       </button>
 
       <nav
         style={menuStyle}
-        className="absolute flex z-20 text-3xl justify-center items-center bg-neutral-900 bg-opacity-80 left-0 top-0 w-full h-screen transition-[opacity,visibility] xs:hidden"
+        className="absolute left-0 top-0 z-20 flex h-screen w-full items-center justify-center bg-neutral-900 bg-opacity-80 text-3xl transition-[opacity,visibility] xs:hidden"
         onClick={toggleMenu}
       >
         {getMenuList('flex-col -mt-32')}
