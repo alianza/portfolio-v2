@@ -6,7 +6,7 @@
     <title>Content Manager</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <style>
         .notif__container { pointer-events: none; }
 
@@ -29,7 +29,7 @@
       const image = entry.getIn(['data', 'thumbnail'])
       const bg = this.props.getAsset(image)
       return h("div", { className: "content" },
-        h("h1", { className: "mainTitle" }, entry.getIn(["data", "title"])),
+        h("h1", { className: "mainTitle" }, entry.getIn(["data", "title"]) || "Title"),
         h("div", { className: "metaData" },
           entry.getIn(["data", "date"]) ?
             h("time", {}, entry.getIn(["data", "date"])) :
@@ -118,6 +118,22 @@ ${imagesHtml}
     toBlock: (data) => getImagesGridFragment(data.images),
     toPreview: (data) => getImagesGridFragment(data.images)
   })
+
+  // <video playsInline controls src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
+
+    const getVideoFragment = (video) => `<video playsInline controls src="${video}"/>`
+
+  CMS.registerEditorComponent({
+      id: "video",
+      label: "Video",
+      fields: [
+        { name: 'video', label: 'Video', widget: 'file' }
+      ],
+      pattern: /^<video[\s\S]*src="(.*?)"[\s\S]*\/>$/ms,
+      fromBlock: match => ({ video: match[1] }),
+      toBlock: data => getVideoFragment(data.video),
+      toPreview: data => getVideoFragment(data.video)
+    })
 
 </script>
 </body>
