@@ -6,17 +6,22 @@
     {
       "name": "Instagram",
       "url": "https://instagram.com/leacandle",
-      "icon": "/images/5ecec78673e4440004f09e77-1-.png"
+      "icon": "/assets/instagram.png"
     },
     {
-      "name": "Medium",
-      "url": "https://medium.com/@leacandle",
-      "icon": "/images/medium.png"
+      "name": "Email",
+      "url": "mailto:janwillemvanbremen@live.nl",
+      "icon": "/assets/medium.png"
     },
     {
       "name": "LinkedIn",
       "url": "linkedin.com/in/lea-shamaa-014ab8195",
-      "icon": "/images/new-linkedin-logo-white-black-png.png"
+      "icon": "/assets/linkedIn.png"
+    },
+    {
+      "name": "GitHub",
+      "url": "github.com/alianza",
+      "icon": "/assets/github.png"
     }
   ]
 }
