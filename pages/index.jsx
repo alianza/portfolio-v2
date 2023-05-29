@@ -7,6 +7,7 @@ import { getProjects } from '@/lib/services/projectsService';
 import utilStyles from '@/styles/utils.module.scss';
 import Link from 'next/link';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
+import { useState } from 'react';
 
 export async function getStaticProps() {
   const projects = await getProjects({ content: false, limit: 3 });
@@ -19,7 +20,7 @@ export async function getStaticProps() {
 }
 
 function Home({ projects }) {
-  const [coverVideoName] = React.useState(`cover_video_${Math.floor(Math.random() * 2) + 1}`);
+  const [coverVideoName] = useState(`cover_video_${Math.floor(Math.random() * 2) + 1}`);
   useNetlifyIdentityRedirect();
 
   return (
