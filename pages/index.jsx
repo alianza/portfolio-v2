@@ -21,6 +21,8 @@ export async function getStaticProps() {
 function Home({ projects }) {
   useNetlifyIdentityRedirect();
 
+  const coverVideoName = `cover_video_${Math.floor(Math.random() * 2) + 1}`;
+
   return (
     <>
       <div className="w-full">
@@ -35,8 +37,8 @@ function Home({ projects }) {
           muted
           loop
         >
-          <source src="/cover_video.webm" type="video/webm" />
-          <source src="/cover_video.mp4" type="video/mp4" />
+          <source src={`/${coverVideoName}.webm`} type="video/webm" />
+          <source src={`/${coverVideoName}.mp4`} type="video/mp4" />
         </video>
       </div>
 
@@ -66,8 +68,8 @@ function Home({ projects }) {
             </div>
             <div className="flex flex-col">
               <video autoPlay playsInline muted loop className="w-full rounded shadow">
-                <source src="/assets/professional.webm" type="video/webm" />
-                <source src="/assets/professional.mp4" type="video/mp4" />
+                <source src="/professional.webm" type="video/webm" />
+                <source src="/professional.mp4" type="video/mp4" />
               </video>
               <div className="mt-1">
                 <p className="text-2xl font-bold">What I do professionally</p>
