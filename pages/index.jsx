@@ -1,6 +1,6 @@
 import Layout from '@/components/layout/layout/layout';
 import { useNetlifyIdentityRedirect } from '@/lib/customHooks';
-import { hiddenStyle, transitionBaseStyle } from '@/lib/utils';
+import { hiddenStyle, transitionBaseStyle, yearsSinceDate } from '@/lib/utils';
 import { TransitionScroll } from 'react-transition-scroll';
 import Image from 'next/image';
 import { getProjects } from '@/lib/services/projectsService';
@@ -9,7 +9,7 @@ import Link from 'next/link';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
 
 export async function getStaticProps() {
-  const projects = await getProjects();
+  const projects = await getProjects({ content: false, limit: 3 });
 
   return {
     props: {
@@ -24,12 +24,12 @@ function Home({ projects }) {
   return (
     <>
       <div className="w-full">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5">
+        <div className="absolute left-1/2 top-1/2 w-4/5 -translate-x-1/2 -translate-y-1/2 text-neutral-50">
           <h1 className="text-5xl font-bold drop-shadow-lg">Jan-Willem van Bremen</h1>
           <h2 className="text-3xl drop-shadow-lg">Software engineer, Skateboarder & Model!</h2>
         </div>
         <video
-          className="object-cover pointer-events-none w-full h-[calc(100vh-theme(spacing.header))]"
+          className="pointer-events-none h-[calc(100vh-theme(spacing.header))] w-full object-cover"
           autoPlay
           playsInline
           muted
@@ -39,34 +39,96 @@ function Home({ projects }) {
           <source src="/cover_video.mp4" type="video/mp4" />
         </video>
       </div>
-      <main className="flex flex-col items-center justify-between p-12 max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center">Welcome to my personal portfolio website!</h1>
-        <div className="w-full h-full grid grid-cols-3 grid-rows-1 gap-4 mt-6">
-          {projects.map((project) => (
-            <TransitionScroll key={project.id} className="" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
-              <Link
-                href={`/projects/${project.id}`}
-                className={`relative block aspect-video ${utilStyles.hoverEffectSlight}`}
-              >
-                <Image
-                  fill
-                  sizes="100vw"
-                  alt={`${project.data.title} thumbnail`}
-                  src={project.data.thumbnail}
-                  placeholder="blur"
-                  blurDataURL={`/_next/image?url=${project.data.thumbnail}&w=16&q=1`}
-                />
-              </Link>
-              <div>
-                <Link href={`/projects/${project.id}`} className={`${utilStyles.link} text-2xl font-bold`}>
-                  {project.data.title}
-                </Link>
-                <StartEndDateLabel startDate={project.data.startDate} endDate={project.data.endDate} />
-                <p className="font-light">{project.data.description}</p>
+
+      <main className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:p-12">
+        <section className="flex flex-col gap-4">
+          <h2 id="about" className="scroll-header-offset text-center text-4xl font-bold sm:text-left">
+            About me
+          </h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            <div className="flex flex-col">
+              <Image
+                src="/assets/portrait.webp"
+                alt="Portrait of Jan-Willem van Bremen"
+                className="w-full rounded shadow"
+                quality={100}
+                width={500}
+                height={500}
+              />
+              <div className="mt-1">
+                <p className="text-2xl font-bold">Wo I am</p>
+                <p>
+                  My name is Jan-Willem van Bremen. I'm a {yearsSinceDate('10-10-1998')} year old software engineer,
+                  skateboarder and model from Amsterdam! I'm a very social, diligent and precise person who can
+                  concentrate for long periods of time. I work well both solo and in development teams!
+                </p>
               </div>
-            </TransitionScroll>
-          ))}
-        </div>
+            </div>
+            <div className="flex flex-col">
+              <video autoPlay playsInline muted loop className="w-full rounded shadow">
+                <source src="/assets/professional.webm" type="video/webm" />
+                <source src="/assets/professional.mp4" type="video/mp4" />
+              </video>
+              <div className="mt-1">
+                <p className="text-2xl font-bold">What I do professionally</p>
+                <p>
+                  Professionally I am a full-stack Software Engineer focussing on web-development. I do this using
+                  technologies & techniques like HTML, (S)CSS, Type/JavaScript, Node.js, web frameworks (React,
+                  Next.js), Git(hub), Agile Scrum and more! Check out some of my experiences & projects!
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col sm:last-of-type:odd:col-span-full md:last-of-type:odd:col-span-1">
+              <Image
+                src="/assets/fun.webp"
+                alt="Portrait of Jan-Willem van Bremen"
+                className="w-full rounded shadow"
+                quality={100}
+                width={500}
+                height={500}
+              />
+              <div className="mt-1">
+                <p className="text-2xl font-bold">What I do for fun</p>
+                <p>
+                  For fun I have been practicing skateboarding for {yearsSinceDate('1-7-2011')} years on an amateur
+                  level. During my skateboarding career I have been sponsored by different brands and shops. Next to
+                  that I also do some model work for various street wear brands in Amsterdam.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 id="experiences" className="scroll-header-offset text-center text-4xl font-bold sm:text-left">
+            Experiences & Projects
+          </h2>
+
+          <div className="mt-6 grid h-full w-full grid-cols-1 grid-rows-1 gap-4 md:grid-cols-3">
+            {projects.map(({ data, id }) => (
+              <TransitionScroll key={id} className="" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+                <Link href={`/projects/${id}`} className={`relative block ${utilStyles.hoverEffectSlight}`}>
+                  <Image
+                    className="aspect-square rounded object-cover"
+                    alt={`${data.title} thumbnail`}
+                    width={500}
+                    height={500}
+                    src={data.thumbnail}
+                    placeholder="blur"
+                    blurDataURL={`/_next/image?url=${data.thumbnail}&w=16&q=1`}
+                  />
+                </Link>
+                <div>
+                  <Link href={`/projects/${id}`} className={`${utilStyles.link} text-2xl font-bold`}>
+                    {data.title}
+                  </Link>
+                  <StartEndDateLabel startDate={data.startDate} endDate={data.endDate} />
+                  <p className="font-light">{data.description}</p>
+                </div>
+              </TransitionScroll>
+            ))}
+          </div>
+        </section>
       </main>
     </>
   );
