@@ -158,16 +158,19 @@ function Home({ projects }) {
                 placeholder="Name..."
                 name="name"
                 className="h-12 p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+                required
               />
               <textarea
                 placeholder="Message..."
                 name="message"
                 className="row-span-2 min-h-[112px] p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+                required
               />
               <input
                 placeholder="Email..."
                 name="email"
                 className="mt-auto h-12 p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+                required
               />
               <button
                 className={`${utilStyles.button} ${utilStyles.green} col-span-full mx-auto h-12 w-1/5`}
@@ -175,7 +178,7 @@ function Home({ projects }) {
               >
                 Send
               </button>
-              <div className="col-span-full" data-netlify-recaptcha="true" />
+              <div className="col-span-full" data-netlify-recaptcha="true"></div>
             </form>
           </TransitionScroll>
           <div>
