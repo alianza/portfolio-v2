@@ -5,19 +5,11 @@ import utilStyles from '../../../styles/utils.module.scss';
 export default function Header({}) {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
-  const menuStyle = {
-    opacity: menuOpen ? 1 : 0,
-    pointerEvents: menuOpen ? 'auto' : 'none',
-    visibility: menuOpen ? 'visible' : 'hidden',
-  };
-
   useEffect(() => {
     menuOpen ? document.body.classList.add('no-scroll') : document.body.classList.remove('no-scroll');
   }, [menuOpen]);
 
-  const toggleMenu = () => {
-    setMenuOpen((wasOpen) => !wasOpen);
-  };
+  const toggleMenu = () => setMenuOpen((wasOpen) => !wasOpen);
 
   const getMenuList = (extraClasses = '') => (
     <ul className={`${extraClasses} flex flex-nowrap justify-between gap-4 whitespace-nowrap font-medium sm:gap-2`}>
@@ -37,25 +29,23 @@ export default function Header({}) {
   );
 
   return (
-    <header
-      id="header"
-      className="sticky top-0 z-10 flex h-header items-center justify-between gap-2 bg-neutral-800 px-4 text-neutral-50"
-    >
+    <header className="sticky top-0 z-10 flex h-header items-center justify-between gap-2 bg-neutral-800 px-4 text-neutral-50">
       <Link href="/" className={`${utilStyles.link} whitespace-nowrap text-3xl font-extrabold`}>
         <h1 className="sm:hidden">J.W.</h1>
         <h1 className="hidden sm:block md:hidden">J.W. van Bremen</h1>
         <h1 className="hidden md:block">Jan-Willem van Bremen</h1>
       </Link>
 
-      <button
-        className={`${utilStyles.hoverEffectStrong} z-30 text-3xl hover:duration-75 xs:hidden`}
-        onClick={toggleMenu}
-      >
+      <button className={`${utilStyles.hoverStrong} z-30 text-3xl hover:duration-75 xs:hidden`} onClick={toggleMenu}>
         {!menuOpen ? '☰' : '✕'}
       </button>
 
       <nav
-        style={menuStyle}
+        style={{
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? 'auto' : 'none',
+          visibility: menuOpen ? 'visible' : 'hidden',
+        }}
         className="absolute left-0 top-0 z-20 flex h-screen w-full items-center justify-center bg-neutral-900 bg-opacity-80 text-3xl transition-[opacity,visibility] xs:hidden"
         onClick={toggleMenu}
       >
