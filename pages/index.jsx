@@ -154,6 +154,7 @@ function Home({ projects }) {
               data-netlify="true"
               // data-netlify-recaptcha="true"
             >
+              <input type="hidden" name="form-name" value="contact" />
               <input
                 placeholder="Name..."
                 name="name"
