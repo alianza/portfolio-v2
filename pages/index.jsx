@@ -48,74 +48,75 @@ function Home({ projects }) {
         </video>
       </div>
 
-      <main className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:p-12">
-        <section className="flex w-full flex-col gap-4">
-          <h2 id="about" className="scroll-header-offset text-center text-4xl font-bold sm:text-left">
+      <main className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
+        <section className="w-full">
+          <h2 id="about" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
             About me
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-            <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle} className="flex flex-col">
-              <Image
-                src="/portrait.webp"
-                alt="Portrait of Jan-Willem van Bremen"
-                className="w-full rounded shadow"
-                quality={100}
-                width={500}
-                height={500}
-              />
-              <div className="mt-1">
-                <p className="text-2xl font-bold">Wo I am</p>
-                <p>
-                  My name is Jan-Willem van Bremen. I&apos;m a {yearsSinceDate('10-10-1998')} year old software
-                  engineer, skateboarder and model from Amsterdam! I&apos;m a very social, diligent and precise person
-                  who can concentrate for long periods of time. I work well both solo and in development teams!
-                </p>
-              </div>
-            </TransitionScroll>
-            <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle} className="flex flex-col">
-              <video autoPlay playsInline muted loop className="w-full rounded shadow">
-                <source src="/professional.webm" type="video/webm" />
-                <source src="/professional.mp4" type="video/mp4" />
-              </video>
-              <div className="mt-1">
-                <p className="text-2xl font-bold">What I do professionally</p>
-                <p>
-                  Professionally I am a full-stack Software Engineer focussing on web-development. I do this using
-                  technologies & techniques like HTML, (S)CSS, Type/JavaScript, Node.js, web frameworks (React,
-                  Next.js), Git(hub), Agile Scrum and more! Check out some of my experiences & projects!
-                </p>
-              </div>
-            </TransitionScroll>
-            <TransitionScroll
-              baseStyle={transitionBaseStyle}
-              hiddenStyle={hiddenStyle}
-              className="flex flex-col sm:last-of-type:odd:col-span-full md:last-of-type:odd:col-span-1"
-            >
-              <Image
-                src="/fun.webp"
-                alt="Portrait of Jan-Willem van Bremen"
-                className="w-full rounded shadow"
-                quality={100}
-                width={500}
-                height={500}
-              />
-              <div className="mt-1">
-                <p className="text-2xl font-bold">What I do for fun</p>
-                <p>
-                  For fun I have been practicing skateboarding for {yearsSinceDate('1-7-2011')} years on an amateur
+            {[
+              [
+                'Who I am',
+                `  My name is Jan-Willem van Bremen. I'm a ${yearsSinceDate('10-10-1998')} year old software
+                  engineer, skateboarder and model from Amsterdam! I'm a very social, diligent and precise person
+                  who can concentrate for long periods of time. I work well both solo and in development teams!`,
+                <Image
+                  key="Who I am"
+                  src="/portrait.webp"
+                  alt="Portrait of Jan-Willem van Bremen"
+                  className="w-full rounded shadow"
+                  quality={100}
+                  width={500}
+                  height={500}
+                />,
+              ],
+              [
+                'What I do for fun',
+                `For fun I have been practicing skateboarding for ${yearsSinceDate('1-7-2011')} years on an amateur
                   level. During my skateboarding career I have been sponsored by different brands and shops. Next to
-                  that I also do some model work for various street wear brands in Amsterdam.
-                </p>
-              </div>
-            </TransitionScroll>
+                  that I also do some model work for various street wear brands in Amsterdam.`,
+                <Image
+                  key="What I do for fun"
+                  src="/portrait.webp"
+                  alt="Portrait of Jan-Willem van Bremen"
+                  className="w-full rounded shadow"
+                  quality={100}
+                  width={500}
+                  height={500}
+                />,
+              ],
+              [
+                'What I do professionally',
+                `Professionally I am a full-stack Software Engineer focussing on web-development. I do this using
+                  technologies & techniques like HTML, (S)CSS, Type/JavaScript, Node.js, web frameworks (React,
+                  Next.js), Git(hub), Agile Scrum and more! Check out some of my experiences & projects!`,
+                <video key="What I do professionally" autoPlay playsInline muted loop className="w-full rounded shadow">
+                  <source src="/professional.webm" type="video/webm" />
+                  <source src="/professional.mp4" type="video/mp4" />
+                </video>,
+              ],
+            ].map(([title, description, media]) => (
+              <TransitionScroll
+                key={title}
+                baseStyle={transitionBaseStyle}
+                hiddenStyle={hiddenStyle}
+                className="flex flex-col"
+              >
+                {media}
+                <div className="mt-1">
+                  <p className="text-2xl font-bold">{title}</p>
+                  <p>{description}</p>
+                </div>
+              </TransitionScroll>
+            ))}
           </div>
         </section>
 
         <section className="w-full">
-          <h2 id="experiences" className="scroll-header-offset text-center text-4xl font-bold sm:text-left">
+          <h2 id="experiences" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
             Experiences & Projects
           </h2>
-          <div className="mt-6 grid h-full w-full grid-cols-1 grid-rows-1 gap-4 md:grid-cols-3">
+          <div className="grid h-full w-full grid-cols-1 grid-rows-1 gap-4 md:grid-cols-3">
             {projects.map(({ data, id }) => (
               <TransitionScroll key={id} className="" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
                 <Link href={`/projects/${id}`} className={`relative block ${utilStyles.hoverEffectSlight}`}>
@@ -142,17 +143,16 @@ function Home({ projects }) {
         </section>
 
         <section className="w-full">
-          <h2 id="contact" className="scroll-header-offset text-center text-4xl font-bold sm:text-left">
+          <h2 id="contact" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
             Contact me
           </h2>
           <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
-            <h3 className="my-2 text-2xl">Send me a message!</h3>
+            <h3 className="mb-2 text-2xl">Send me a message!</h3>
             <form
-              className="my-6 grid grid-cols-2 grid-rows-[repeat(2,_minmax(0,_1fr))_repeat(2,_48px)] gap-4 text-neutral-700"
+              className="grid-col-1 grid grid-rows-4 gap-4 text-neutral-700 sm:grid-cols-2 sm:grid-rows-[repeat(2,_minmax(0,_1fr))_48px]"
               name="contact"
               method="POST"
               data-netlify="true"
-              // data-netlify-recaptcha="true"
             >
               <input type="hidden" name="form-name" value="contact" />
               <input
@@ -161,29 +161,28 @@ function Home({ projects }) {
                 className="h-12 p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
                 required
               />
-              <textarea
-                placeholder="Message..."
-                name="message"
-                className="row-span-2 min-h-[112px] p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
-                required
-              />
               <input
                 placeholder="Email..."
                 name="email"
                 className="mt-auto h-12 p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
                 required
               />
+              <textarea
+                placeholder="Message..."
+                name="message"
+                className="row-span-2 min-h-[112px] p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+                required
+              />
               <button
-                className={`${utilStyles.button} ${utilStyles.green} col-span-full mx-auto h-12 w-1/5`}
+                className={`${utilStyles.button} ${utilStyles.green} col-span-full mx-auto h-12 w-full sm:w-auto`}
                 type="submit"
               >
                 Send
               </button>
-              {/*<div className="col-span-full" data-netlify-recaptcha="true"></div>*/}
             </form>
           </TransitionScroll>
           <div>
-            <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+            <TransitionScroll className="mb-2 mt-4" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
               <h3 className="font-semibold">
                 Or, Email me directly! @{' '}
                 <a className={`font-bold text-blue-500 underline`} href="mailto:janwillemvanbremen@live.nl">
