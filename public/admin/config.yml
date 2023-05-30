@@ -26,7 +26,6 @@ collections:
           - { label: "Site heading", name: "siteHeading", widget: "string" }
           - { label: "Site title", name: "siteTitle", widget: "string", hint: "The title of the site (Also tab bar)" }
           - { label: "Site description", name: "siteDescription", widget: "text", hint: "Used for meta description" }
-          - { label: "Medium username", name: "usernameMedium", widget: "string", hint: "To retrieve medium articles" }
           - label: "Online accounts"
             name: "accounts"
             label_singular: "Online account"
@@ -35,7 +34,7 @@ collections:
             fields:
               - { label: "Social media name", name: "name", widget: "string" }
               - { label: "Url", name: "url", widget: "string" }
-              - { label: "Icon", name: "icon", widget: "image" }
+              - { label: "Icon", name: "icon", widget: "image", required: false }
 
   - label: 'Projects'
     name: 'projects'
