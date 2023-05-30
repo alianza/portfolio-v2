@@ -145,7 +145,7 @@ function Home({ projects }) {
           <h2 id="contact" className="scroll-header-offset text-center text-4xl font-bold sm:text-left">
             Contact me
           </h2>
-          <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+          {/*<TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>*/}
             <h3 className="my-2 text-2xl">Send me a message!</h3>
             <form
               className="my-6 grid grid-cols-2 grid-rows-[repeat(2,_minmax(0,_1fr))_repeat(2,_48px)] gap-4 text-neutral-700"
@@ -180,16 +180,16 @@ function Home({ projects }) {
               </button>
               <div className="col-span-full" data-netlify-recaptcha="true"></div>
             </form>
-          </TransitionScroll>
+          {/*</TransitionScroll>*/}
           <div>
-            <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+            {/*<TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>*/}
               <h3 className="font-semibold">
                 Or, Email me directly! @{' '}
                 <a className={`font-bold text-blue-500 underline`} href="mailto:janwillemvanbremen@live.nl">
                   janwillemvanbremen@live.nl
                 </a>
               </h3>
-            </TransitionScroll>
+            {/*</TransitionScroll>*/}
           </div>
         </section>
       </main>
