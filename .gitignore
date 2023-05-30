@@ -36,3 +36,6 @@ next-env.d.ts
 
 # Runtime Generated Files
 public/styles
+
+# Local Netlify folder
+.netlify
