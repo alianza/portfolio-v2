@@ -71,21 +71,6 @@ function Home({ projects }) {
                 />,
               ],
               [
-                'What I do for fun',
-                `For fun I have been practicing skateboarding for ${yearsSinceDate('1-7-2011')} years on an amateur
-                  level. During my skateboarding career I have been sponsored by different brands and shops. Next to
-                  that I also do some model work for various street wear brands in Amsterdam.`,
-                <Image
-                  key="What I do for fun"
-                  src="/portrait.webp"
-                  alt="Portrait of Jan-Willem van Bremen"
-                  className="w-full rounded shadow"
-                  quality={100}
-                  width={500}
-                  height={500}
-                />,
-              ],
-              [
                 'What I do professionally',
                 `Professionally I am a full-stack Software Engineer focussing on web-development. I do this using
                   technologies & techniques like HTML, (S)CSS, Type/JavaScript, Node.js, web frameworks (React,
@@ -95,12 +80,27 @@ function Home({ projects }) {
                   <source src="/professional.mp4" type="video/mp4" />
                 </video>,
               ],
+              [
+                'What I do for fun',
+                `For fun I have been practicing skateboarding for ${yearsSinceDate('1-7-2011')} years on an amateur
+                  level. During my skateboarding career I have been sponsored by different brands and shops. Next to
+                  that I also do some model work for various street wear brands in Amsterdam.`,
+                <Image
+                  key="What I do for fun"
+                  src="/fun.webp"
+                  alt="Portrait of Jan-Willem van Bremen"
+                  className="w-full rounded shadow"
+                  quality={100}
+                  width={500}
+                  height={500}
+                />,
+              ],
             ].map(([title, description, media]) => (
               <TransitionScroll
                 key={title}
                 baseStyle={transitionBaseStyle}
                 hiddenStyle={hiddenStyle}
-                className="flex flex-col"
+                className="flex flex-col sm:last-of-type:odd:col-span-full md:last-of-type:odd:col-span-1"
               >
                 {media}
                 <div className="mt-1">
@@ -118,8 +118,8 @@ function Home({ projects }) {
           </h2>
           <div className="grid h-full w-full grid-cols-1 grid-rows-1 gap-4 md:grid-cols-3">
             {projects.map(({ data, id }) => (
-              <TransitionScroll key={id} className="" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
-                <Link href={`/projects/${id}`} className={`relative block ${utilStyles.hoverEffectSlight}`}>
+              <TransitionScroll key={id} baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+                <Link href={`/projects/${id}`} className={`relative block ${utilStyles.hoverSlight}`}>
                   <Image
                     className="aspect-square w-full rounded object-cover"
                     alt={`${data.title} thumbnail`}
@@ -158,19 +158,19 @@ function Home({ projects }) {
               <input
                 placeholder="Name..."
                 name="name"
-                className="h-12 p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
-                required
-              />
-              <input
-                placeholder="Email..."
-                name="email"
-                className="mt-auto h-12 p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+                className="h-12 rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
                 required
               />
               <textarea
                 placeholder="Message..."
                 name="message"
-                className="row-span-2 min-h-[112px] p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+                className="row-span-2 max-h-96 min-h-[112px] rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+                required
+              />
+              <input
+                placeholder="Email..."
+                name="email"
+                className="mt-auto h-12 rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
                 required
               />
               <button
