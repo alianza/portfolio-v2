@@ -4,24 +4,29 @@
   "siteDescription": "Jan-Willem van Bremen's personal portfolio website.",
   "accounts": [
     {
-      "name": "Instagram",
+      "name": "📱Instagram",
       "url": "https://instagram.com/leacandle",
-      "icon": "/assets/instagram.png"
+      "icon": ""
     },
     {
-      "name": "Email",
-      "url": "mailto:janwillemvanbremen@live.nl",
-      "icon": "/assets/medium.png"
+      "name": "👨‍💼LinkedIn",
+      "url": "https://www.linkedin.com/in/jan-willem/",
+      "icon": ""
     },
     {
-      "name": "LinkedIn",
-      "url": "linkedin.com/in/lea-shamaa-014ab8195",
-      "icon": "/assets/linkedIn.png"
-    },
-    {
-      "name": "GitHub",
+      "name": "💾GitHub",
       "url": "github.com/alianza",
-      "icon": "/assets/github.png"
+      "icon": ""
+    },
+    {
+      "name": "📧Email",
+      "url": "mailto:janwillemvanbremen@live.nl",
+      "icon": ""
+    },
+    {
+      "name": "📞Phone",
+      "url": "tel:+31657118462",
+      "icon": ""
     }
   ]
 }
