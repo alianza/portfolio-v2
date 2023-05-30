@@ -30,10 +30,10 @@
     }
 }
 
-.hoverEffectSlight {
+.hoverSlight {
     @apply transition-transform hover:scale-[1.02] active:scale-[.98] #{!important};
 }
 
-.hoverEffectStrong {
+.hoverStrong {
     @apply transition-transform hover:scale-110 active:scale-95;
 }
