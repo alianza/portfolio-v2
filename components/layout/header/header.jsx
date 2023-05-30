@@ -22,10 +22,10 @@ export default function Header({}) {
   const getMenuList = (extraClasses = '') => (
     <ul className={`${extraClasses} flex flex-nowrap justify-between gap-4 whitespace-nowrap font-medium sm:gap-2`}>
       {[
-        ['#about', 'About me'],
-        ['#experiences', 'Experiences'],
-        ['#cv', 'Curriculum Vitae'],
-        ['#contact', 'Contact'],
+        ['/#about', 'About me'],
+        ['/#experiences', 'Experiences'],
+        ['/#cv', 'Curriculum Vitae'],
+        ['/#contact', 'Contact'],
       ].map(([href, text]) => (
         <li key={href}>
           <Link href={href} className={`${utilStyles.link} py-4`}>
