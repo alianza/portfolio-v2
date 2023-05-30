@@ -30,7 +30,7 @@
 }
 
 .content {
-    @apply text-neutral-900 dark:text-neutral-50 lg:prose-xl prose dark:prose-invert relative mx-auto my-4 antialiased;
+    @apply lg:prose-xl prose dark:prose-invert relative mx-auto my-4 antialiased;
 
     .metaData {
         @apply flex w-full justify-between items-center mb-2;
@@ -52,10 +52,6 @@
 
         pre {
             @apply m-0 p-0 shadow-sm;
-        }
-
-        code + :not(pre) {
-            @apply bg-neutral-100 dark:bg-neutral-500 rounded-md border border-gray-300 font-mono text-xs px-2 py-0.5 whitespace-pre;
         }
 
         details {
