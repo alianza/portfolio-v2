@@ -16,7 +16,7 @@ export default function Header({}) {
       {[
         ['/#about', 'About me'],
         ['/#experiences', 'Experiences'],
-        ['/#cv', 'Curriculum Vitae'],
+        ['/cv', 'Curriculum Vitae'],
         ['/#contact', 'Contact'],
       ].map(([href, text]) => (
         <li key={href}>

@@ -27,7 +27,9 @@ export default function Layout({ children }) {
 
       <Header />
 
-      <main id="content">{children}</main>
+      <main id="content" className="flex grow flex-col">
+        {children}
+      </main>
 
       <Footer />
 

@@ -48,7 +48,7 @@ function Home({ projects }) {
         </video>
       </div>
 
-      <main className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
+      <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
         <section className="w-full">
           <h2 id="about" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
             About me
@@ -192,7 +192,7 @@ function Home({ projects }) {
             </TransitionScroll>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }
