@@ -151,7 +151,7 @@ function Home({ projects }) {
               className="my-6 grid grid-cols-2 grid-rows-[repeat(2,_minmax(0,_1fr))_repeat(2,_48px)] gap-4 text-neutral-700"
               name="contact"
               method="POST"
-              // data-netlify="true"
+              data-netlify="true"
               // data-netlify-recaptcha="true"
             >
               <input
