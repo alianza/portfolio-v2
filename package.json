@@ -14,16 +14,6 @@
     "watch-styles": "run-p watch-sass:* watch-tailwind:*",
     "build-styles": "run-p compile-sass:* compile-tailwind:*",
 
-    "build-tw-styles:content": "npx tailwindcss -i ./public/styles/content.module.css -o ./public/styles/content.module.css",
-    "build-tw-styles:base": "npx tailwindcss -i styles/tailwindBase.css -o ./public/styles/tailwindBase.css",
-    "watch-tw-styles:content": "npx tailwindcss -i ./public/styles/content.module.css -o ./public/styles/content.module.css --watch",
-    "watch-tw-styles:base": "npx tailwindcss -i styles/tailwindBase.css -o ./public/styles/tailwindBase.css --watch",
-
-    "watch-compile-styles": "sass components/mdContent/mdContent.module.scss ./public/styles/content.module.css --no-source-map --watch",
-    "build-compile-styles": "sass components/mdContent/mdContent.module.scss ./public/styles/content.module.css --no-source-map",
-
-
-
     "compile-sass:globals": "sass styles/globals.scss ./public/styles/globals.css --no-source-map",
     "compile-tailwind:globals": "npx tailwindcss -i ./public/styles/globals.css -o ./public/styles/globals.css",
     "watch-sass:globals": "sass styles/globals.scss ./public/styles/globals.css --no-source-map --watch",
