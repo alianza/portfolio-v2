@@ -1,5 +1,6 @@
 .frame-content { // For Decap CMS Markdown content container
-    @apply m-2 my-8 flex bg-neutral-50 dark:bg-neutral-900 shadow-cmsPreviewFrame shadow-neutral-50 dark:shadow-neutral-900 min-h-screen; // as in global.scss
+    @apply m-2 my-8 flex bg-neutral-50 dark:bg-neutral-900 shadow-cmsPreviewFrame shadow-neutral-50 dark:shadow-neutral-900 min-h-screen;
+    // as in global.scss
 }
 
 @mixin widgetStyles {
@@ -22,7 +23,7 @@
 }
 
 .startEndDateLabel {
-    @apply flex items-center gap-1 flex-wrap font-light;
+    @apply flex items-center gap-1 flex-wrap;
 
     time {
         @apply m-0 whitespace-nowrap;
@@ -52,6 +53,18 @@
 
         pre {
             @apply m-0 p-0 shadow-sm;
+        }
+
+        img[alt='icon'] {
+            @apply inline-block w-auto h-6 m-0 hoverStrong shadow-none drop-shadow;
+        }
+
+        button {
+            @apply button button-green;
+
+            img[alt='icon'] {
+                @apply mr-1;
+            }
         }
 
         details {
