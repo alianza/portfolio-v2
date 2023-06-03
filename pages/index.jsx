@@ -119,7 +119,7 @@ function Home({ projects }) {
           <div className="grid h-full w-full grid-cols-1 grid-rows-1 gap-4 md:grid-cols-3">
             {projects.map(({ data, id }) => (
               <TransitionScroll key={id} baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
-                <Link href={`/projects/${id}`} className={`relative block ${utilStyles.hoverSlight}`}>
+                <Link href={`/projects/${id}`} className="hoverSlight relative block">
                   <Image
                     className="aspect-square w-full rounded object-cover"
                     alt={`${data.title} thumbnail`}
@@ -135,7 +135,7 @@ function Home({ projects }) {
                     {data.title}
                   </Link>
                   <StartEndDateLabel startDate={data.startDate} endDate={data.endDate} />
-                  <p className="font-light">{data.description}</p>
+                  <p className="line-clamp-3 font-light">{data.description}</p>
                 </div>
               </TransitionScroll>
             ))}

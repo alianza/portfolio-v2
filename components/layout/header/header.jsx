@@ -36,7 +36,7 @@ export default function Header({}) {
         <h1 className="hidden md:block">Jan-Willem van Bremen</h1>
       </Link>
 
-      <button className={`${utilStyles.hoverStrong} z-30 text-3xl hover:duration-75 xs:hidden`} onClick={toggleMenu}>
+      <button className="hoverStrong z-30 text-3xl hover:duration-75 xs:hidden" onClick={toggleMenu}>
         {!menuOpen ? '☰' : '✕'}
       </button>
 
