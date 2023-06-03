@@ -41,6 +41,10 @@
         @apply m-0 text-4xl;
     }
 
+    img {
+        @apply w-full;
+    }
+
     .markdown {
 
         figure, img, video, iframe {
@@ -56,11 +60,11 @@
         }
 
         img[alt='icon'] {
-            @apply inline-block w-auto h-6 m-0 hoverStrong shadow-none drop-shadow;
+            @apply inline-block w-auto h-6 m-0 shadow-none drop-shadow hover:scale-110;
         }
 
         button {
-            @apply button button-green;
+            @apply text-neutral-100 bg-neutral-600 hover:bg-neutral-700 focus:ring-neutral-600/50 rounded-lg px-5 py-2.5 text-sm font-medium hover:duration-100 hover:decoration-inherit focus:outline-none focus:ring-4 transition-colors underline decoration-transparent duration-300 ease-in-out; // button button-green
 
             img[alt='icon'] {
                 @apply mr-1;

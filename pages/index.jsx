@@ -4,7 +4,6 @@ import { hiddenStyle, transitionBaseStyle, yearsSinceDate } from '@/lib/utils';
 import { TransitionScroll } from 'react-transition-scroll';
 import Image from 'next/image';
 import { getProjects } from '@/lib/services/projectsService';
-import utilStyles from '@/styles/utils.module.scss';
 import Link from 'next/link';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
 import { useEffect, useState } from 'react';
@@ -131,7 +130,7 @@ function Home({ projects }) {
                   />
                 </Link>
                 <div>
-                  <Link href={`/projects/${id}`} className={`${utilStyles.link} text-2xl font-bold`}>
+                  <Link href={`/projects/${id}`} className="link text-2xl font-bold">
                     {data.title}
                   </Link>
                   <StartEndDateLabel startDate={data.startDate} endDate={data.endDate} />
@@ -173,10 +172,7 @@ function Home({ projects }) {
                 className="mt-auto h-12 rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
                 required
               />
-              <button
-                className={`${utilStyles.button} ${utilStyles.green} col-span-full mx-auto h-12 w-full sm:w-auto`}
-                type="submit"
-              >
+              <button className={`button button-green col-span-full mx-auto h-12 w-full sm:w-auto`} type="submit">
                 Send
               </button>
             </form>

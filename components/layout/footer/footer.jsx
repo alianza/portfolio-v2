@@ -1,6 +1,5 @@
 import React from 'react';
 import config from '../../../content/config.json';
-import utilStyles from '../../../styles/utils.module.scss';
 
 export default function Footer({}) {
   return (
@@ -11,7 +10,7 @@ export default function Footer({}) {
       <p className="my-2 font-semibold">Author: Jan-Willem van Bremen</p>
       <div className="my-2 flex flex-wrap gap-4 sm:flex-nowrap">
         {config.accounts.map(({ name, url, icon }) => (
-          <a className={`${utilStyles.link}`} key={name} href={url}>
+          <a className="link" key={name} href={url}>
             {name}
           </a>
         ))}

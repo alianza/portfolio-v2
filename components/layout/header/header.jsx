@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import utilStyles from '../../../styles/utils.module.scss';
 
 export default function Header({}) {
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -20,7 +19,7 @@ export default function Header({}) {
         ['/#contact', 'Contact'],
       ].map(([href, text]) => (
         <li key={href}>
-          <Link href={href} className={`${utilStyles.link} py-4`}>
+          <Link href={href} className="link py-4">
             {text}
           </Link>
         </li>
@@ -30,7 +29,7 @@ export default function Header({}) {
 
   return (
     <header className="sticky top-0 z-10 flex h-header items-center justify-between gap-2 bg-neutral-800 px-4 text-neutral-50">
-      <Link href="/" className={`${utilStyles.link} whitespace-nowrap text-3xl font-extrabold`}>
+      <Link href="/" className="link whitespace-nowrap text-3xl font-extrabold">
         <h1 className="sm:hidden">J.W.</h1>
         <h1 className="hidden sm:block md:hidden">J.W. van Bremen</h1>
         <h1 className="hidden md:block">Jan-Willem van Bremen</h1>
