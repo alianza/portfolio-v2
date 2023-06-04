@@ -84,7 +84,7 @@ ${details || 'Details...'}
       { name: 'summary', label: 'Summary', widget: 'string' },
       { name: 'details', label: 'Details', widget: 'markdown' }
     ],
-    pattern: /^<details>\n<summary>(.*?)<\/summary>\n<div>\n*(.*?)\n<\/div>\n<\/details>$/ms,
+    pattern: /^<details>\n<summary>(.*?)<\/summary>\n<div>\n*(.*?)\n<\/div>\n<\/details>/ms,
     fromBlock: match => ({
         summary: match[1],
         details: match[2]
@@ -106,9 +106,9 @@ ${imagesHtml}
     id: "images-grid",
     label: "Images Grid",
     fields: [
-      { name: 'images', label: 'Images', widget: 'list', field: { name: "image", label: "Image", widget: 'image' } }
+      { name: 'images', label: 'Images', widget: 'list', field: { name: "image", label: "Image", widget: 'image', default: "/assets/placeholder.jpg" } }
     ],
-    pattern: /^<div class="images-grid">\n(.*?)<\/div>$/ms,
+    pattern: /^<div class="images-grid">\n(.*?)<\/div>/ms,
     fromBlock(match) {
       const images = match[1].split('\n').filter(Boolean)
       return ({
@@ -121,7 +121,7 @@ ${imagesHtml}
 
   // <video playsInline controls src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
 
-    const getVideoFragment = (video) => `<video playsInline controls src="${video}"/>`
+    const getVideoFragment = (video) => `<video playsinline controls src="${video}"></video>`
 
   CMS.registerEditorComponent({
       id: "video",
@@ -129,10 +129,70 @@ ${imagesHtml}
       fields: [
         { name: 'video', label: 'Video', widget: 'file' }
       ],
-      pattern: /^<video playsInline controls src="(.*?)"\/>$/ms,
+      pattern: /^<video playsinline controls src="(.*?)"><\/video>/ms,
       fromBlock: match => ({ video: match[1] }),
       toBlock: data => getVideoFragment(data.video),
       toPreview: data => getVideoFragment(data.video)
+    })
+
+    const getButtonFragment = (icon, text, link) => `<a href="${link || '#'}"><button><img src="${icon || "/assets/placeholder.jpg"}" alt="icon" />${text || "Text..."}</button></a>`
+
+    CMS.registerEditorComponent({
+      id: "icon-button",
+      label: "Button with icon",
+      fields: [
+        { name: 'icon', label: 'Icon', widget: 'image', default: '/assets/placeholder.jpg' },
+        { name: 'text', label: 'Text', widget: 'string' },
+        { name: 'link', label: 'Link', widget: 'string' }
+      ],
+      pattern: /^<a href="(.*?)"><button><img src="(.*?)" alt="icon" \/>(.*?)<\/button><\/a>/ms,
+      fromBlock: match => ({ link: match[1], icon: match[2], text: match[3] }),
+      toBlock: ({ icon, link, text }) => getButtonFragment(icon, text, link),
+      toPreview: ({ icon, link, text }) => getButtonFragment(icon, text, link)
+    })
+
+    const getIconLiFragment = (item) => {
+      item ??= {}
+      if (item.item) {
+        item = item.item
+      }
+      return `<li>${item.text || 'Text...'} <a href="${item.link || "#"}"><img src="${item.icon || "/assets/placeholder.jpg"}" alt="icon"></a></li>`
+    }
+
+  CMS.registerEditorComponent({
+      id: "icon-list",
+      label: "Icon list",
+      fields: [
+        {
+          name: 'list',
+            label: 'List',
+            widget: 'list',
+            label_singular: 'item',
+            field: {
+              name: 'item',
+              label: 'Item',
+              widget: 'object',
+              fields: [
+                { name: 'text', label: 'text', widget: 'string', default: 'text...' },
+                { name: 'icon', label: 'Icon', widget: 'image', default: '/assets/placeholder.jpg' },
+                { name: 'link', label: 'Link', widget: 'string', default: '#' }
+              ]
+            }
+        }
+      ],
+        pattern: /^<ul class="icon-list">\n(.*?)\n<\/ul>/ms,
+        fromBlock: match => {
+          const list = match[1].split('\n').filter(Boolean)
+          return {
+            list: list.map(item => {
+              const match = item.match(/^<li>(.*?) <a href="(.*?)"><img src="(.*?)" alt="icon"><\/a><\/li>/)
+              const [_, text, link, icon] = match || [];
+              return { item: { text, link, icon } }
+            })
+          }
+        },
+        toBlock: ({ list }) => `<ul class="icon-list">\n${list ? list.map(getIconLiFragment).join('\n') : ''}\n</ul>`,
+        toPreview: ({ list }) => `<ul class="icon-list">\n${list ? list.map(getIconLiFragment).join('\n') : ''}\n</ul>`
     })
 
 </script>
