@@ -110,6 +110,7 @@ components/layout.js g
 
 
 
+
 </div>
 </details>
 
@@ -123,4 +124,4 @@ Hello, loose image:
 <img src="/assets/schermafbeelding-2023-05-09-144144.png" />
 </div>
 
-<video playsInline controls src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"/>
+<video playsInline controls src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
