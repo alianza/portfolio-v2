@@ -81,7 +81,7 @@ pages/_app.tsx
 
 Inside your layout, you can fetch data on the client-side using `useEffect` or a library like [SWR](https://swr.vercel.app/). Because this file is not a [Page](https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts), you cannot use `getStaticProps` or `getServerSideProps` currently.
 
-components/layout.js g
+components/layout.js
 
 <details>
 <summary>Expand me!</summary>
@@ -111,6 +111,8 @@ components/layout.js g
 
 
 
+
+
 </div>
 </details>
 
@@ -124,4 +126,4 @@ Hello, loose image:
 <img src="/assets/schermafbeelding-2023-05-09-144144.png" />
 </div>
 
-<video playsInline controls src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
+<video playsinline controls src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
