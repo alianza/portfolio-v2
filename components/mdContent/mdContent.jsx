@@ -1,7 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import contentStyles from './mdContent.module.scss';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
-import { useDetailTagsAnimation, useImageZoom } from '@/lib/markdownEnrichment';
+import {
+  useCodeHighlightStyles,
+  useDetailTagsAnimation,
+  useExternalLinks,
+  useImageZoom,
+} from '@/lib/markdownEnrichment';
 import { useDarkMode } from '@/lib/customHooks';
 import Image from 'next/image';
 
@@ -9,19 +14,10 @@ const contentId = 'article-content';
 
 const MdContent = ({ content: { title, date, startDate, endDate, thumbnail, content }, noDate }) => {
   const darkMode = useDarkMode();
-
   useDetailTagsAnimation();
-
   useImageZoom(contentId);
-
-  useEffect(() => {
-    if (darkMode === undefined) return;
-    if (darkMode) {
-      import('highlight.js/styles/a11y-dark.css');
-    } else {
-      import('highlight.js/styles/a11y-light.css');
-    }
-  }, [darkMode]);
+  useExternalLinks(contentId);
+  useCodeHighlightStyles(darkMode);
 
   return (
     <article className={contentStyles.content}>

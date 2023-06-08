@@ -26,7 +26,7 @@ const Project = ({ project }) => {
   return (
     <>
       <Head item={project} />
-      <div className={`max-w-screen-xl mx-auto p-2 mobile:p-6 max-w-screen-desktop`}>
+      <div className="mx-auto max-w-screen-xl p-2 sm:p-6">
         <MdContent content={project} />
       </div>
     </>

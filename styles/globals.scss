@@ -84,7 +84,8 @@ body {
     ::-webkit-scrollbar {
         @apply w-2;
     }
+
     ::-webkit-scrollbar-track {
         @apply shadow rounded-2xl;
-    };
+    }
 }
