@@ -21,6 +21,7 @@ export async function getStaticProps() {
 function Home({ projects }) {
   useNetlifyIdentityRedirect();
   const [videoId, setVideoId] = useState(null);
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   useEffect(() => {
     setVideoId(Math.floor(Math.random() * 2) + 1);
@@ -116,8 +117,13 @@ function Home({ projects }) {
             Experiences & Projects
           </h2>
           <div className="grid h-full w-full grid-cols-1 grid-rows-1 gap-4 md:grid-cols-3">
-            {projects.map(({ data, id }) => (
-              <TransitionScroll key={id} baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+            {projects.map(({ data, id }, index) => (
+              <TransitionScroll
+                key={id}
+                baseStyle={transitionBaseStyle}
+                hiddenStyle={hiddenStyle}
+                className={index > 5 && !showAllProjects ? 'hidden' : ''}
+              >
                 <Link href={`/projects/${id}`} className="hoverSlight relative block">
                   <Image
                     className="aspect-square w-full rounded object-cover"
@@ -139,6 +145,13 @@ function Home({ projects }) {
               </TransitionScroll>
             ))}
           </div>
+          {projects.length > 5 && !showAllProjects && (
+            <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
+              <button className="button button-green" onClick={() => setShowAllProjects(true)}>
+                Load more...
+              </button>
+            </TransitionScroll>
+          )}
         </section>
 
         <section className="w-full">

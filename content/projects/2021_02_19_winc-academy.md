@@ -1,6 +1,6 @@
 ---
 title: Winc Academy
-startDate: 2021-03-10
+startDate: 2021-02-19
 endDate: 2021-05-21
 thumbnail: /assets/winc.webp
 description: During my time as a Software Engineering student I worked for a

@@ -1,7 +1,10 @@
 import React from 'react';
 import config from '../../../content/config.json';
+import { isExternalLink } from '@/lib/utils';
 
 export default function Footer({}) {
+  const getProps = (url) => (isExternalLink(url) ? { target: '_blank', rel: 'noopener noreferrer' } : {});
+
   return (
     <footer
       id="footer"
@@ -10,7 +13,7 @@ export default function Footer({}) {
       <p className="my-2 font-semibold">Author: Jan-Willem van Bremen</p>
       <div className="my-2 flex flex-wrap gap-4 sm:flex-nowrap">
         {config.accounts.map(({ name, url, icon }) => (
-          <a className="link" key={name} href={url}>
+          <a className="link" {...getProps(url)} key={name} href={url}>
             {name}
           </a>
         ))}
