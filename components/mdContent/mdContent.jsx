@@ -25,7 +25,7 @@ const MdContent = ({ content: { title, date, startDate, endDate, thumbnail, cont
 
   return (
     <article className={contentStyles.content}>
-      <div className="flex justify-between items-center flex-wrap gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <h1 className={contentStyles.mainTitle}>{title}</h1>
       </div>
       <div className={contentStyles.metaData}>
@@ -37,7 +37,7 @@ const MdContent = ({ content: { title, date, startDate, endDate, thumbnail, cont
           width={0}
           height={0}
           sizes="100vw"
-          className="w-full h-auto"
+          className={contentStyles.thumbnail}
           alt={`${title} thumbnail`}
           src={thumbnail}
           placeholder="blur"

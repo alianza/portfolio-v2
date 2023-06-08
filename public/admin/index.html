@@ -38,7 +38,7 @@
               h("span", {}, "-"),
               h("time", {}, entry.getIn(["data", "endDate"]) || "Present")),
         ),
-        h("img", { src: bg.toString() }),
+        h("img", { className: "thumbnail",src: bg.toString() }),
         h("div", { className: 'markdown' }, this.props.widgetFor("body"))
       )
     },
