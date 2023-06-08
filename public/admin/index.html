@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Content Manager</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
@@ -67,8 +68,8 @@
     toPreview: () => `<hr />`
   });
 
-    const getCollapsableNoteFragment = (summary, details) =>
-`<details>
+  const getCollapsableNoteFragment = (summary, details, open) =>
+    `<details ${open ? 'open' : ''}>
 <summary>${summary || 'Title...'}</summary>
 <div>
 
@@ -84,13 +85,13 @@ ${details || 'Details...'}
       { name: 'summary', label: 'Summary', widget: 'string' },
       { name: 'details', label: 'Details', widget: 'markdown' }
     ],
-    pattern: /^<details>\n<summary>(.*?)<\/summary>\n<div>\n*(.*?)\n<\/div>\n<\/details>/ms,
+    pattern: /^<details[\s\S]*>\n<summary>(.*?)<\/summary>\n<div>\n*(.*?)\n<\/div>\n<\/details>/ms,
     fromBlock: match => ({
-        summary: match[1],
-        details: match[2]
+      summary: match[1],
+      details: match[2]
     }),
-    toBlock: data => getCollapsableNoteFragment(data.summary, data.details),
-    toPreview: data => getCollapsableNoteFragment(data.summary, data.details)
+    toBlock: data => getCollapsableNoteFragment(data.summary, data.details, false),
+    toPreview: data => marked.parse(getCollapsableNoteFragment(data.summary, data.details, true))
   });
 
     const getImagesGridFragment = (images) => {
@@ -171,7 +172,7 @@ ${imagesHtml}
               label: 'Item',
               widget: 'object',
               fields: [
-                { name: 'text', label: 'text', widget: 'string', default: 'text...' },
+                { name: 'text', label: 'text', widget: 'string', default: 'Text...' },
                 { name: 'icon', label: 'Icon', widget: 'image', default: '/assets/placeholder.jpg' },
                 { name: 'link', label: 'Link', widget: 'string', default: '#' }
               ]
