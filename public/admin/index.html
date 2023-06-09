@@ -95,7 +95,7 @@ ${details || 'Details...'}
   });
 
     const getImagesGridFragment = (images) => {
-        const imagesHtml = images?.map(image => `<img src="${image}" />`).join('\n');
+        const imagesHtml = images?.map(image => `<img src="${image || "/assets/placeholder.jpg"}" />`).join('\n');
         const fragment =
 `<div class="images-grid">
 ${imagesHtml}
@@ -107,13 +107,15 @@ ${imagesHtml}
     id: "images-grid",
     label: "Images Grid",
     fields: [
-      { name: 'images', label: 'Images', widget: 'list', field: { name: "image", label: "Image", widget: 'image', default: "/assets/placeholder.jpg" } }
+      { name: 'images', label: 'Images', label_singular: "image", widget: 'list', field: { name: "image", label: "Image", widget: 'image' } }
     ],
     pattern: /^<div class="images-grid">\n(.*?)<\/div>/ms,
     fromBlock(match) {
+      console.log(`match`, match)
       const images = match[1].split('\n').filter(Boolean)
+      console.log(`images`, images)
       return ({
-        images: images.map(image => image.match(/<img[\s\S]*src="(.*?)"[\s\S]*\/>/)[1])
+        images: images.map(image => image.match(/<img[\s\S]*src="(.*?)"[\s\S]*\/>/)?.[1]).filter(Boolean)
       })
     },
     toBlock: (data) => getImagesGridFragment(data.images),
