@@ -4,9 +4,8 @@ import { hiddenStyle, transitionBaseStyle, yearsSinceDate } from '@/lib/utils';
 import { TransitionScroll } from 'react-transition-scroll';
 import Image from 'next/image';
 import { getProjects } from '@/lib/services/projectsService';
-import Link from 'next/link';
-import StartEndDateLabel from '@/components/common/startEndDateLabel';
 import { useEffect, useState } from 'react';
+import ProjectPreview from '@/components/previews/projectPreview';
 
 export async function getStaticProps() {
   const projects = await getProjects({ content: false });
@@ -21,7 +20,7 @@ export async function getStaticProps() {
 function Home({ projects }) {
   useNetlifyIdentityRedirect();
   const [videoId, setVideoId] = useState(null);
-  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [showProjects, setShowProjects] = useState(false);
 
   useEffect(() => {
     setVideoId(Math.floor(Math.random() * 2) + 1);
@@ -116,38 +115,14 @@ function Home({ projects }) {
           <h2 id="experiences" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
             Experiences & Projects
           </h2>
-          <div className="grid h-full w-full grid-cols-1 grid-rows-1 gap-4 md:grid-cols-3">
-            {projects.map(({ data, id }, index) => (
-              <TransitionScroll
-                key={id}
-                baseStyle={transitionBaseStyle}
-                hiddenStyle={hiddenStyle}
-                className={index > 5 && !showAllProjects ? 'hidden' : ''}
-              >
-                <Link href={`/projects/${id}`} className="hoverSlight relative block">
-                  <Image
-                    className="aspect-square w-full rounded object-cover"
-                    alt={`${data.title} thumbnail`}
-                    width={500}
-                    height={500}
-                    src={data.thumbnail}
-                    placeholder="blur"
-                    blurDataURL={`/_next/image?url=${data.thumbnail}&w=16&q=1`}
-                  />
-                </Link>
-                <div>
-                  <Link href={`/projects/${id}`} className="link text-2xl font-bold">
-                    {data.title}
-                  </Link>
-                  <StartEndDateLabel startDate={data.startDate} endDate={data.endDate} />
-                  <p className="line-clamp-3 font-light">{data.description}</p>
-                </div>
-              </TransitionScroll>
-            ))}
+          <div className="mb-4 grid h-full w-full grid-cols-1 grid-rows-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+            {projects.map((project, i) =>
+              i > 5 && !showProjects ? null : <ProjectPreview key={project.id} project={project} />
+            )}
           </div>
-          {projects.length > 5 && !showAllProjects && (
+          {projects.length > 5 && !showProjects && (
             <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
-              <button className="button button-green" onClick={() => setShowAllProjects(true)}>
+              <button className="button button-green" onClick={() => setShowProjects(true)}>
                 Load more...
               </button>
             </TransitionScroll>
@@ -170,19 +145,19 @@ function Home({ projects }) {
               <input
                 placeholder="Name..."
                 name="name"
-                className="h-12 rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+                className="h-12 w-full rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
                 required
               />
               <textarea
                 placeholder="Message..."
                 name="message"
-                className="row-span-2 max-h-96 min-h-[112px] rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+                className="row-span-2 max-h-96 min-h-[112px] w-full rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
                 required
               />
               <input
                 placeholder="Email..."
                 name="email"
-                className="mt-auto h-12 rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
+                className="mt-auto h-12 w-full rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
                 required
               />
               <button className={`button button-green col-span-full mx-auto h-12 w-full sm:w-auto`} type="submit">
@@ -194,7 +169,11 @@ function Home({ projects }) {
             <TransitionScroll className="mb-2 mt-4" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
               <h3 className="font-semibold">
                 Or, Email me directly! @{' '}
-                <a className={`font-bold text-blue-500 underline`} href="mailto:janwillemvanbremen@live.nl">
+                <a
+                  style={{ wordBreak: 'break-word' }}
+                  className="font-bold text-blue-500 underline"
+                  href="mailto:janwillemvanbremen@live.nl"
+                >
                   janwillemvanbremen@live.nl
                 </a>
               </h3>

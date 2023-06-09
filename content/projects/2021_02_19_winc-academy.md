@@ -3,6 +3,7 @@ title: Winc Academy
 startDate: 2021-02-19
 endDate: 2021-05-21
 thumbnail: /assets/winc.webp
+type: Professional
 description: During my time as a Software Engineering student I worked for a
   couple of months at the Winc Academy. The Winc Academy is an online academy
   where people can learn programming from experienced teachers. The programming

@@ -2,6 +2,7 @@
 title: Team Rockstars IT
 startDate: 2023-04-19
 endDate: 2023-05-01
+type: Professional
 thumbnail: /assets/hubble_ultra_deep_field.jpg
 description: My first real cool job at a real company making bog moneys adrerie.
 ---

@@ -2,6 +2,7 @@
 title: Botenloods
 startDate: 2021-05-21
 endDate: null
+type: Professional
 thumbnail: /assets/botenloods.webp
 description: As a part-time job and service to my neighbouring shipyard I took
   management over their website which was at the time of accusation not working

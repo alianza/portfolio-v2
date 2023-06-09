@@ -2,6 +2,7 @@
 title: Team Rockstars IT
 startDate: 2021-03-10
 endDate: 2021-03-25
+type: Personal
 thumbnail: /assets/hubble_ultra_deep_field.jpg
 description: Faka My first real cool job at a real company making bog moneys adrerie.
 ---
