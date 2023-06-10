@@ -111,9 +111,7 @@ ${imagesHtml}
     ],
     pattern: /^<div class="images-grid">\n(.*?)<\/div>/ms,
     fromBlock(match) {
-      console.log(`match`, match)
       const images = match[1].split('\n').filter(Boolean)
-      console.log(`images`, images)
       return ({
         images: images.map(image => image.match(/<img[\s\S]*src="(.*?)"[\s\S]*\/>/)?.[1]).filter(Boolean)
       })
@@ -122,18 +120,19 @@ ${imagesHtml}
     toPreview: (data) => getImagesGridFragment(data.images)
   })
 
-    const getVideoFragment = (video) => `<video playsinline controls src="${video}"></video>`
+    const getVideoFragment = (video, autoplay) => `<video${autoplay ? ' autoplay muted loop' : ''} playsinline controls src="${video}"></video>`
 
   CMS.registerEditorComponent({
       id: "video",
       label: "Video",
       fields: [
-        { name: 'video', label: 'Video', widget: 'file' }
+        { name: 'video', label: 'Video', widget: 'file' },
+        { name: 'autoplay', label: 'Autoplay', widget: 'boolean', default: false }
       ],
-      pattern: /^<video playsinline controls src="(.*?)"><\/video>/ms,
-      fromBlock: match => ({ video: match[1] }),
-      toBlock: data => getVideoFragment(data.video),
-      toPreview: data => getVideoFragment(data.video)
+      pattern: /^<video(.*?) playsinline controls src="(.*?)"><\/video>/ms,
+      fromBlock: match => ({ autoplay: !!match[1], video: match[2], }),
+      toBlock: ({ autoplay, video }) => getVideoFragment(video, autoplay),
+      toPreview: ({ autoplay, video }) => getVideoFragment(video, autoplay)
     })
 
     const getButtonFragment = (icon, text, link) => `<a href="${link || '#'}"><button><img src="${icon || "/assets/placeholder.jpg"}" alt="icon" />${text || "Text..."}</button></a>`

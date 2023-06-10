@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        pro: 'url("/pro.png")',
+        personal: 'url("/personal.png")',
+      },
       spacing: {
         header: '64px',
       },

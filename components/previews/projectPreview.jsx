@@ -4,14 +4,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
 
+const psuedoElementBaseClass =
+  'after:bg-48px bg-no-repeat after:absolute after:left-1 after:top-1 after:h-12 after:w-12  after:object-cover after:drop-shadow-xl after:content-[""]';
+
 export default function ProjectPreview({ project, ...props }) {
   const { id, data } = project;
-  console.log(`project`, project);
   return (
     <TransitionScroll key={id} baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle} {...props}>
-      <Link href={`/projects/${id}`} className={`${(data.type = 'Professional' ? '' : '')} hoverSlight relative block`}>
-        {' '}
-        {/*Todo: Add pro / solo icons */}
+      <Link
+        href={`/projects/${id}`}
+        className={`${
+          data.type === 'Professional' ? 'after:bg-pro' : data.type === 'Personal' ? 'after:bg-personal' : ''
+        } ${!!data.type ? psuedoElementBaseClass : ''} hoverSlight relative block`}
+      >
         <Image
           className="aspect-square w-full rounded object-cover"
           alt={`${data.title} thumbnail`}
