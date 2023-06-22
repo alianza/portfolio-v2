@@ -1,6 +1,6 @@
 import Layout from '@/components/layout/layout/layout';
 import { useNetlifyIdentityRedirect } from '@/lib/customHooks';
-import { hiddenStyle, transitionBaseStyle, yearsSinceDate } from '@/lib/utils';
+import { hiddenStyle, baseStyle, yearsSinceDate } from '@/lib/utils';
 import { TransitionScroll } from 'react-transition-scroll';
 import Image from 'next/image';
 import { getProjects } from '@/lib/services/projectsService';
@@ -97,7 +97,7 @@ function Home({ projects }) {
             ].map(([title, description, media]) => (
               <TransitionScroll
                 key={title}
-                baseStyle={transitionBaseStyle}
+                baseStyle={baseStyle}
                 hiddenStyle={hiddenStyle}
                 className="flex flex-col sm:last-of-type:odd:col-span-full md:last-of-type:odd:col-span-1"
               >
@@ -121,7 +121,7 @@ function Home({ projects }) {
             )}
           </div>
           {projects.length > 5 && !showProjects && (
-            <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
+            <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
               <button className="button button-green" onClick={() => setShowProjects(true)}>
                 Load more...
               </button>
@@ -133,7 +133,7 @@ function Home({ projects }) {
           <h2 id="contact" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
             Contact me
           </h2>
-          <TransitionScroll baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+          <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
             <h3 className="mb-2 text-2xl">Send me a message!</h3>
             <form
               className="grid-col-1 grid grid-rows-4 gap-4 text-neutral-700 sm:grid-cols-2 sm:grid-rows-[repeat(2,_minmax(0,_1fr))_48px]"
@@ -166,7 +166,7 @@ function Home({ projects }) {
             </form>
           </TransitionScroll>
           <div>
-            <TransitionScroll className="mb-2 mt-4" baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle}>
+            <TransitionScroll className="mb-2 mt-4" baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
               <h3 className="font-semibold">
                 Or, Email me directly! @{' '}
                 <a

@@ -1,5 +1,5 @@
 import { TransitionScroll } from 'react-transition-scroll';
-import { hiddenStyle, transitionBaseStyle } from '@/lib/utils';
+import { hiddenStyle, baseStyle } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
@@ -10,7 +10,7 @@ const psuedoElementBaseClass =
 export default function ProjectPreview({ project, ...props }) {
   const { id, data } = project;
   return (
-    <TransitionScroll key={id} baseStyle={transitionBaseStyle} hiddenStyle={hiddenStyle} {...props}>
+    <TransitionScroll key={id} baseStyle={baseStyle} hiddenStyle={hiddenStyle} {...props}>
       <Link
         href={`/projects/${id}`}
         className={`${
