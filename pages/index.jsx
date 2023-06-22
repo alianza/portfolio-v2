@@ -56,7 +56,7 @@ function Home({ projects }) {
             {[
               [
                 'Who I am',
-                `  My name is Jan-Willem van Bremen. I'm a ${yearsSinceDate('10-10-1998')} year old software
+                `My name is Jan-Willem van Bremen. I'm a ${yearsSinceDate('10-10-1998')} year old software
                   engineer, skateboarder and model from Amsterdam! I'm a very social, diligent and precise person
                   who can concentrate for long periods of time. I work well both solo and in development teams!`,
                 <Image

@@ -5,19 +5,22 @@ import {
   useCodeHighlightStyles,
   useDetailTagsAnimation,
   useExternalLinks,
+  useGithubLastUpdated,
   useImageZoom,
 } from '@/lib/markdownEnrichment';
 import { useDarkMode } from '@/lib/customHooks';
 import Image from 'next/image';
+import { use } from 'marked';
 
 const contentId = 'article-content';
 
 const MdContent = ({ content: { title, date, startDate, endDate, thumbnail, content }, noDate }) => {
   const darkMode = useDarkMode();
-  useDetailTagsAnimation();
+  useDetailTagsAnimation(contentId);
   useImageZoom(contentId);
   useExternalLinks(contentId);
   useCodeHighlightStyles(darkMode);
+  useGithubLastUpdated(contentId);
 
   return (
     <article className={contentStyles.content}>
@@ -30,9 +33,8 @@ const MdContent = ({ content: { title, date, startDate, endDate, thumbnail, cont
       </div>
       {thumbnail && (
         <Image
-          width={0}
-          height={0}
-          sizes="100vw"
+          width={700}
+          height={700}
           className={contentStyles.thumbnail}
           alt={`${title} thumbnail`}
           src={thumbnail}
