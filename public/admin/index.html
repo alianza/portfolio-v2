@@ -135,20 +135,20 @@ ${imagesHtml}
       toPreview: ({ autoplay, video }) => getVideoFragment(video, autoplay)
     })
 
-    const getButtonFragment = (icon, text, link) => `<a href="${link || '#'}"><button><img src="${icon || "/assets/placeholder.jpg"}" alt="icon" />${text || "Text..."}</button></a>`
+    const getIconButtonFragment = (icon, text, link) => `<a href="${link || '#'}"><button><img src="${icon || "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="}" alt="icon" />${text || "Text..."}</button></a>`
 
     CMS.registerEditorComponent({
       id: "icon-button",
       label: "Button with icon",
       fields: [
-        { name: 'icon', label: 'Icon', widget: 'image', default: '/assets/placeholder.jpg' },
+        { name: 'icon', label: 'Icon', widget: 'image' },
         { name: 'text', label: 'Text', widget: 'string' },
         { name: 'link', label: 'Link', widget: 'string' }
       ],
       pattern: /^<a href="(.*?)"><button><img src="(.*?)" alt="icon" \/>(.*?)<\/button><\/a>/ms,
       fromBlock: match => ({ link: match[1], icon: match[2], text: match[3] }),
-      toBlock: ({ icon, link, text }) => getButtonFragment(icon, text, link),
-      toPreview: ({ icon, link, text }) => getButtonFragment(icon, text, link)
+      toBlock: ({ icon, link, text }) => getIconButtonFragment(icon, text, link),
+      toPreview: ({ icon, link, text }) => getIconButtonFragment(icon, text, link)
     })
 
     const getIconLiFragment = (item) => {

@@ -53,6 +53,11 @@
 
         img {
             @apply cursor-pointer transition-[transform,shadow] hover:duration-75 active:scale-[0.99] hover:scale-[1.01] hover:shadow-xl;
+
+            // empty src
+            &[src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="] { // Empty src
+                @apply hidden #{!important};
+            }
         }
 
         pre {
@@ -69,6 +74,11 @@
 
         button {
             @apply inline-flex items-center gap-2 my-1 text-neutral-100 bg-neutral-600 hover:bg-neutral-700 focus:ring-neutral-600/50 rounded-lg px-5 py-2.5 text-sm font-medium hover:duration-100 hover:decoration-inherit focus:outline-none focus:ring-4 transition-colors underline decoration-transparent duration-300 ease-in-out;
+            contain: content;
+
+            img[alt='icon'] {
+                @apply h-5;
+            }
         }
 
         details {
