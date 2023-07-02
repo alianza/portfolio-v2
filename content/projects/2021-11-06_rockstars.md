@@ -50,11 +50,12 @@ Progressive Web Application.
 
 ## Screens
 
-![flex screenshot](/assets/rockstars.webp)
-![flex screenshot](/assets/rockstars_1.webp)
-
-![flex screenshot](/assets/rockstars_2.webp)
-![flex screenshot](/assets/rockstars_3.webp)
+<div class="images-grid">
+<img src="/assets/rockstars.webp" />
+<img src="/assets/rockstars_1.webp" />
+<img src="/assets/rockstars_2.webp" />
+<img src="/assets/rockstars_3.webp" />
+</div>
 
 <video autoplay muted loop playsinline controls src="/assets/rockstars.webm"></video>
 
@@ -75,7 +76,7 @@ Progressive Web Application.
 
 ## Lighthouse Audit Score ![icon](/assets/lighthouse.png)
 
-![flex screenshot](/assets/lighthouse.png)
+![Lighthouse score](/assets/lighthouse_rockstars.png "Lighthouse score")
 
 - - -
 
@@ -229,6 +230,6 @@ export default function Songs({songs}) {
 [<button>![icon](/assets/github.png) Github</button>](https://github.com/alianza/rockstars_static)
 [<button>![icon](/assets/vercel.png) Visit Site (Vercel)</button>](https://rockstars-static.vercel.app/)
 [<button>![icon](/assets/netlify.png) Visit Site (Netlify)</button>](https://rockstars.jwvbremen.nl/)
-[<button>![icon](/assets/lighthouse.png) Lighthouse audit</button>](/projects/rockstars/lighthouse.html)
+[<button>![icon](/assets/lighthouse.png) Lighthouse audit</button>](/projects/rockstars/lighthouse_rockstars.html)
 
 - - -
