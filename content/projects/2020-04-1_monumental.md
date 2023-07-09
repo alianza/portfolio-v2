@@ -4,12 +4,13 @@ startDate: 2020-04-01
 endDate: 2021-01-12
 thumbnail: /assets/monumental.webp
 type: Professional
-description: Faka My first real cool job at a real company making bog moneys adrerie.
+description: The Monumental Android application was created for the mobile development thematic semester during my HBO-ICT Software Engineering studies.
+  I created this application by myself from the concept to implementation phase. 
 ---
 # Monumental - Android
 
-I created the Monumental Android application for the mobile development thematic semester for my HBO-ICT Software Engineering studies.
-I created this application by myself from the concept to implementation phase. 
+The Monumental Android application was created for the mobile development thematic semester during my HBO-ICT Software Engineering studies.
+I created this application by myself from the concept to implementation phase.
 
 ## Technologies & Frameworks
 
