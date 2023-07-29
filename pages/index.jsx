@@ -20,7 +20,7 @@ export async function getStaticProps() {
 function Home({ projects }) {
   useNetlifyIdentityRedirect();
   const [videoId, setVideoId] = useState(null);
-  const [showProjects, setShowProjects] = useState(false);
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   useEffect(() => {
     setVideoId(Math.floor(Math.random() * 2) + 1);
@@ -117,12 +117,12 @@ function Home({ projects }) {
           </h2>
           <div className="mb-4 grid h-full w-full grid-cols-1 grid-rows-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {projects.map((project, i) =>
-              i > 5 && !showProjects ? null : <ProjectPreview key={project.id} project={project} />
+              i > 5 && !showAllProjects ? null : <ProjectPreview key={project.id} project={project} />
             )}
           </div>
-          {projects.length > 5 && !showProjects && (
+          {projects.length > 5 && !showAllProjects && (
             <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
-              <button className="button button-green" onClick={() => setShowProjects(true)}>
+              <button className="button button-green" onClick={() => setShowAllProjects(true)}>
                 Load more...
               </button>
             </TransitionScroll>
@@ -142,6 +142,7 @@ function Home({ projects }) {
               data-netlify="true"
             >
               <input type="hidden" name="form-name" value="contact" />
+              {/*https://www.youtube.com/watch?v=nJzKi6oIvBA&ab_channel=TailwindLabs*/}
               <input
                 placeholder="Name..."
                 name="name"
