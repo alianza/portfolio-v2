@@ -5,7 +5,7 @@ endDate: null
 type: Professional
 thumbnail: /assets/botenloods.webp
 description: As a part-time job and service to my neighbouring shipyard I took
-  management over their website which was at the time of accusation not working
+  management over their website which was at the time of acquisition not working
   correctly.
 ---
 # Botenloods - Part-time Job
@@ -23,8 +23,8 @@ description: As a part-time job and service to my neighbouring shipyard I took
 
 ## Summary
 
-As a part-time job and service to my neighbouring shipyard I took management over their website which was at the time of 
-accusation not working correctly. Stylesheets wouldn't load, images were missing, the website was insecure, out of date
+As a part-time job and service to my neighbouring shipyard I took management over their website which was at the time of
+acquisition not working correctly. Stylesheets wouldn't load, images were missing, the website was insecure, out of date
 content had to be updated or removed and new content had to be made available. The administrator of the website at the 
 time was too old to manage the website further, so I took responsibility over the previously mentioned aspects.
 

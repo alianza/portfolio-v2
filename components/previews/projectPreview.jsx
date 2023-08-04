@@ -4,19 +4,28 @@ import Link from 'next/link';
 import Image from 'next/image';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
 
-const psuedoElementBaseClass =
+const pseudoElementBaseClass =
   'after:bg-48px bg-no-repeat after:absolute after:left-1 after:top-1 after:h-12 after:w-12  after:object-cover after:drop-shadow-xl after:content-[""]';
 
 export default function ProjectPreview({ project, ...props }) {
   const { id, data } = project;
+  let projectTypeImageBgClass = '';
+
+  if (data.type) {
+    projectTypeImageBgClass =
+      data.type === 'Professional'
+        ? 'after:bg-pro'
+        : data.type === 'Personal'
+        ? 'after:bg-personal'
+        : data.type === 'Academic'
+        ? 'after:bg-academic'
+        : '';
+    projectTypeImageBgClass = `${projectTypeImageBgClass} ${pseudoElementBaseClass}`;
+  }
+
   return (
     <TransitionScroll key={id} baseStyle={baseStyle} hiddenStyle={hiddenStyle} {...props}>
-      <Link
-        href={`/projects/${id}`}
-        className={`${
-          data.type === 'Professional' ? 'after:bg-pro' : data.type === 'Personal' ? 'after:bg-personal' : ''
-        } ${!!data.type ? psuedoElementBaseClass : ''} hoverSlight relative block`}
-      >
+      <Link href={`/projects/${id}`} className={`${projectTypeImageBgClass} hoverSlight relative block`}>
         <Image
           className="aspect-square w-full rounded object-cover"
           alt={`${data.title} thumbnail`}
@@ -32,7 +41,9 @@ export default function ProjectPreview({ project, ...props }) {
           {data.title}
         </Link>
         <StartEndDateLabel startDate={data.startDate} endDate={data.endDate} />
-        <p className="line-clamp-3 font-light">{data.description}</p>
+        <p className="line-clamp-3 font-light" title={data.description.length > 120 ? data.description : ''}>
+          {data.description}
+        </p>
       </div>
     </TransitionScroll>
   );

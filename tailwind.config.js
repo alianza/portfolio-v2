@@ -10,6 +10,7 @@ module.exports = {
       backgroundImage: {
         pro: 'url("/pro.png")',
         personal: 'url("/personal.png")',
+        academic: 'url("/academic.png")',
       },
       spacing: {
         header: '64px',

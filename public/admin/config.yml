@@ -3,7 +3,7 @@ backend:
   branch: main
   repo: alianza/portfolio-lea
 
-local_backend: true
+local_backend: false
 site_url: https://jw-portfolio-v2.netlify.app/
 display_url: https://jw-portfolio-v2.netlify.app/
 media_folder: public/assets
@@ -47,6 +47,6 @@ collections:
       - { label: 'Start Date', name: 'startDate', widget: 'datetime', format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
       - { label: 'End Date', name: 'endDate', widget: 'datetime', format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, default: "", hint: "Leave empty if still working (present)" }
       - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
-      - { label: 'Type', name: 'type', widget: 'select', options: ['Personal', 'Professional'], default: 'Professional' }
-      - { label: 'Description', name: 'description', widget: 'text' }
-      - { label: 'Body', name: 'body', widget: 'markdown' }
+      - { label: 'Type', name: 'type', widget: 'select', options: ['Personal', 'Professional', "Academic"], default: 'Professional', required: false }
+      - { label: 'Description', name: 'description', widget: 'text', required: false }
+      - { label: 'Body', name: 'body', widget: 'markdown', required: false }

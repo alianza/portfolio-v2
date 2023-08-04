@@ -22,6 +22,11 @@ const MdContent = ({ content: { title, date, startDate, endDate, thumbnail, cont
   useCodeHighlightStyles(darkMode);
   useGithubLastUpdated(contentId);
 
+  if (!content) {
+    content = `<h1>Article for ${title} not written yet...</h1>
+    <p>Check back later!</p>`;
+  }
+
   return (
     <article className={contentStyles.content}>
       <div className="flex flex-wrap items-center justify-between gap-2">
