@@ -8,11 +8,11 @@ description: I built this Personal Portfolio Website to introduce myself as a
   software engineer, demonstrate some of my previous projects and experiences
   and as practice in vanilla web development (No frameworks).
 ---
-# Personal Portfolio Website - Vanilla JS
+# Personal Portfolio Website v1 - Vanilla JS
 
-I built this Personal Portfolio Website to introduce myself as a software engineer, demonstrate some of my previous projects
-and experiences and as practice in vanilla web development (No frameworks). I update this website with new content as I
-make new projects or gain new professional experiences!
+I built the previous version of this Personal Portfolio Website to introduce myself as a software engineer, demonstrate some of my previous projects
+and experiences and as practice in vanilla web development (No frameworks). I updated this website with new content as I
+made new projects or gained new professional experiences!
 
 - - -
 
@@ -29,11 +29,14 @@ make new projects or gain new professional experiences!
 
 ## Summary
 
-The website features a lot of visual elements like a full screen background video, lots of images and hover effects.
+The website featured a lot of visual elements like a full screen background video, lots of images and hover effects.
 Most of the website's content resides behind the clickable project images. In the dialog that pops up detailed information
 for every project (That I've gotten around to write) can be found including images, video's, code snippets and links to source code
 and live demo's. Content is created using Markdown and a minimal amount of HTML. This is all fetched on the fly when the user requests it.
 The project is hosted using the [Netlify](https://netlify.com/) deployment platform.
+
+Since then, I've created a new version of this website using the Next.js framework. Which is the current version of this website you are viewing now!
+The new version of this website is statically generated from a local Markdown and JSON data source with a git based CMS for easy content management.
 
 - - -
 
@@ -356,7 +359,7 @@ The projects and past experiences are loaded in the main content using JavaScrip
 ## Check out the project
 
 [<button>![icon](/assets/github.png) Github</button>](https://github.com/alianza/portfolio)
-[<button>![icon](/assets/portfolio_v1.webp) Visit Site</button>](https://jwvbremen.nl/) *You are already here :)*
+[<button>![icon](/assets/portfolio_v1.webp) Visit Site</button>](https://old.jwvbremen.nl/)
 [<button>![icon](/assets/lighthouse.png) Lighthouse audit</button>](/projects/portfolio/lighthouse_portfolio_v1.html)
 
 - - -

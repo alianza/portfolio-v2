@@ -222,6 +222,6 @@ export default function Updates() {
 
 [<button>![icon](/assets/github.png) Github</button>](https://github.com/alianza/veldje14)
 [<button>![icon](/assets/vercel.png) Visit Site</button>](https://veldje14.nl/)
-[<button>![icon](/assets/lighthouse.png) Lighthouse audit</button>](/projects/veldje14/lighthouse.html)
+[<button>![icon](/assets/lighthouse.png) Lighthouse audit</button>](/assets/lighthouse_veldje14.html)
 
 - - -
