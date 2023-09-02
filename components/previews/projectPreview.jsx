@@ -41,7 +41,7 @@ export default function ProjectPreview({ project, ...props }) {
           {data.title}
         </Link>
         <StartEndDateLabel startDate={data.startDate} endDate={data.endDate} />
-        <p className="line-clamp-3 font-light" title={data.description.length > 120 ? data.description : ''}>
+        <p className="line-clamp-3 font-light" title={data.description?.length > 120 ? data.description : ''}>
           {data.description}
         </p>
       </div>
