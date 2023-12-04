@@ -1,15 +1,15 @@
 backend:
   name: git-gateway
   branch: main
-  repo: alianza/portfolio-lea
+  repo: alianza/portfolio-v2
 
 local_backend: false
-site_url: https://jw-portfolio-v2.netlify.app/
-display_url: https://jw-portfolio-v2.netlify.app/
+site_url: https://jwvbremen.nl/
+display_url: https://jwvbremen.nl/
 media_folder: public/assets
 public_folder: /assets
 publish_mode: editorial_workflow
-logo_url: https://jw-portfolio-v2.netlify.app/admin/cms_img.jpg
+logo_url: https://jwvbremen.nl/admin/cms_img.jpg
 
 collections:
   - name: "config"
