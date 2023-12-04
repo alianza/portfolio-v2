@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import contentStyles from './mdContent.module.scss';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
 import {
@@ -10,7 +10,6 @@ import {
 } from '@/lib/markdownEnrichment';
 import { useDarkMode } from '@/lib/customHooks';
 import Image from 'next/image';
-import { use } from 'marked';
 
 const contentId = 'article-content';
 
