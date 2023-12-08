@@ -1,6 +1,6 @@
 ---
 title: Team Rockstars IT
-startDate: 2023-12-08
+startDate: 2021-12-01
 endDate: ""
 thumbnail: /assets/rockstars_5.webp
 type: Professional
