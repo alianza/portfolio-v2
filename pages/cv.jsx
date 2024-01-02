@@ -1,10 +1,9 @@
-import Layout from '@/components/layout/layout/layout';
-import Home from '@/pages/index';
+import Layout from "@/components/layout/layout/layout";
 
 function Cv() {
   return (
     <iframe
-      src={'/Curriculum Vitae Jan-Willem van Bremen 500779265 - English.pdf'}
+      src={"/Curriculum Vitae Jan-Willem van Bremen 500779265 - English.pdf"}
       className="w-full grow"
       width="100%"
       height="100%"
