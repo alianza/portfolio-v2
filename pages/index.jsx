@@ -23,7 +23,7 @@ function Home({ projects }) {
   const [showAllProjects, setShowAllProjects] = useState(false);
 
   useEffect(() => {
-    setVideoId(Math.floor(Math.random() * 2) + 1);
+    setVideoId(Math.floor(Math.random() * 2) + 1); // 1 or 2
   }, []);
 
   return (
@@ -58,7 +58,7 @@ function Home({ projects }) {
                 'Who I am',
                 `My name is Jan-Willem van Bremen. I'm a ${yearsSinceDate('10-10-1998')} year old software
                   engineer, skateboarder and model from Amsterdam! I'm a very social, diligent and precise person
-                  who can concentrate for long periods of time. I work well both solo and in development teams!`,
+                  who can concentrate for long periods of time. I work well both solo and in (multidisciplinary) development teams!`,
                 <Image
                   key="Who I am"
                   src="/portrait.webp"
@@ -117,7 +117,7 @@ function Home({ projects }) {
           </h2>
           <div className="mb-4 grid h-full w-full grid-cols-1 grid-rows-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {projects.map((project, i) =>
-              i > 5 && !showAllProjects ? null : <ProjectPreview key={project.id} project={project} />
+              i > 5 && !showAllProjects ? null : <ProjectPreview key={project.id} project={project} />,
             )}
           </div>
           {projects.length > 5 && !showAllProjects && (
@@ -130,37 +130,57 @@ function Home({ projects }) {
         </section>
 
         <section className="w-full">
-          <h2 id="contact" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
+          <h2 id="contact" className="scroll-header-offset mt-5 text-center text-4xl font-bold sm:text-left">
             Contact me
           </h2>
           <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
-            <h3 className="mb-2 text-2xl">Send me a message!</h3>
+            <h3 className="mb-6 text-2xl">Send me a message!</h3>
             <form
-              className="grid-col-1 grid grid-rows-4 gap-4 text-neutral-700 sm:grid-cols-2 sm:grid-rows-[repeat(2,_minmax(0,_1fr))_48px]"
+              className="grid-col-1 grid grid-rows-4 gap-5 text-neutral-700 sm:grid-cols-2 sm:grid-rows-[repeat(2,_minmax(0,_1fr))_48px]"
               name="contact"
               method="POST"
               data-netlify="true"
             >
               <input type="hidden" name="form-name" value="contact" />
               {/*https://www.youtube.com/watch?v=nJzKi6oIvBA&ab_channel=TailwindLabs*/}
-              <input
-                placeholder="Name..."
-                name="name"
-                className="h-12 w-full rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
-                required
-              />
+              <div className="relative">
+                <input
+                  placeholder="Name..."
+                  name="name"
+                  id="name"
+                  className="peer h-12 w-full rounded border-b-2 p-2 placeholder-transparent shadow shadow-neutral-200 transition-colors focus:border-rose-600 focus:outline-none dark:shadow-neutral-600"
+                  required
+                />
+                <label
+                  htmlFor="name"
+                  className="absolute -top-3.5 left-1 cursor-text text-sm text-gray-600 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-5 peer-focus:text-sm peer-focus:dark:text-neutral-50"
+                >
+                  Name...
+                </label>
+              </div>
+
               <textarea
                 placeholder="Message..."
                 name="message"
                 className="row-span-2 max-h-96 min-h-[112px] w-full rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
                 required
               />
-              <input
-                placeholder="Email..."
-                name="email"
-                className="mt-auto h-12 w-full rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
-                required
-              />
+              <div className="relative">
+                <input
+                  placeholder="Email..."
+                  name="email"
+                  id="email"
+                  className="peer order-first mt-auto h-12 w-full rounded border-b-2 p-2 placeholder-transparent shadow shadow-neutral-200 transition-colors focus:border-rose-600 focus:outline-none sm:order-none dark:shadow-neutral-600"
+                  required
+                />
+                <label
+                  htmlFor="email"
+                  className="absolute -top-3.5 left-1 cursor-text text-sm text-gray-600 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-5 peer-focus:text-sm peer-focus:dark:text-neutral-50"
+                >
+                  Email...
+                </label>
+              </div>
+
               <button className={`button button-green col-span-full mx-auto h-12 w-full sm:w-auto`} type="submit">
                 Send
               </button>
