@@ -4,7 +4,7 @@ startDate: 2021-11-06
 endDate: 2021-11-09
 thumbnail: /assets/rockstars.webp
 type: Professional
-description: his project was a learning experience and a good example of how to
+description: This project was a learning experience and a good example of how to
   use Next.js. This project demonstrates how to use Next.js to render static web
   pages from an external data source. The application allows you to search for
   rockstars and their songs. The application is inspired by the Front-End Tech
@@ -68,7 +68,7 @@ Progressive Web Application.
 * [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 * [Yarn](https://yarnpkg.com/)
 * [Cypress E2E testing](https://www.cypress.io/)
-* [Github Actions](https://www.github.com/features/actions)
+* [GitHub Actions](https://www.github.com/features/actions)
 * [Lighthouse Audits](https://developers.google.com/web/tools/lighthouse/)
 * [Compress-JSON](https://www.npmjs.com/package/compress-json)
 * [Prop-Types](https://www.npmjs.com/package/prop-types)
