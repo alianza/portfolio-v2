@@ -12,15 +12,15 @@
     "next:lint": "next lint",
     "netlify-cms-proxy": "npx netlify-cms-proxy-server",
     "watch-styles": "run-p watch-sass:* watch-tailwind:*",
-    "build-styles": "run-p compile-sass:* compile-tailwind:*",
-    "compile-sass:globals": "sass styles/globals.scss ./public/styles/globals.css --no-source-map",
-    "compile-tailwind:globals": "npx tailwindcss -i ./public/styles/globals.css -o ./public/styles/globals.css",
-    "watch-sass:globals": "sass styles/globals.scss ./public/styles/globals.css --no-source-map --watch",
+    "build-styles": "run-p build-sass:* build-tailwind:*",
     "watch-tailwind:globals": "npx tailwindcss -i ./public/styles/globals.css -o ./public/styles/globals.css --watch",
-    "compile-sass:content": "sass components/mdContent/mdContent.module.scss ./public/styles/content.module.css --no-source-map",
-    "compile-tailwind:content": "npx tailwindcss -i ./public/styles/content.module.css -o ./public/styles/content.module.css",
+    "watch-tailwind:content": "npx tailwindcss -i ./public/styles/content.module.css -o ./public/styles/content.module.css --watch",
     "watch-sass:content": "sass components/mdContent/mdContent.module.scss ./public/styles/content.module.css --no-source-map --watch",
-    "watch-tailwind:content": "npx tailwindcss -i ./public/styles/content.module.css -o ./public/styles/content.module.css --watch"
+    "watch-sass:globals": "sass styles/globals.scss ./public/styles/globals.css --no-source-map --watch",
+    "build-sass:content": "sass components/mdContent/mdContent.module.scss ./public/styles/content.module.css --no-source-map",
+    "build-sass:globals": "sass styles/globals.scss ./public/styles/globals.css --no-source-map",
+    "build-tailwind:content": "npx tailwindcss -i ./public/styles/content.module.css -o ./public/styles/content.module.css",
+    "build-tailwind:globals": "npx tailwindcss -i ./public/styles/globals.css -o ./public/styles/globals.css"
   },
   "dependencies": {
     "autoprefixer": "^10.4.16",
