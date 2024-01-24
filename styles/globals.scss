@@ -28,8 +28,7 @@
   }
 
   .button-red {
-    @apply bg-red-700 text-neutral-100 hover:bg-red-800 focus:ring-red-700/50;
-    // For accessibility reasons, the red button is darker than the others
+    @apply bg-red-700 text-neutral-100 hover:bg-red-800 focus:ring-red-700/50; // For accessibility reasons, the red button is darker than the others
   }
 
   .inputAnimation {
