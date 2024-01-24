@@ -70,7 +70,7 @@ function Home({ projects }) {
                   key="Who I am"
                   src="/portrait.webp"
                   alt="Portrait of Jan-Willem van Bremen"
-                  className="w-full rounded shadow"
+                  className="w-full rounded shadow-lg"
                   quality={100}
                   width={500}
                   height={500}
@@ -81,7 +81,14 @@ function Home({ projects }) {
                 `Professionally I am a full-stack Software Engineer focussing on web-development. I do this using
                   technologies & techniques like HTML, (S)CSS, Type/JavaScript, Node.js, web frameworks (React,
                   Next.js), Git(hub), Agile Scrum and more! Check out some of my experiences & projects!`,
-                <video key="What I do professionally" autoPlay playsInline muted loop className="w-full rounded shadow">
+                <video
+                  key="What I do professionally"
+                  autoPlay
+                  playsInline
+                  muted
+                  loop
+                  className="w-full rounded shadow-lg"
+                >
                   <source src="/professional.webm" type="video/webm" />
                   <source src="/professional.mp4" type="video/mp4" />
                 </video>,
@@ -95,7 +102,7 @@ function Home({ projects }) {
                   key="What I do for fun"
                   src="/fun.webp"
                   alt="Portrait of Jan-Willem van Bremen"
-                  className="w-full rounded shadow"
+                  className="w-full rounded shadow-lg"
                   quality={100}
                   width={500}
                   height={500}
@@ -150,7 +157,7 @@ function Home({ projects }) {
           <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
             <h3 className="mb-6 text-2xl">Send me a message!</h3>
             <form
-              className="grid-col-1 grid grid-rows-4 gap-6 text-neutral-700 sm:grid-cols-2 sm:grid-rows-[repeat(2,_minmax(0,_1fr))_48px]"
+              className="grid grid-cols-1 grid-rows-4 gap-6 text-neutral-700 sm:grid-cols-2 sm:grid-rows-3"
               name="contact"
               method="POST"
               data-netlify="true"
@@ -161,7 +168,7 @@ function Home({ projects }) {
                   placeholder="Name"
                   name="name"
                   id="name"
-                  className="inputAnimation peer  h-12 w-full p-2 indent-12"
+                  className="inputAnimation peer h-12 w-full p-2 indent-12"
                   required
                 />
                 <label htmlFor="name" className="labelAnimation">
