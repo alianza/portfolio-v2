@@ -158,40 +158,40 @@ function Home({ projects }) {
               <input type="hidden" name="form-name" value="contact" />
               <div className="relative">
                 <input
-                  placeholder="Name..."
+                  placeholder="Name"
                   name="name"
                   id="name"
-                  className="inputAnimation peer h-12 w-full p-2"
+                  className="inputAnimation peer  h-12 w-full p-2 indent-12"
                   required
                 />
                 <label htmlFor="name" className="labelAnimation">
-                  Name...
+                  Name
                 </label>
               </div>
 
               <div className="relative row-span-2">
                 <textarea
-                  placeholder="Message..."
+                  placeholder="Message"
                   name="message"
                   id="message"
-                  className="inputAnimation peer max-h-96 min-h-[100%] w-full p-2"
+                  className="inputAnimation peer max-h-96 min-h-[100%] w-full p-2 py-3 indent-[4.25em]"
                   required
                 />
                 <label htmlFor="message" className="labelAnimation">
-                  Message...
+                  Message
                 </label>
               </div>
 
               <div className="relative order-first sm:order-none">
                 <input
-                  placeholder="Email..."
+                  placeholder="Email"
                   name="email"
                   id="email"
-                  className="inputAnimation peer mt-auto h-12 w-full p-2"
+                  className="inputAnimation peer mt-auto h-12 w-full p-2 indent-12"
                   required
                 />
                 <label htmlFor="email" className="labelAnimation">
-                  Email...
+                  Email
                 </label>
               </div>
 

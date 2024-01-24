@@ -32,11 +32,11 @@
   }
 
   .inputAnimation {
-    @apply rounded border-b-2 border-transparent placeholder-transparent shadow shadow-neutral-200 transition-colors focus:border-rose-600 focus:outline-none dark:shadow-neutral-600;
+    @apply rounded border-b-2 border-transparent placeholder-transparent shadow shadow-neutral-200 transition-all focus:border-rose-600 focus:indent-0 focus:outline-none dark:shadow-neutral-600;
   }
 
   .labelAnimation {
-    @apply absolute -top-5 left-1 cursor-text text-sm font-semibold text-neutral-50 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-400 peer-focus:-top-5 peer-focus:text-sm peer-focus:font-semibold peer-focus:text-neutral-600 peer-focus:dark:text-neutral-50;
+    @apply absolute left-1.5 top-3 cursor-text font-semibold transition-all after:content-[':'] peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-400 peer-placeholder-shown:after:content-[''] peer-focus:-top-5 peer-focus:text-sm peer-focus:font-semibold peer-focus:text-neutral-600 peer-focus:after:content-[''] peer-focus:dark:text-neutral-50;
   }
 
   .link {
