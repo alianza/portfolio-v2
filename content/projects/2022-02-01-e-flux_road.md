@@ -20,6 +20,8 @@ I started working with Road.io when they were still a start-up with a very small
 
 - - -
 
+## Technologies & Frameworks
+
 <ul class="icon-list">
 <li>Node.js <a href="https://nodejs.org/en"><img src="/assets/nodejs.png" alt="icon"></a></li>
 <li>React.js <a href="https://react.dev/"><img src="/assets/react.png" alt="icon"></a></li>
@@ -31,3 +33,14 @@ I started working with Road.io when they were still a start-up with a very small
 <li>OCPI <a href="https://evroaming.org/"><img src="/assets/ocpi.png" alt="icon"></a></li>
 <li>OpenApi <a href="https://www.openapis.org/"><img src="/assets/openapi.png" alt="icon"></a></li>
 </ul>
+
+- - -
+
+## Screens
+
+<div class="images-grid">
+<img src="/assets/dashboard.e-flux.io_.png" />
+<img src="/assets/dashboard.e-flux.io_-1-.png" />
+</div>
+
+<div class="video-container"><iframe class="youtube-embed" src="https://www.youtube.com/embed/WZ2oaUdtNgc" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen> </iframe></div>
