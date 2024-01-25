@@ -32,6 +32,7 @@ I started working with Road.io when they were still a start-up with a very small
 <li>OCPP <a href="https://openchargealliance.org/"><img src="/assets/ocpp.png" alt="icon"></a></li>
 <li>OCPI <a href="https://evroaming.org/"><img src="/assets/ocpi.png" alt="icon"></a></li>
 <li>OpenApi <a href="https://www.openapis.org/"><img src="/assets/openapi.png" alt="icon"></a></li>
+<li>GitHub <a href="https://github.com/"><img src="/assets/github.png" alt="icon"></a></li>
 </ul>
 
 - - -
