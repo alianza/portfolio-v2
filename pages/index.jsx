@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { getProjects } from '@/lib/services/projectsService';
 import { useEffect, useState } from 'react';
 import ProjectPreview from '@/components/previews/projectPreview';
+import Link from 'next/link';
 
 export async function getStaticProps() {
   const projects = await getProjects({ content: false });
@@ -20,7 +21,7 @@ export async function getStaticProps() {
 function Home({ projects }) {
   useNetlifyIdentityRedirect();
   const [videoId, setVideoId] = useState(null);
-  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [numVisibleProjects, setNumVisibleProjects] = useState(6);
 
   useEffect(() => {
     setVideoId(Math.floor(Math.random() * 2) + 1); // 1 or 2
@@ -29,10 +30,14 @@ function Home({ projects }) {
   return (
     <>
       <div className="w-full">
-        <div className="absolute left-1/2 top-1/2 w-4/5 -translate-x-1/2 -translate-y-1/2 text-neutral-50">
+        <TransitionScroll
+          baseStyle={baseStyle}
+          hiddenStyle={{ ...hiddenStyle, transform: null }}
+          className="absolute left-1/2 top-1/2 w-4/5 -translate-x-1/2 -translate-y-1/2 text-neutral-50"
+        >
           <h1 className="text-5xl font-bold drop-shadow-lg">Jan-Willem van Bremen</h1>
           <h2 className="text-3xl drop-shadow-lg">Software engineer, Skateboarder & Model!</h2>
-        </div>
+        </TransitionScroll>
         <video
           className="pointer-events-none h-[calc(100vh-theme(spacing.header))] w-full object-cover"
           autoPlay
@@ -49,9 +54,11 @@ function Home({ projects }) {
 
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
         <section className="w-full">
-          <h2 id="about" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
-            About me
-          </h2>
+          <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
+            <h2 id="about" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
+              About me
+            </h2>
+          </TransitionScroll>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             {[
               [
@@ -63,7 +70,7 @@ function Home({ projects }) {
                   key="Who I am"
                   src="/portrait.webp"
                   alt="Portrait of Jan-Willem van Bremen"
-                  className="w-full rounded shadow"
+                  className="w-full rounded shadow-lg"
                   quality={100}
                   width={500}
                   height={500}
@@ -74,7 +81,14 @@ function Home({ projects }) {
                 `Professionally I am a full-stack Software Engineer focussing on web-development. I do this using
                   technologies & techniques like HTML, (S)CSS, Type/JavaScript, Node.js, web frameworks (React,
                   Next.js), Git(hub), Agile Scrum and more! Check out some of my experiences & projects!`,
-                <video key="What I do professionally" autoPlay playsInline muted loop className="w-full rounded shadow">
+                <video
+                  key="What I do professionally"
+                  autoPlay
+                  playsInline
+                  muted
+                  loop
+                  className="w-full rounded shadow-lg"
+                >
                   <source src="/professional.webm" type="video/webm" />
                   <source src="/professional.mp4" type="video/mp4" />
                 </video>,
@@ -88,7 +102,7 @@ function Home({ projects }) {
                   key="What I do for fun"
                   src="/fun.webp"
                   alt="Portrait of Jan-Willem van Bremen"
-                  className="w-full rounded shadow"
+                  className="w-full rounded shadow-lg"
                   quality={100}
                   width={500}
                   height={500}
@@ -112,72 +126,79 @@ function Home({ projects }) {
         </section>
 
         <section className="w-full">
-          <h2 id="experiences" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
-            Experiences & Projects
-          </h2>
+          <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
+            <h2 id="experiences" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
+              Experiences & Projects
+            </h2>
+          </TransitionScroll>
+
           <div className="mb-4 grid h-full w-full grid-cols-1 grid-rows-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {projects.map((project, i) =>
-              i > 5 && !showAllProjects ? null : <ProjectPreview key={project.id} project={project} />,
+              i > 5 && i >= numVisibleProjects ? null : <ProjectPreview key={project.id} project={project} />,
             )}
           </div>
-          {projects.length > 5 && !showAllProjects && (
-            <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
-              <button className="button button-green" onClick={() => setShowAllProjects(true)}>
-                Load more...
-              </button>
-            </TransitionScroll>
-          )}
+
+          <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
+            <button
+              className="button button-green"
+              onClick={() => setNumVisibleProjects((prevNumVisibleProjects) => prevNumVisibleProjects + 6)}
+            >
+              {projects.length > numVisibleProjects ? 'See more...' : <Link href="/projects">See all...</Link>}
+            </button>
+          </TransitionScroll>
         </section>
 
         <section className="w-full">
-          <h2 id="contact" className="scroll-header-offset mt-5 text-center text-4xl font-bold sm:text-left">
-            Contact me
-          </h2>
+          <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
+            <h2 id="contact" className="scroll-header-offset mt-5 text-center text-4xl font-bold sm:text-left">
+              Contact me
+            </h2>
+          </TransitionScroll>
           <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
             <h3 className="mb-6 text-2xl">Send me a message!</h3>
             <form
-              className="grid-col-1 grid grid-rows-4 gap-5 text-neutral-700 sm:grid-cols-2 sm:grid-rows-[repeat(2,_minmax(0,_1fr))_48px]"
+              className="grid grid-cols-1 grid-rows-4 gap-6 text-neutral-700 sm:grid-cols-2 sm:grid-rows-3"
               name="contact"
               method="POST"
               data-netlify="true"
             >
               <input type="hidden" name="form-name" value="contact" />
-              {/*https://www.youtube.com/watch?v=nJzKi6oIvBA&ab_channel=TailwindLabs*/}
               <div className="relative">
                 <input
-                  placeholder="Name..."
+                  placeholder="Name"
                   name="name"
                   id="name"
-                  className="peer h-12 w-full rounded border-b-2 p-2 placeholder-transparent shadow shadow-neutral-200 transition-colors focus:border-rose-600 focus:outline-none dark:shadow-neutral-600"
+                  className="inputAnimation peer h-12 w-full p-2 indent-12"
                   required
                 />
-                <label
-                  htmlFor="name"
-                  className="absolute -top-3.5 left-1 cursor-text text-sm text-gray-600 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-5 peer-focus:text-sm peer-focus:dark:text-neutral-50"
-                >
-                  Name...
+                <label htmlFor="name" className="labelAnimation">
+                  Name
                 </label>
               </div>
 
-              <textarea
-                placeholder="Message..."
-                name="message"
-                className="row-span-2 max-h-96 min-h-[112px] w-full rounded p-2 shadow shadow-neutral-200 dark:shadow-neutral-600"
-                required
-              />
-              <div className="relative">
-                <input
-                  placeholder="Email..."
-                  name="email"
-                  id="email"
-                  className="peer order-first mt-auto h-12 w-full rounded border-b-2 p-2 placeholder-transparent shadow shadow-neutral-200 transition-colors focus:border-rose-600 focus:outline-none sm:order-none dark:shadow-neutral-600"
+              <div className="relative row-span-2">
+                <textarea
+                  placeholder="Message"
+                  name="message"
+                  id="message"
+                  className="inputAnimation peer max-h-96 min-h-[100%] w-full p-2 py-3 indent-[4.25em]"
                   required
                 />
-                <label
-                  htmlFor="email"
-                  className="absolute -top-3.5 left-1 cursor-text text-sm text-gray-600 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-5 peer-focus:text-sm peer-focus:dark:text-neutral-50"
-                >
-                  Email...
+                <label htmlFor="message" className="labelAnimation">
+                  Message
+                </label>
+              </div>
+
+              <div className="relative order-first sm:order-none">
+                <input
+                  placeholder="Email"
+                  name="email"
+                  id="email"
+                  className="inputAnimation peer mt-auto h-12 w-full p-2 indent-12"
+                  required
+                />
+                <label htmlFor="email" className="labelAnimation">
+                  Email
                 </label>
               </div>
 

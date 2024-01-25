@@ -1,7 +1,7 @@
 ---
 title: Portfolio Lea Shamaa
-startDate: 2022-02-22
-endDate: 2023-10-25
+startDate: 2022-02-21
+endDate: 2022-6-21
 thumbnail: /assets/portfolio_lea.png
 type: Personal
 description: This project is a portfolio website for Lea Shamaa aimed at her Journalist career.

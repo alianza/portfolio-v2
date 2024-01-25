@@ -3,92 +3,99 @@
 @tailwind utilities;
 
 @layer utilities {
-    .scroll-header-offset {
-        @apply scroll-mt-[calc(theme(spacing.header)+1em)];
-    }
+  .scroll-header-offset {
+    @apply scroll-mt-[calc(theme(spacing.header)+1em)];
+  }
 
-    .hoverStrong {
-        @apply transition-transform hover:scale-110 active:scale-95;
-    }
+  .hoverStrong {
+    @apply transition-transform hover:scale-110 active:scale-95;
+  }
 
-    .hoverSlight {
-        @apply transition-transform hover:scale-[1.02] active:scale-[.98] #{!important};
-    }
+  .hoverSlight {
+    @apply transition-transform hover:scale-[1.02] active:scale-[.98] #{!important};
+  }
 
-    .button {
-        @apply rounded-lg px-5 py-2.5 text-sm font-medium hover:duration-100 hover:decoration-inherit focus:outline-none focus:ring-4 transition-colors underline decoration-transparent duration-300 ease-in-out;
-    }
+  .button {
+    @apply rounded-lg px-5 py-2.5 text-sm font-medium underline decoration-transparent transition-colors duration-300 ease-in-out hover:decoration-inherit hover:duration-100 focus:outline-none focus:ring-4;
+  }
 
-    .button-green {
-        @apply text-neutral-100 bg-green-600 hover:bg-green-700 focus:ring-green-600/50;
-    }
+  .button-green {
+    @apply bg-green-600 text-neutral-100 hover:bg-green-700 focus:ring-green-600/50;
+  }
 
-    .button-blue {
-        @apply text-neutral-100 bg-blue-600 hover:bg-blue-700 focus:ring-blue-600/50;
-    }
+  .button-blue {
+    @apply bg-blue-600 text-neutral-100 hover:bg-blue-700 focus:ring-blue-600/50;
+  }
 
-    .button-red {
-        @apply text-neutral-100 bg-red-700 hover:bg-red-800 focus:ring-red-700/50;
-        // For accessibility reasons, the red button is darker than the others
-    }
+  .button-red {
+    @apply bg-red-700 text-neutral-100 hover:bg-red-800 focus:ring-red-700/50; // For accessibility reasons, the red button is darker than the others
+  }
 
-    .link {
-        @apply underline decoration-transparent transition-colors duration-300 ease-in-out hover:duration-100 hover:decoration-inherit;
+  .inputAnimation {
+    @apply rounded border-b-2 border-transparent placeholder-transparent shadow shadow-neutral-200 transition-all focus:border-rose-600 focus:indent-0 focus:outline-none dark:shadow-neutral-600;
+  }
 
-        @media (hover: none) {
-            @apply decoration-inherit;
-        }
-    }
+  .labelAnimation {
+    @apply absolute left-1.5 top-3 cursor-text font-semibold transition-all after:content-[':'] peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-400 peer-placeholder-shown:after:content-[''] peer-focus:-top-5 peer-focus:text-sm peer-focus:font-semibold peer-focus:text-neutral-600 peer-focus:after:content-[''] peer-focus:dark:text-neutral-50;
+  }
 
-    .bg-48px {
-        background-size: 48px;
+  .link {
+    @apply underline decoration-transparent transition-colors duration-300 ease-in-out hover:decoration-inherit hover:duration-100;
+
+    @media (hover: none) {
+      @apply decoration-inherit;
     }
+  }
+
+  .bg-48px {
+    background-size: 48px;
+  }
 }
 
 html {
-    @apply scroll-smooth #{!important};
+  @apply scroll-smooth #{!important};
 }
 
 body {
-    @apply p-0 m-0 dark:text-neutral-50 text-neutral-900 min-h-screen box-border bg-neutral-50 dark:bg-neutral-900 antialiased;
+  @apply m-0 box-border min-h-screen bg-neutral-50 p-0 text-neutral-900 antialiased dark:bg-neutral-900 dark:text-neutral-50;
 
-    #app {
-        @apply min-h-screen flex flex-col;
-    }
+  #app {
+    @apply flex min-h-screen flex-col;
+  }
 
-    dialog {
-        @apply fixed cursor-pointer top-0 bg-neutral-50 dark:bg-neutral-200 bottom-0 z-50 backdrop:backdrop-blur;
-    }
+  dialog {
+    @apply fixed bottom-0 top-0 z-50 cursor-pointer bg-neutral-50 backdrop:backdrop-blur dark:bg-neutral-200;
+  }
 
-    &.no-scroll {
-        @apply overflow-hidden;
-    }
+  &.no-scroll {
+    @apply overflow-hidden;
+  }
 
-    #nprogress {
-        .spinner {
-            @apply hidden;
-        }
+  #nprogress {
+    .spinner {
+      @apply hidden;
     }
+  }
 }
 
 ::-webkit-scrollbar {
-    @apply w-3;
+  @apply w-3;
 }
 
 ::-webkit-scrollbar-track {
-    @apply bg-neutral-700;
+  @apply bg-neutral-700;
 }
 
 ::-webkit-scrollbar-thumb {
-    @apply bg-neutral-500;
+  @apply bg-neutral-500;
 }
 
 #app {
-    ::-webkit-scrollbar {
-        @apply w-2;
-    }
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
 
-    ::-webkit-scrollbar-track {
-        @apply shadow
-    }
+  ::-webkit-scrollbar-track {
+    @apply shadow;
+  }
 }

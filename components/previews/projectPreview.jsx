@@ -16,10 +16,10 @@ export default function ProjectPreview({ project, ...props }) {
       data.type === 'Professional'
         ? 'after:bg-pro'
         : data.type === 'Personal'
-        ? 'after:bg-personal'
-        : data.type === 'Academic'
-        ? 'after:bg-academic'
-        : '';
+          ? 'after:bg-personal'
+          : data.type === 'Academic'
+            ? 'after:bg-academic'
+            : '';
     projectTypeImageBgClass = `${projectTypeImageBgClass} ${pseudoElementBaseClass}`;
   }
 
@@ -27,7 +27,7 @@ export default function ProjectPreview({ project, ...props }) {
     <TransitionScroll key={id} baseStyle={baseStyle} hiddenStyle={hiddenStyle} {...props}>
       <Link href={`/projects/${id}`} className={`${projectTypeImageBgClass} hoverSlight relative block`}>
         <Image
-          className="aspect-square w-full rounded object-cover"
+          className="aspect-square w-full rounded object-cover shadow-lg"
           alt={`${data.title} thumbnail`}
           width={500}
           height={500}
@@ -36,8 +36,8 @@ export default function ProjectPreview({ project, ...props }) {
           blurDataURL={`/_next/image?url=${data.thumbnail}&w=16&q=1`}
         />
       </Link>
-      <div>
-        <Link href={`/projects/${id}`} className="link text-2xl font-bold">
+      <div className="my-1">
+        <Link href={`/projects/${id}`} className="link my-1 text-2xl font-bold">
           {data.title}
         </Link>
         <StartEndDateLabel startDate={data.startDate} endDate={data.endDate} />
