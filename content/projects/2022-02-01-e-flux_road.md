@@ -27,4 +27,7 @@ I started working with Road.io when they were still a start-up with a very small
 <li>Mongoose <a href="https://mongoosejs.com/"><img src="/assets/mongoose.png" alt="icon"></a></li>
 <li>Google Cloud Platform <a href="https://cloud.google.com/"><img src="/assets/google-cloud-platform.png" alt="icon"></a></li>
 <li>Semantic UI React <a href="https://react.semantic-ui.com/"><img src="/assets/semantic-ui-react.png" alt="icon"></a></li>
+<li>OCPP <a href="https://openchargealliance.org/"><img src="/assets/ocpp.png" alt="icon"></a></li>
+<li>OCPI <a href="https://evroaming.org/"><img src="/assets/ocpi.png" alt="icon"></a></li>
+<li>OpenApi <a href="https://www.openapis.org/"><img src="/assets/openapi.png" alt="icon"></a></li>
 </ul>
