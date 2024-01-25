@@ -25,5 +25,6 @@ I started working with Road.io when they were still a start-up with a very small
 <li>React.js <a href="https://react.dev/"><img src="/assets/react.png" alt="icon"></a></li>
 <li>MongoDB <a href="https://www.mongodb.com/"><img src="/assets/mongodb.png" alt="icon"></a></li>
 <li>Mongoose <a href="https://mongoosejs.com/"><img src="/assets/mongoose.png" alt="icon"></a></li>
-<li>Google Cloud Platform <a href="#"><img src="/assets/placeholder.jpg" alt="icon"></a></li>
+<li>Google Cloud Platform <a href="https://cloud.google.com/"><img src="/assets/google-cloud-platform.png" alt="icon"></a></li>
+<li>Semantic UI React <a href="https://react.semantic-ui.com/"><img src="/assets/semantic-ui-react.png" alt="icon"></a></li>
 </ul>
