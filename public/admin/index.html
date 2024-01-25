@@ -201,11 +201,9 @@ ${imagesHtml}
         pattern: /^<ul class="icon-list">\n(.*?)\n<\/ul>/ms,
         fromBlock: (match) => {
           const list = match[1].split('\n').filter(Boolean);
-          console.log(`list`, list);
           return {
             list: list.map((item) => {
               const match = item.match(/^<li>(.*?) <a href="(.*?)"><img src="(.*?)" alt="icon"><\/a><\/li>/);
-              console.log(`match`, match);
               const [_, text, link, icon] = match || [];
               return { text, link, icon };
             }),
