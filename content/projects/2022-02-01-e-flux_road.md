@@ -24,4 +24,5 @@ I started working with Road.io when they were still a start-up with a very small
 <li>Node.js <a href="https://nodejs.org/en"><img src="/assets/nodejs.png" alt="icon"></a></li>
 <li>React.js <a href="https://react.dev/"><img src="/assets/react.png" alt="icon"></a></li>
 <li>MongoDB <a href="https://www.mongodb.com/"><img src="/assets/mongodb.png" alt="icon"></a></li>
+<li>Mongoose <a href="https://mongoosejs.com/"><img src="/assets/placeholder.jpg" alt="icon"></a></li>
 </ul>
