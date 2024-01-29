@@ -1,6 +1,6 @@
-import Head from 'next/head';
-import Header from '../header/header';
-import Footer from '../footer/footer';
+import Head from 'next/Head';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
 import dynamic from 'next/dynamic';
 import { useDarkMode } from '@/lib/customHooks';
 const NextNProgress = dynamic(() => import('nextjs-progressbar'), { loading: () => <div /> });

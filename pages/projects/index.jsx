@@ -1,5 +1,5 @@
 import Layout from '@/components/layout/layout/Layout';
-import { getProjects } from '@/lib/services/ProjectsService';
+import { getProjects } from '@/lib/services/projectsService';
 import ProjectPreview from '@/components/previews/ProjectPreview';
 
 export async function getStaticProps() {

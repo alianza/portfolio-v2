@@ -1,5 +1,5 @@
 import Layout from '../../components/layout/layout/Layout';
-import MdContent from '../../components/mdContent/mdContent';
+import MdContent from '../../components/mdContent/MdContent';
 import { getProject, getProjectIds } from '@/lib/services/projectsService';
 import Head from '@/components/layout/head/Head';
 
