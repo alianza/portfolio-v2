@@ -35,6 +35,18 @@ collections:
               - { label: "Social media name", name: "name", widget: "string" }
               - { label: "Url", name: "url", widget: "string" }
               - { label: "Icon", name: "icon", widget: "image", required: false }
+          - label: 'Introductions' # and introduction consists of a title, image and body
+            name: 'introductions'
+            label_singular: 'Introduction'
+            widget: 'list'
+            allow_add: false
+            min: 3
+            max: 3
+            summary: '{{fields.title}}'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'Media', name: 'media', widget: 'image' }
+              - { label: 'Body', name: 'body', widget: 'markdown', editor_components: ['years-since-date'] }
 
   - label: 'Projects'
     name: 'projects'
