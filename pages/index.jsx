@@ -1,11 +1,11 @@
 import Layout from '@/components/layout/layout/Layout';
 import { useNetlifyIdentityRedirect } from '@/lib/customHooks';
 import { getProjects } from '@/lib/services/projectsService';
-import CoverVideo from '@/components/coverVideo/CoverVideo';
 import { getIntros } from '@/lib/services/introService';
-import AboutMe from '@/components/aboutMe/AboutMe';
-import Contact from '@/components/contact/Contact';
-import Projects from '@/components/projects/Projects';
+import CoverVideo from '@/components/layout/sections/coverVideo/CoverVideo';
+import AboutMe from '@/components/layout/sections/aboutMe/AboutMe';
+import Contact from '@/components/layout/sections/contact/Contact';
+import Projects from '@/components/layout/sections/projects/Projects';
 
 export async function getStaticProps() {
   const projects = await getProjects({ content: false });
