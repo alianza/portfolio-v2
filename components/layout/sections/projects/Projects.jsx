@@ -15,6 +15,8 @@ const Projects = ({ projects }) => {
 
   useEffect(() => {
     if (numVisibleProjects === initialNumVisibleProjects) return;
+    if (window.innerWidth < 1024) return;
+    if ('ontouchstart' in window || navigator.maxTouchPoints) return;
     const difference = document.documentElement.scrollHeight - documentHeight;
     setTimeout(() => window.scrollBy({ top: difference, behavior: 'smooth' }), 200);
   }, [numVisibleProjects]);
