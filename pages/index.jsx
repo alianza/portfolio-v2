@@ -1,32 +1,26 @@
 import Layout from '@/components/layout/layout/Layout';
 import { useNetlifyIdentityRedirect } from '@/lib/customHooks';
-import { hiddenStyle, baseStyle, yearsSinceDate } from '@/lib/utils';
-import { TransitionScroll } from 'react-transition-scroll';
-import Image from 'next/image';
 import { getProjects } from '@/lib/services/projectsService';
-import { useState } from 'react';
-import ProjectPreview from '@/components/previews/ProjectPreview';
-import { useRouter } from 'next/router';
 import CoverVideo from '@/components/coverVideo/CoverVideo';
+import { getIntros } from '@/lib/services/introService';
+import AboutMe from '@/components/aboutMe/AboutMe';
+import Contact from '@/components/contact/Contact';
+import Projects from '@/components/projects/Projects';
 
 export async function getStaticProps() {
   const projects = await getProjects({ content: false });
-
-  // const intros = await getIntros();
+  const intros = await getIntros();
 
   return {
     props: {
       projects,
+      intros,
     },
   };
 }
 
-function Home({ projects }) {
+function Home({ projects, intros }) {
   useNetlifyIdentityRedirect();
-  const [numVisibleProjects, setNumVisibleProjects] = useState(6);
-  const router = useRouter();
-
-  const allProjectsVisible = projects.length <= numVisibleProjects;
 
   return (
     <>
@@ -34,177 +28,15 @@ function Home({ projects }) {
 
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
         <section className="w-full">
-          <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
-            <h2 id="about" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
-              About me
-            </h2>
-          </TransitionScroll>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {[
-              [
-                'Who I am',
-                `My name is Jan-Willem van Bremen. I'm a ${yearsSinceDate('10-10-1998')} year old software
-                  engineer, skateboarder and model from Amsterdam! I'm a very social, diligent and precise person
-                  who can concentrate for long periods of time. I work well both solo and in (multidisciplinary) development teams!`,
-                <Image
-                  key="Who I am"
-                  src="/portrait.webp"
-                  alt="Portrait of Jan-Willem van Bremen"
-                  className="w-full rounded shadow-lg"
-                  quality={100}
-                  width={500}
-                  height={500}
-                />,
-              ],
-              [
-                'What I do professionally',
-                `Professionally I am a full-stack Software Engineer focussing on web-development. I do this using
-                  technologies & techniques like HTML, (S)CSS, Type/JavaScript, Node.js, web frameworks (React,
-                  Next.js), Git(hub), Agile Scrum and more! Check out some of my experiences & projects!`,
-                <video
-                  key="What I do professionally"
-                  autoPlay
-                  playsInline
-                  muted
-                  loop
-                  className="w-full rounded shadow-lg"
-                >
-                  <source src="/professional.webm" type="video/webm" />
-                  <source src="/professional.mp4" type="video/mp4" />
-                </video>,
-              ],
-              [
-                'What I do for fun',
-                `For fun I have been practicing skateboarding for ${yearsSinceDate('1-7-2011')} years on an amateur
-                  level. During my skateboarding career I have been sponsored by different brands and shops. Next to
-                  that I also do some model work for various street wear brands in Amsterdam.`,
-                <Image
-                  key="What I do for fun"
-                  src="/fun.webp"
-                  alt="Portrait of Jan-Willem van Bremen"
-                  className="w-full rounded shadow-lg"
-                  quality={100}
-                  width={500}
-                  height={500}
-                />,
-              ],
-            ].map(([title, description, media]) => (
-              <TransitionScroll
-                key={title}
-                baseStyle={baseStyle}
-                hiddenStyle={hiddenStyle}
-                className="flex flex-col sm:last-of-type:odd:col-span-full md:last-of-type:odd:col-span-1"
-              >
-                {media}
-                <div className="mt-1">
-                  <p className="text-2xl font-bold">{title}</p>
-                  <p>{description}</p>
-                </div>
-              </TransitionScroll>
-            ))}
-          </div>
+          <AboutMe intros={intros} />
         </section>
 
         <section className="w-full">
-          <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
-            <h2 id="experiences" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
-              Experiences & Projects
-            </h2>
-          </TransitionScroll>
-
-          <div className="mb-4 grid h-full w-full grid-cols-1 grid-rows-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-            {projects.map((project, i) =>
-              i > 5 && i >= numVisibleProjects ? null : <ProjectPreview key={project.id} project={project} />,
-            )}
-          </div>
-
-          <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
-            <button
-              className="button button-green"
-              onClick={() =>
-                allProjectsVisible
-                  ? router.push('/projects')
-                  : setNumVisibleProjects((prevNumVisibleProjects) => prevNumVisibleProjects + 6)
-              }
-            >
-              <span className="m-2">{allProjectsVisible ? 'See all...' : 'See more...'}</span>
-            </button>
-          </TransitionScroll>
+          <Projects projects={projects} />
         </section>
 
         <section className="w-full">
-          <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
-            <h2 id="contact" className="scroll-header-offset mt-5 text-center text-4xl font-bold sm:text-left">
-              Contact me
-            </h2>
-          </TransitionScroll>
-          <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
-            <h3 className="mb-6 text-2xl">Send me a message!</h3>
-            <form
-              className="grid grid-cols-1 grid-rows-4 gap-6 text-neutral-700 sm:grid-cols-2 sm:grid-rows-3"
-              name="contact"
-              method="POST"
-              data-netlify="true"
-            >
-              <input type="hidden" name="form-name" value="contact" />
-              <div className="relative">
-                <input
-                  placeholder="Name"
-                  name="name"
-                  id="name"
-                  className="inputAnimation peer h-12 w-full p-2 indent-12"
-                  required
-                />
-                <label htmlFor="name" className="labelAnimation">
-                  Name
-                </label>
-              </div>
-
-              <div className="relative row-span-2">
-                <textarea
-                  placeholder="Message"
-                  name="message"
-                  id="message"
-                  className="inputAnimation peer max-h-96 min-h-[100%] w-full p-2 py-3 indent-[4.25em]"
-                  required
-                />
-                <label htmlFor="message" className="labelAnimation">
-                  Message
-                </label>
-              </div>
-
-              <div className="relative order-first sm:order-none">
-                <input
-                  placeholder="Email"
-                  name="email"
-                  id="email"
-                  className="inputAnimation peer mt-auto h-12 w-full p-2 indent-12"
-                  required
-                />
-                <label htmlFor="email" className="labelAnimation">
-                  Email
-                </label>
-              </div>
-
-              <button className={`button button-green col-span-full mx-auto h-12 w-full sm:w-auto`} type="submit">
-                Send
-              </button>
-            </form>
-          </TransitionScroll>
-          <div>
-            <TransitionScroll className="mb-2 mt-4" baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
-              <h3 className="font-semibold">
-                Or, Email me directly! @{' '}
-                <a
-                  style={{ wordBreak: 'break-word' }}
-                  className="font-bold text-blue-500 underline"
-                  href="mailto:janwillemvanbremen@live.nl"
-                >
-                  janwillemvanbremen@live.nl
-                </a>
-              </h3>
-            </TransitionScroll>
-          </div>
+          <Contact />
         </section>
       </div>
     </>
