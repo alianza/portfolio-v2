@@ -43,6 +43,7 @@ I started working with Road.io when they were still a start-up with a very small
 <img src="/assets/dashboard.e-flux.io_.png" />
 <img src="/assets/dashboard.e-flux.io_-1-.png" />
 <img src="/assets/schermafbeelding-2024-01-25-163305.png" />
+<img src="/assets/dsc00700.jpg" />
 </div>
 
 <div class="video-container"><iframe class="youtube-embed" src="https://www.youtube.com/embed/WZ2oaUdtNgc" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen> </iframe></div>
