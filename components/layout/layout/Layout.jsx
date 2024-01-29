@@ -1,4 +1,4 @@
-import Head from 'next/Head';
+import Head from 'next/head';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import dynamic from 'next/dynamic';
