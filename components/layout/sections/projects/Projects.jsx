@@ -2,13 +2,22 @@ import { TransitionScroll } from 'react-transition-scroll';
 import { baseStyle, hiddenStyle } from '@/lib/utils';
 import ProjectPreview from '@/components/previews/ProjectPreview';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+const initialNumVisibleProjects = 6;
+let documentHeight = Infinity;
 
 const Projects = ({ projects }) => {
-  const [numVisibleProjects, setNumVisibleProjects] = useState(6);
+  const [numVisibleProjects, setNumVisibleProjects] = useState(initialNumVisibleProjects);
   const router = useRouter();
 
   const allProjectsVisible = projects.length <= numVisibleProjects;
+
+  useEffect(() => {
+    if (numVisibleProjects === initialNumVisibleProjects) return;
+    const difference = document.documentElement.scrollHeight - documentHeight;
+    setTimeout(() => window.scrollBy({ top: difference, behavior: 'smooth' }), 200);
+  }, [numVisibleProjects]);
 
   return (
     <>
@@ -20,7 +29,7 @@ const Projects = ({ projects }) => {
 
       <div className="mb-4 grid h-full w-full grid-cols-1 grid-rows-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
         {projects.map((project, i) =>
-          i > 5 && i >= numVisibleProjects ? null : <ProjectPreview key={project.id} project={project} />,
+          i >= numVisibleProjects ? null : <ProjectPreview key={project.id} project={project} />,
         )}
       </div>
 
@@ -30,7 +39,10 @@ const Projects = ({ projects }) => {
           onClick={() =>
             allProjectsVisible
               ? router.push('/projects')
-              : setNumVisibleProjects((prevNumVisibleProjects) => prevNumVisibleProjects + 6)
+              : (() => {
+                  documentHeight = document.documentElement.scrollHeight;
+                  setNumVisibleProjects((prevNumVisibleProjects) => prevNumVisibleProjects + 6);
+                })()
           }
         >
           <span className="m-2">{allProjectsVisible ? 'See all...' : 'See more...'}</span>
