@@ -4,12 +4,15 @@ import { hiddenStyle, baseStyle, yearsSinceDate } from '@/lib/utils';
 import { TransitionScroll } from 'react-transition-scroll';
 import Image from 'next/image';
 import { getProjects } from '@/lib/services/projectsService';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ProjectPreview from '@/components/previews/projectPreview';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
+import CoverVideo from '@/components/coverVideo/CoverVideo';
 
 export async function getStaticProps() {
   const projects = await getProjects({ content: false });
+
+  // const intros = await getIntros();
 
   return {
     props: {
@@ -20,37 +23,14 @@ export async function getStaticProps() {
 
 function Home({ projects }) {
   useNetlifyIdentityRedirect();
-  const [videoId, setVideoId] = useState(null);
   const [numVisibleProjects, setNumVisibleProjects] = useState(6);
+  const router = useRouter();
 
-  useEffect(() => {
-    setVideoId(Math.floor(Math.random() * 2) + 1); // 1 or 2
-  }, []);
+  const allProjectsVisible = projects.length <= numVisibleProjects;
 
   return (
     <>
-      <div className="w-full">
-        <TransitionScroll
-          baseStyle={baseStyle}
-          hiddenStyle={{ ...hiddenStyle, transform: null }}
-          className="absolute left-1/2 top-1/2 w-4/5 -translate-x-1/2 -translate-y-1/2 text-neutral-50"
-        >
-          <h1 className="text-5xl font-bold drop-shadow-lg">Jan-Willem van Bremen</h1>
-          <h2 className="text-3xl drop-shadow-lg">Software engineer, Skateboarder & Model!</h2>
-        </TransitionScroll>
-        <video
-          className="pointer-events-none h-[calc(100vh-theme(spacing.header))] w-full object-cover"
-          autoPlay
-          playsInline
-          muted
-          loop
-        >
-          {videoId &&
-            [[`cover_video_${videoId}.webm`], [`cover_video_${videoId}.mp4`]].map(([src]) => (
-              <source key={src} src={`/${src}`} type={`video/${src.split('.').pop()}`} />
-            ))}
-        </video>
-      </div>
+      <CoverVideo />
 
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
         <section className="w-full">
@@ -141,9 +121,13 @@ function Home({ projects }) {
           <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
             <button
               className="button button-green"
-              onClick={() => setNumVisibleProjects((prevNumVisibleProjects) => prevNumVisibleProjects + 6)}
+              onClick={() =>
+                allProjectsVisible
+                  ? router.push('/projects')
+                  : setNumVisibleProjects((prevNumVisibleProjects) => prevNumVisibleProjects + 6)
+              }
             >
-              {projects.length > numVisibleProjects ? 'See more...' : <Link href="/projects">See all...</Link>}
+              <span className="m-2">{allProjectsVisible ? 'See all...' : 'See more...'}</span>
             </button>
           </TransitionScroll>
         </section>

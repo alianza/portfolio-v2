@@ -5,7 +5,7 @@ import Image from 'next/image';
 import StartEndDateLabel from '@/components/common/startEndDateLabel';
 
 const pseudoElementBaseClass =
-  'after:bg-48px bg-no-repeat after:absolute after:left-1 after:top-1 after:h-12 after:w-12  after:object-cover after:drop-shadow-xl after:content-[""]';
+  'after:bg-48px bg-no-repeat after:absolute after:left-1 after:top-1 after:h-12 after:w-12  after:object-cover after:drop-shadow-xl after:content-[""] after:pointer-events-none';
 
 export default function ProjectPreview({ project, ...props }) {
   const { id, data } = project;
@@ -29,6 +29,7 @@ export default function ProjectPreview({ project, ...props }) {
         <Image
           className="aspect-square w-full rounded object-cover shadow-lg"
           alt={`${data.title} thumbnail`}
+          title={`${data.type} project: ${data.title}`}
           width={500}
           height={500}
           src={data.thumbnail}
