@@ -1,11 +1,11 @@
-import Layout from '@/components/layout/layout/layout';
+import Layout from '@/components/layout/layout/Layout';
 import { useNetlifyIdentityRedirect } from '@/lib/customHooks';
 import { hiddenStyle, baseStyle, yearsSinceDate } from '@/lib/utils';
 import { TransitionScroll } from 'react-transition-scroll';
 import Image from 'next/image';
 import { getProjects } from '@/lib/services/projectsService';
 import { useState } from 'react';
-import ProjectPreview from '@/components/previews/projectPreview';
+import ProjectPreview from '@/components/previews/ProjectPreview';
 import { useRouter } from 'next/router';
 import CoverVideo from '@/components/coverVideo/CoverVideo';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import contentStyles from './mdContent.module.scss';
-import StartEndDateLabel from '@/components/common/startEndDateLabel';
+import StartEndDateLabel from '@/components/common/StartEndDateLabel';
 import {
   useCodeHighlightStyles,
   useDetailTagsAnimation,

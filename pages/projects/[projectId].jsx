@@ -1,7 +1,7 @@
-import Layout from '../../components/layout/layout/layout';
+import Layout from '../../components/layout/layout/Layout';
 import MdContent from '../../components/mdContent/mdContent';
 import { getProject, getProjectIds } from '@/lib/services/projectsService';
-import Head from '@/components/layout/head/head';
+import Head from '@/components/layout/head/Head';
 
 export const getStaticPaths = async () => {
   const projectIds = await getProjectIds();

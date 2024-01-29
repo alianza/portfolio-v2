@@ -2,7 +2,7 @@ import { TransitionScroll } from 'react-transition-scroll';
 import { hiddenStyle, baseStyle } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
-import StartEndDateLabel from '@/components/common/startEndDateLabel';
+import StartEndDateLabel from '@/components/common/StartEndDateLabel';
 
 const pseudoElementBaseClass =
   'after:bg-48px bg-no-repeat after:absolute after:left-1 after:top-1 after:h-12 after:w-12  after:object-cover after:drop-shadow-xl after:content-[""] after:pointer-events-none';

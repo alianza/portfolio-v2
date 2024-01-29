@@ -1,6 +1,6 @@
-import Layout from '@/components/layout/layout/layout';
-import { getProjects } from '@/lib/services/projectsService';
-import ProjectPreview from '@/components/previews/projectPreview';
+import Layout from '@/components/layout/layout/Layout';
+import { getProjects } from '@/lib/services/ProjectsService';
+import ProjectPreview from '@/components/previews/ProjectPreview';
 
 export async function getStaticProps() {
   const projects = await getProjects({ content: false });
