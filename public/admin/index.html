@@ -18,6 +18,22 @@
         -webkit-user-modify: read-write !important;
       }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.27/darkreader.min.js"></script>
+    <script>
+      DarkReader.auto({
+        brightness: 100,
+        darkSchemeBackgroundColor: '#1e1e1e',
+        darkSchemeTextColor: '#fff',
+      });
+    </script>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <!-- Include the script that builds the page and powers Netlify CMS -->
@@ -216,14 +232,12 @@ ${imagesHtml}
       CMS.registerEditorComponent({
         id: 'years-since-date',
         label: 'Years since date',
-        fields: [
-          { name: 'date', label: 'Date', widget: 'date', date_format: "DD-MM-YYYY", format: "DD-MM-YYYY" },
-        ],
+        fields: [{ name: 'date', label: 'Date', widget: 'date', date_format: 'DD-MM-YYYY', format: 'DD-MM-YYYY' }],
         pattern: /<span data-date-string="(.*?)" data-years-since-date>(.*?)<\/span>/ms,
         fromBlock: (match) => ({ date: match[1] }),
         toBlock: ({ date }) => `<span data-date-string="${date}" data-years-since-date>"Date since ${date}"</span>`,
         toPreview: ({ date }) => `<span data-date-string="${date}" data-years-since-date>"Date since ${date}"</span>`,
-      })
+      });
     </script>
   </body>
 </html>
