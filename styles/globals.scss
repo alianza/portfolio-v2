@@ -64,7 +64,7 @@ body {
   }
 
   dialog {
-    @apply fixed bottom-0 top-0 z-50 cursor-pointer bg-neutral-50 backdrop:backdrop-blur dark:bg-neutral-200;
+    @apply fixed bottom-0 top-0 z-20 cursor-pointer bg-neutral-50 backdrop:backdrop-blur dark:bg-neutral-200;
   }
 
   &.no-scroll {

@@ -3,7 +3,7 @@ backend:
   branch: main
   repo: alianza/portfolio-v2
 
-local_backend: false
+local_backend: true
 site_url: https://jwvbremen.nl/
 display_url: https://jwvbremen.nl/
 media_folder: public/assets

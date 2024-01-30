@@ -1,105 +1,108 @@
-.frame-content { // For Decap CMS Markdown content container
-    @apply m-2 my-8 bg-neutral-50 dark:bg-neutral-900 shadow-cmsPreviewFrame shadow-neutral-50 dark:shadow-neutral-900 min-h-screen;
-    // as in global.scss
+.frame-content {
+  // For Decap CMS Markdown content container
+  @apply m-2 my-8 min-h-screen bg-neutral-50 shadow-cmsPreviewFrame shadow-neutral-50 dark:bg-neutral-900 dark:shadow-neutral-900;
+  // as in global.scss
 }
 
 @mixin widgetStyles {
-    .video-container {
-        @apply relative w-full my-4;
-        padding-bottom: 56.25%;
+  .video-container {
+    @apply relative my-4 w-full;
+    padding-bottom: 56.25%;
 
-        .youtube-embed {
-            @apply absolute top-0 left-0 w-full h-full border-0;
-        }
+    .youtube-embed {
+      @apply absolute left-0 top-0 h-full w-full border-0;
     }
+  }
 
-    .images-grid {
-        @apply grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-4;
+  .images-grid {
+    @apply grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-4;
 
-        img {
-            @apply w-full m-0 sm:last:odd:col-span-2;
-        }
+    img {
+      @apply m-0 w-full sm:last:odd:col-span-2;
     }
+  }
 }
 
 .startEndDateLabel {
-    @apply flex items-center gap-1 flex-wrap;
+  @apply flex flex-wrap items-center gap-1;
 
-    time {
-        @apply m-0 whitespace-nowrap;
-    }
+  time {
+    @apply m-0 whitespace-nowrap;
+  }
 }
 
 .content {
-    @apply lg:prose-xl prose dark:prose-invert relative mx-auto my-4 antialiased;
+  @apply prose relative mx-auto my-4 antialiased lg:prose-xl dark:prose-invert;
 
-    .metaData {
-        @apply flex w-full justify-between items-center mb-2;
+  .metaData {
+    @apply mb-2 flex w-full items-center justify-between;
+  }
+
+  .mainTitle {
+    @apply m-0 text-4xl;
+  }
+
+  .thumbnail {
+    @apply mt-0 h-auto w-full shadow-xl;
+  }
+
+  .markdown {
+    figure,
+    img,
+    video,
+    iframe {
+      @apply mx-auto max-w-full rounded shadow;
     }
 
-    .mainTitle {
-        @apply m-0 text-4xl;
+    img {
+      @apply cursor-pointer transition-[transform,shadow] hover:scale-[1.01] hover:shadow-xl hover:duration-75 active:scale-[0.99];
+
+      // empty src
+      &[src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='] {
+        // Empty src
+        @apply hidden #{!important};
+      }
     }
 
-    .thumbnail {
-        @apply w-full h-auto mt-0;
+    pre {
+      @apply m-0 grid w-full p-0 shadow-sm;
+
+      code {
+        @apply block overflow-x-auto p-4;
+      }
     }
 
-    .markdown {
-
-        figure, img, video, iframe {
-            @apply max-w-full shadow rounded mx-auto;
-        }
-
-        img {
-            @apply cursor-pointer transition-[transform,shadow] hover:duration-75 active:scale-[0.99] hover:scale-[1.01] hover:shadow-xl;
-
-            // empty src
-            &[src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="] { // Empty src
-                @apply hidden #{!important};
-            }
-        }
-
-        pre {
-            @apply m-0 p-0 shadow-sm grid w-full;
-
-            code {
-                @apply p-4 block overflow-x-auto;
-            }
-        }
-
-        img[alt='icon'] {
-            @apply inline-block w-auto h-6 m-0 shadow-none drop-shadow hover:scale-110;
-        }
-
-        button {
-            @apply inline-flex items-center gap-2 my-1 text-neutral-100 bg-neutral-600 hover:bg-neutral-700 focus:ring-neutral-600/50 rounded-lg px-5 py-2.5 text-sm font-medium hover:duration-100 hover:decoration-inherit focus:outline-none focus:ring-4 transition-colors underline decoration-transparent duration-300 ease-in-out;
-            contain: content;
-
-            img[alt='icon'] {
-                @apply h-5;
-            }
-        }
-
-        details {
-            @apply my-4;
-
-            summary {
-                @apply cursor-pointer text-2xl font-bold break-words;
-            }
-
-            div {
-                @apply my-4;
-            }
-        }
-
-        // Netlify CMS widget styles
-        @include widgetStyles;
-
-        // App widget styles
-        :global {
-            @include widgetStyles;
-        }
+    img[alt='icon'] {
+      @apply m-0 inline-block h-6 w-auto shadow-none drop-shadow hover:scale-110;
     }
+
+    button {
+      @apply my-1 inline-flex items-center gap-2 rounded-lg bg-neutral-600 px-5 py-2.5 text-sm font-medium text-neutral-100 underline decoration-transparent transition-colors duration-300 ease-in-out hover:bg-neutral-700 hover:decoration-inherit hover:duration-100 focus:outline-none focus:ring-4 focus:ring-neutral-600/50;
+      contain: content;
+
+      img[alt='icon'] {
+        @apply h-5;
+      }
+    }
+
+    details {
+      @apply my-4;
+
+      summary {
+        @apply cursor-pointer break-words text-2xl font-bold;
+      }
+
+      div {
+        @apply my-4;
+      }
+    }
+
+    // Netlify CMS widget styles
+    @include widgetStyles;
+
+    // App widget styles
+    :global {
+      @include widgetStyles;
+    }
+  }
 }
-
