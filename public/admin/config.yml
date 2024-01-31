@@ -3,7 +3,7 @@ backend:
   branch: main
   repo: alianza/portfolio-v2
 
-local_backend: true
+local_backend: false
 site_url: https://jwvbremen.nl/
 display_url: https://jwvbremen.nl/
 media_folder: public/assets
@@ -35,7 +35,7 @@ collections:
               - { label: "Social media name", name: "name", widget: "string" }
               - { label: "Url", name: "url", widget: "string" }
               - { label: "Icon", name: "icon", widget: "image", required: false }
-          - label: 'Introductions' # and introduction consists of a title, image and body
+          - label: 'Introductions'
             name: 'introductions'
             label_singular: 'Introduction'
             widget: 'list'

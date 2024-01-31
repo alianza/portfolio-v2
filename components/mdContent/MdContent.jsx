@@ -7,6 +7,7 @@ import {
   useExternalLinks,
   useGithubLastUpdated,
   useImageZoom,
+  useYearsSinceDateTags,
 } from '@/lib/markdownEnrichment';
 import { useDarkMode } from '@/lib/customHooks';
 import Image from 'next/image';
@@ -20,6 +21,7 @@ const MdContent = ({ content: { title, date, startDate, endDate, thumbnail, cont
   useExternalLinks(contentId);
   useCodeHighlightStyles(darkMode);
   useGithubLastUpdated(contentId);
+  useYearsSinceDateTags();
 
   if (!content) {
     content = `<h1>Article for ${title} not written yet...</h1>
