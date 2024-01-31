@@ -8,7 +8,6 @@ description: For my graduation assignment for my Software Engineering study at
   the University of Applied Sciences in Amsterdam I did an internship at the
   Kabisa B.V. company.
 ---
-# PokéDex - React
 
 As you know by now I like to experiment with the *[PokéApi](https://pokeapi.co/)*. This project is the third Pokémon related application I have built.
 This time built using the *[ReactJS](https://reactjs.org/)* web framework. This was my first ever *ReactJS* application I have created.

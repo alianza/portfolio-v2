@@ -1,5 +1,5 @@
 ---
-title: Rockstars
+title: Rockstars Static
 startDate: 2021-11-06
 endDate: 2021-11-09
 thumbnail: /assets/rockstars.webp
@@ -10,7 +10,6 @@ description: This project was a learning experience and a good example of how to
   rockstars and their songs. The application is inspired by the Front-End Tech
   Case for my new position at Team Rockstars IT.
 ---
-# Rockstars Static - Next.js
 
 This project was a learning experience and a good example of how to use Next.js. This project demonstrates how to use 
 Next.js to render static web pages from an external data source. The application allows you to search for rockstars and their songs.

@@ -90,6 +90,14 @@ body {
   @apply bg-neutral-500;
 }
 
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-400;
+}
+
+::-webkit-scrollbar-thumb:active {
+  @apply bg-neutral-600;
+}
+
 #app {
   ::-webkit-scrollbar {
     @apply w-2;

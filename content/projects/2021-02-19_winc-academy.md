@@ -10,7 +10,10 @@ description: During my time as a Software Engineering student I worked for a
   studies are done remotely and contact with the students was done via the Slack
   channel.
 ---
-# Winc Academy - Part-time Job
+
+During my time as a Software Engineering student I worked for a couple of months at the Winc Academy. The Winc Academy is
+an online academy where people can learn programming from experienced teachers. The programming studies are done remotely
+and contact with the students was done via the Slack channel.
 
 ## Technologies & Frameworks
 
@@ -25,10 +28,6 @@ description: During my time as a Software Engineering student I worked for a
 - - -
 
 ## Summary
-
-During my time as a Software Engineering student I worked for a couple of months at the Winc Academy. The Winc Academy is
-an online academy where people can learn programming from experienced teachers. The programming studies are done remotely
-and contact with the students was done via the Slack channel.
 
 My activities within the Winc Academy consisted of checking the assignments made by the students based on different acceptance
 criteria and general programming best practices and patterns. Checked assignments were graded, the results communicated with 

@@ -8,9 +8,6 @@ description: As a part-time job and service to my neighbouring shipyard I took
   management over their website which was at the time of acquisition not working
   correctly.
 ---
-# Botenloods - Part-time Job
-
-- - -
 
 ## Technologies & Frameworks
 

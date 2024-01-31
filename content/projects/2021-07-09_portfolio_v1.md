@@ -8,7 +8,6 @@ description: I built this Personal Portfolio Website to introduce myself as a
   software engineer, demonstrate some of my previous projects and experiences
   and as practice in vanilla web development (No frameworks).
 ---
-# Personal Portfolio Website v1 - Vanilla JS
 
 I built the previous version of this Personal Portfolio Website to introduce myself as a software engineer, demonstrate some of my previous projects
 and experiences and as practice in vanilla web development (No frameworks). I updated this website with new content as I
