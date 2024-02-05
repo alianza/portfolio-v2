@@ -39,6 +39,7 @@ The website needed be easy to manage in terms of adding new content, articles an
 <img src="/assets/portfolio_lea_1.png" />
 <img src="/assets/portfolio_lea_2.png" />
 <img src="/assets/portfolio_lea_3.png" />
+<img src="/assets/portfolio_lea_4.png" />
 </div>
 
 - - -
@@ -272,6 +273,9 @@ Post.withLayout = (page) => <Layout>{page}</Layout>
 export default Post
 
 ```
+
+
+
 
 
 
