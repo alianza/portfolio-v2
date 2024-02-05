@@ -229,6 +229,6 @@ export default function Songs({songs}) {
 [<button>![icon](/assets/github.png) Github</button>](https://github.com/alianza/rockstars_static)
 [<button>![icon](/assets/vercel.png) Visit Site (Vercel)</button>](https://rockstars-static.vercel.app/)
 [<button>![icon](/assets/netlify.png) Visit Site (Netlify)</button>](https://rockstars.jwvbremen.nl/)
-[<button>![icon](/assets/lighthouse.png) Lighthouse audit</button>](/projects/rockstars/lighthouse_rockstars.html)
+[<button>![icon](/assets/lighthouse.png) Lighthouse audit</button>](/assets/lighthouse_rockstars.html)
 
 - - -
