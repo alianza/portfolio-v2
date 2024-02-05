@@ -77,7 +77,7 @@ The snippets demonstrate clean, concise and powerful code following established 
 **Index.js file with static rendering**\
 The index.js file is the main page of the application. It gathers all the data from local files and renders the static site.
 
-```javascript
+```jsx
 export async function getStaticProps() {
 
     const intro = await markdownToHtml(getLocalFile('intro.md'))
@@ -124,7 +124,7 @@ The Updates component is a dynamic component that loads data from the remote Goo
 posted updates and displays them in a list to the user. It also shows a form to post a new update with. New Updates are
 updated in realtime so new data is always available. The styling has mostly been done using TailwindCSS.
 
-```javascript
+```jsx
 export default function Updates() {
   const [updates, setUpdates] = useState([])
   const [submitted, setSubmitted] = useState(false)

@@ -82,7 +82,7 @@ The following are some code snippets of pieces of code I'm proud of from this pr
 **ViewModel for the Landmarks fragment**\
 All communication between the View and Model is done through the ViewModel according to the MVVM architecture as is demonstrated throughout the project.
 
-```javascript
+```kotlin
 package com.example.monumental.viewModel.landmark
 
 class LandmarksViewModel(application: Application) : AndroidViewModel(application) {
@@ -128,7 +128,7 @@ class LandmarksViewModel(application: Application) : AndroidViewModel(applicatio
 **Journeys fragment delete operation**\
 These methods demonstrate the builder design pattern and, object-oriented and effective functional programming approach and proper use of the Kotlin programming language.
 
-```javascript
+```kotlin
 /**When Journey delete button is clicked
  * Builds dialog for delete confirmation
  * @param journey Journey to delete */

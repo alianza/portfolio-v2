@@ -90,7 +90,7 @@ The snippets demonstrate clean, concise and powerful code following established 
 This is the /artists/\[artistName].js file. It is a dynamic route that is used to render the detail page for each artist. 
 All artist pages are rendered using the Next.js framework with data provided by the local JSON server ran at build-time.
 
-```javascript
+```jsx
 export async function getStaticProps({ params }) {
     const songs = await MusicService.getSongsByArtistName(encodeURIComponent(params.name))
 
@@ -163,7 +163,7 @@ It features advanced filtering on each property of a song and rudimentary sortin
 Song elements are dynamically rendered using the React.js framework.
 It also demonstrates how to treat large amounts of data using JSON compression.
 
-```javascript
+```jsx
 export async function getStaticProps() {
     let songs = await MusicService.getSongs()
 
