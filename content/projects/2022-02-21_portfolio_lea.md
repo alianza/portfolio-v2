@@ -55,6 +55,8 @@ The website has already generated traffic and some potential leads for Lea's jou
 
 ![Lighthouse score](/assets/lighthouse_portfolio-lea.png "Lighthouse score")
 
+Note: *I don't know why the performance score is low here. The desktop lighthouse test gets a perfect 100 on that metric but I can't seem to find the large contentful paint they're talking about...*
+
 - - -
 
 <details >
@@ -270,6 +272,7 @@ Post.withLayout = (page) => <Layout>{page}</Layout>
 export default Post
 
 ```
+
 
 
 </div>
