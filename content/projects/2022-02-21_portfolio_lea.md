@@ -39,7 +39,7 @@ The website needed be easy to manage in terms of adding new content, articles an
 <img src="/assets/portfolio_lea_1.png" />
 <img src="/assets/portfolio_lea_2.png" />
 <img src="/assets/portfolio_lea_3.png" />
-<img src="/assets/portfolio_lea_4.jpg" />
+<img src="/assets/portfolio_lea_4.png" />
 </div>
 
 - - -
@@ -278,6 +278,7 @@ export default Post
 
 
 
+
 </div>
 </details>
 
@@ -286,4 +287,5 @@ export default Post
 ### Check out the project!
 
 [<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/portfolio-lea)
+
 [<button>![icon](/assets/portfolio_lea.png) Check out the site!</button>](https://leashamaa.nl/)
