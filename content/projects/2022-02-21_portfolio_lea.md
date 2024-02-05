@@ -287,5 +287,4 @@ export default Post
 ### Check out the project!
 
 [<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/portfolio-lea)
-
 [<button>![icon](/assets/portfolio_lea.png) Check out the site!</button>](https://leashamaa.nl/)
