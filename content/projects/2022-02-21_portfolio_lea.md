@@ -51,14 +51,11 @@ The website has already generated traffic and some potential leads for Lea's jou
 
 - - -
 
-## Screens
+## Lighthouse Audit Score ![icon](/assets/lighthouse.png)
 
-<div class="images-grid">
-<img src="/assets/dashboard.e-flux.io_.png" />
-<img src="/assets/dashboard.e-flux.io_-1-.png" />
-<img src="/assets/schermafbeelding-2024-01-25-163305.png" />
-<img src="/assets/dsc00700.jpg" />
-</div>
+![Lighthouse score](/assets/lighthouse_portfolio-lea.png "Lighthouse score")
+
+Note: *I don't know why the performance score is low here. The desktop lighthouse test gets a perfect 100 on that metric but I can't seem to find the large contentful paint they're talking about...*
 
 - - -
 
@@ -129,238 +126,162 @@ const Home = ({ homeContent, experiences, posts, articles }) => {
 Home.withLayout = (page) => <Layout>{page}</Layout>
 ```
 
-**Audit-Entry Mongoose Schema**\
-This code snippet showcases the Mongoose Schema for the Audit-Entry Model. Audit-Entries are responsible for logging changes to whatever other model in the database and store them in a new collection so we have an Audit Trail of all changes in the system without too much overhead.
+**PostService.js File**\
+This code snippet showcases the PostService.js file. This service is responsible for loading the blog posts from the file system (since all content is saved as markdown files in the repository itself) and parsing them during build time of the application to facilitate static site generation. Blog posts can have a category assigned to them which will show in the UI.
 
 ```javascript
+const postsDirectory = path.join(process.cwd(), 'content/posts');
 
+export async function getPosts(options = {}) {
+  const fileNames = await fs.readdir(postsDirectory).catch(() => []);
+
+  const posts = await Promise.all(
+    fileNames.map(async (fileName) => {
+      const post = await parsePost(fileName);
+
+      return {
+        id: fileName.replace('.md', ''),
+        ...post,
+        ...(options.preview && { content: '' }),
+      };
+    }),
+  );
+
+  for (const post of posts) {
+    post.data.category = await configService.getCategory(post.data.category);
+  }
+
+  posts.sort((a, b) => (new Date(a.data.date) < new Date(b.data.date) ? 1 : -1));
+
+  return posts;
+}
+
+export async function getCategories() {
+  const posts = await getPosts();
+
+  const categories = []; // [{ name: "category", count: 0, posts: [{ name: "post", date: "date" }] }]
+
+  for (const post of posts) {
+    const category = await configService.getCategory(post.data.category.name);
+
+    if (category && !categories.find((c) => c.name === category.name)) {
+      const relevantPosts = posts.filter((p) => p.data.category.name === category.name);
+      category.count = relevantPosts.length;
+      category.posts = relevantPosts.map((post) => ({
+        name: post.data.title,
+        date: post.data.date,
+      }));
+      categories.push(category);
+    }
+  }
+
+  // Add remaining (unused) categories
+  for (let category of await configService.getCategories()) {
+    if (!categories.find((c) => c.name === category.name)) {
+      category.count = 0;
+      categories.push(category);
+    }
+  }
+
+  // sort categories by newest post
+  categories.sort((a, b) => {
+    const aLatestPost = a?.posts?.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+    const bLatestPost = b?.posts?.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+    const aDate = new Date(aLatestPost?.date).getTime() || 0;
+    const bDate = new Date(bLatestPost?.date).getTime() || 0;
+    return aDate + bDate;
+  });
+
+  return categories;
+}
+
+export async function getPostIds() {
+  const fileNames = await fs.readdir(postsDirectory).catch(() => []);
+  return fileNames.map((fileName) => ({ postId: fileName.replace('.md', '') }));
+}
+
+export async function getPostsByCategory(categoryName) {
+  const posts = await getPosts();
+  return posts.filter((post) => post.data.category.name === categoryName);
+}
+
+export async function getPost(postId) {
+  const post = await parsePost(`${postId}.md`);
+
+  return {
+    id: postId,
+    ...post.data,
+    content: post.content,
+    category: await configService.getCategory(post.data.category),
+  };
+}
+
+const parsePost = async (fileName) => {
+  const filePath = path.join(postsDirectory, fileName);
+  const fileContents = await fs.readFile(filePath, 'utf8');
+  const post = matter(fileContents, {
+    engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) },
+  });
+  post.content = marked.parse(post.content) || '';
+
+  return {
+    id: fileName.replace('.md', ''),
+    ...post,
+  };
+};
 ```
 
-To create an Audit Entry for a change to a document (E.g. a BillingPlan) the following piece of code can be used:
+**\[PostId].jsx File**\
+This file is responsible for the pages of blog posts to be statically generated according to all post files present in the file system according to the *PostService.js* file shown previously. It generates a static path for every post and renders the markdown content retrieved from the Id of the post.
 
-```javascript
+```jsx
+export const getStaticPaths = async () => {
 
-```
+  const postIds = await getPostIds()
 
-Note that the developer experience of adding a new Audit Trail Entry is very simple and all complex logic is obfuscated in the Audit Entry Model.\
-\
-**Remote Sessions Status Handler**\
-This file is triggered through a CRON job every minute to handle active remote sessions. Remote sessions are sessions triggered by a Mobility Service Provider on a changer of another remote Charge Point Operator. This requires authentication and communication between the systems of both parties and updating status towards the user. The job checks for remote sessions that are not Cancelled, Completed or Errored and handles them by updating the status through attempting to find the corresponding active session that the Charge Point Operator should've sent, otherwise it tries to find the corresponding Charge Detail Record indicating the charge session is done and updates the Remote Session accordingly.
-
-```typescript
-const maximumAgeForInactiveMinutes = config.get('MINIMUM_PAYMENT_AGE_FOR_INACTIVE_MINUTES', 'number') || 10;
-export const maximumAgeForInactive = maximumAgeForInactiveMinutes * 60 * 1000;
-
-const maximumAgeForActiveMinutes = config.get('MINIMUM_PAYMENT_AGE_FOR_ACTIVE_MINUTES', 'number') || 4320;
-export const maximumAgeForActive = maximumAgeForActiveMinutes * 60 * 1000;
-
-const stopSessionBackoffMinutes = config.get('REMOTE_SESSION_STOP_BACKOFF_MINUTES', 'number') || 5;
-const stopSessionBackoff = stopSessionBackoffMinutes * 60 * 1000;
-
-@singleton()
-export class MspRemoteSessionStatusManager {
-  constructor(
-    private readonly remoteSessionService: MspRemoteSessionService,
-    private readonly remoteSessionRepository: MspRemoteSessionRepository,
-    private readonly mspSessionRepository: MspSessionRepository,
-    private readonly activeSessionRepository: ActiveSessionRepository,
-    private readonly paymentRepository: PaymentRepository,
-    private readonly tokenRepository: TokenRepository
-  ) {}
-
-  async handleRemoteSessions() {
-    const remoteSessions = this.remoteSessionRepository.findStream({
-      status: { $nin: [RemoteSessionStatus.COMPLETED, RemoteSessionStatus.CANCELLED, RemoteSessionStatus.ERROR] },
-    });
-
-    for await (const remoteSession of remoteSessions) {
-      logger.info(`Handling remote session ${remoteSession.id} with status ${remoteSession.status}`);
-      try {
-        await this.handleOngoingRemoteSessionStatus(remoteSession);
-        await this.handleInactiveRemoteSession(remoteSession);
-        await this.handleOldActiveRemoteSession(remoteSession);
-      } catch (error) {
-        await this.remoteSessionService.setError(remoteSession, error);
-      }
-    }
-  }
-
-  async handleOngoingRemoteSessionStatus(remoteSession: MspRemoteSession) {
-    switch (remoteSession.status) {
-      case RemoteSessionStatus.STARTING:
-        await this.attemptToFindAndAttachActiveSession(remoteSession);
-        break;
-      case RemoteSessionStatus.ERROR: // We have a case when remote session can be marked as ERROR, but we still can receive CDR for it. (critical for PSP payments)
-      case RemoteSessionStatus.STOPPING:
-        if (!(await this.attemptToCompleteAsExcludedCPOSession(remoteSession))) {
-          await this.attemptToFindAndAttachCDR(remoteSession);
-        }
-        break;
-      case RemoteSessionStatus.ACTIVE:
-        await this.handleActiveRemoteSession(remoteSession);
-        break;
-    }
-  }
-
-  private async handleActiveRemoteSession(remoteSession: MspRemoteSession) {
-    if (remoteSession.activeSessionId) {
-      const activeSession = await this.activeSessionRepository.findById(remoteSession.activeSessionId);
-      if (activeSession.status === ActiveSessionStatus.COMPLETED) {
-        await this.attemptToFindAndAttachCDR(remoteSession);
-      }
-      if (remoteSession.paymentId && remoteSession.transactionId) {
-        await this.handlePaymentPreAuthLimit(activeSession, remoteSession);
-      }
-    }
-    if (remoteSession.mspSessionId) {
-      const cdr = await this.mspSessionRepository.findById(remoteSession.mspSessionId);
-      await this.handleCDRFound(cdr, remoteSession);
-    }
-  }
-
-  private async attemptToFindAndAttachActiveSession(remoteSession: MspRemoteSession) {
-    const activeSession = await this.findActiveSession(remoteSession);
-    if (activeSession) {
-      await this.handleActiveSessionFound(activeSession, remoteSession);
-    }
-  }
-
-  private async attemptToFindAndAttachCDR(remoteSession: MspRemoteSession) {
-    const cdr = await this.findCDR(remoteSession);
-    if (cdr) {
-      await this.handleCDRFound(cdr, remoteSession);
-    }
-  }
-
-  private async handleCDRFound(cdr: MongooseSession, remoteSession: MspRemoteSession) {
-    return this.remoteSessionService.completeSession(cdr, remoteSession);
-  }
-
-  private async handleActiveSessionFound(activeSession: ActiveSession, remoteSession: MspRemoteSession) {
-    if (([RemoteSessionStatus.STARTING, RemoteSessionStatus.PENDING] as string[]).includes(remoteSession.status)) {
-      await this.remoteSessionService.setSessionActive(remoteSession, activeSession);
-      return;
-    }
-
-    if (([RemoteSessionStatus.ACTIVE, RemoteSessionStatus.STOPPING] as string[]).includes(remoteSession.status)) {
-      if (remoteSession.createdAt < new Date(Date.now() - maximumAgeForActive)) {
-        await this.remoteSessionService.setError(
-          remoteSession,
-          new Error('Remote session is older than 3 days, but no Active Session or CDR was found.')
-        );
-      }
-      return;
-    }
-  }
-
-  private async preauthLimitReached(activeSession: ActiveSession, remoteSession: MspRemoteSession): Promise<boolean> {
-    if (!activeSession.currentTotal) return false; // no total to compare to - likely haven't received any meter values yet
-
-    const payment = await this.paymentRepository.findById(remoteSession.paymentId);
-    const vatPercentage = activeSession.vatInfo?.['vatPercentage'];
-
-    let sessionTotal = activeSession.currentTotal;
-    if (vatPercentage) {
-      sessionTotal = sessionTotal * (vatPercentage / 100 + 1); // apply VAT if we can
-    }
-
-    return (
-      payment.status === PaymentStatus.PREAUTH_ACCEPTED && // ensure the payment is in the correct state
-      payment.preauthAmount > 0 && // ensure we have a valid preauth amount
-      sessionTotal > payment.preauthAmount * 0.95 // within 5% of preauth limit
-    );
-  }
-
-  private async findCDR(remoteSession: RemoteSession) {
-    const { activeSessionId, infraProviderId, transactionId: externalId } = remoteSession;
-    const activeSession = await this.activeSessionRepository.findById(activeSessionId);
-    const tokenContractId = activeSession?.rawRecord?.auth_id;
-
-    const cdr = await this.mspSessionRepository.findOne(
-      {
-        externalId,
-        infraProviderId,
-        remoteSessionId: { $exists: false },
-        deleted: false,
-        providerContext: 'msp',
-        invoiceId: { $exists: false },
-        ...(tokenContractId && { tokenContractId }),
-      },
-      undefined,
-      { sort: { createdAt: -1 } }
-    );
-    return cdr || null;
-  }
-
-  private async findActiveSession(remoteSession: MspRemoteSession) {
-    const token = await this.tokenRepository.findById(remoteSession.tokenId);
-    const activeSession = await this.activeSessionRepository.findOne(
-      {
-        infraProviderId: remoteSession.partyId,
-        deleted: false,
-        status: ActiveSessionStatus.ACTIVE,
-        remoteSessionId: { $exists: false },
-        tokenId: remoteSession.tokenId,
-        userId: token.userId,
-      },
-      { sort: { createdAt: -1 } }
-    );
-    return activeSession || null;
-  }
-
-  async handleInactiveRemoteSession(remoteSession: MspRemoteSession) {
-    if (remoteSession.statusChangedAt < new Date(Date.now() - maximumAgeForInactive)) {
-      switch (remoteSession.status) {
-        case RemoteSessionStatus.PENDING:
-        case RemoteSessionStatus.STARTING: {
-          await this.remoteSessionService.cancelSession(
-            remoteSession,
-            MspRemoteSessionCancelledReason.NO_ACTIVE_SESSION_RECEIVED
-          );
-          break;
-        }
-        case RemoteSessionStatus.STOPPING: {
-          const errorMessage = `Session status has been in ${remoteSession.status} more than ${maximumAgeForInactiveMinutes} minutes, aborting`;
-          await this.remoteSessionService.setError(remoteSession, new Error(errorMessage));
-        }
-      }
-    }
-  }
-
-  async handleOldActiveRemoteSession(remoteSession: MspRemoteSession) {
-    if (remoteSession.createdAt < new Date(Date.now() - maximumAgeForActive)) {
-      switch (remoteSession.status) {
-        case RemoteSessionStatus.ACTIVE:
-        case RemoteSessionStatus.STOPPING: {
-          const errorMessage = `Remote session is older than ${
-            maximumAgeForActiveMinutes / 60 / 24
-          } days, but no Active Session or CDR was found.`;
-          await this.remoteSessionService.setError(remoteSession, new Error(errorMessage));
-        }
-      }
-    }
-  }
-
-  private async handlePaymentPreAuthLimit(activeSession: ActiveSession, remoteSession: MspRemoteSession) {
-    const preauthReached = await this.preauthLimitReached(activeSession, remoteSession);
-    const shouldAttemptStop =
-      !remoteSession.stopRequestedAt || remoteSession.stopRequestedAt < new Date(Date.now() - stopSessionBackoff);
-
-    if (preauthReached && shouldAttemptStop) {
-      await this.remoteSessionService.stopSession({ remoteSessionId: remoteSession.id, skipUserCheck: true });
-    }
-  }
-
-  private async attemptToCompleteAsExcludedCPOSession(remoteSession: MspRemoteSession): Promise<boolean> {
-    try {
-      return this.remoteSessionService.checkAndCompleteExcludedSession(remoteSession);
-    } catch (e) {
-      logger.error(`Error in completing excluded remote sessions`);
-      return false;
-    }
+  return {
+    paths: postIds.map(({ postId }) => ({ params: { postId } })),
+    fallback: false,
   }
 }
+
+export const getStaticProps = async ({ params }) => {
+
+  const post = await getPost(params.postId)
+
+  return {
+    props: {
+      post,
+    },
+  }
+}
+
+const Post = ({ post }) => {
+  return (
+    <>
+      <Head item={post}/>
+      <div className={`${utils.page} max-w-screen-desktop`}>
+        <MdContent content={post}/>
+      </div>
+    </>
+  )
+}
+
+Post.withLayout = (page) => <Layout>{page}</Layout>
+
+export default Post
+
 ```
+
+
 
 </div>
 </details>
+
+- - -
+
+### Check out the project!
+
+[<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/portfolio-lea)
+
+[<button>![icon](/assets/portfolio_lea.png) Check out the site!</button>](https://leashamaa.nl/)
