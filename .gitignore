@@ -39,3 +39,6 @@ public/styles
 
 # Local Netlify folder
 .netlify
+
+# Parsed CMS config
+/public/admin/config.yml
