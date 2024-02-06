@@ -20,6 +20,8 @@ const DEFAULT_ENV = {
   );
   const parsedConfig = yaml.load(interpolatedYamlContent);
   fs.writeFileSync('./public/admin/config.yml', yaml.dump(parsedConfig));
+
+  console.log(`parsedConfig`, parsedConfig);
 })();
 
 module.exports = nextConfig;
