@@ -15,6 +15,12 @@ The website shows my skills, projects and contact information.
 
 ## Getting Started
 
+Copy the `.env.local.example` file to `.env.local`.
+
+```bash
+cp .env.local.example .env.local
+```
+
 First, run the development server:
 
 ```bash
