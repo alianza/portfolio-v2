@@ -37,7 +37,7 @@
     },
     {
       "title": "What I do professionally",
-      "body": "Professionally I am a full-stack Software Engineer focussing on **web-development**. I do this using technologies & techniques like Node.js, HTML, (S)CSS, Type/JavaScript, web frameworks (React, Next.js), (No)Sql Databases, Git(hub), Agile (Scrum) and more! Check out some of my **experiences & projects**!",
+      "body": "Professionally I am a full-stack Software Engineer focussing on **web-development**. I do this using technologies & techniques like Node.js, HTML, (S)CSS, Type/JavaScript, web frameworks (React, Next.js), (No)Sql Databases, Git(hub), Agile (Scrum), Netlify/Vercel and more!",
       "media": "/assets/professional.gif"
     },
     {
