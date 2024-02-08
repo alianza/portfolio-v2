@@ -44,8 +44,6 @@ The goal of this project was to make the Scroll Into View element I made for Lea
 
 - - -
 
-##  
-
 <details >
 <summary>Code Snippets</summary>
 <div>
@@ -56,34 +54,36 @@ The following are some code snippets of component code that is powerful, demonst
 This code snippet shows the code of the react-transition-scroll library itself. It contains the code to listen to intersections of the to animate elements with the viewport to change the styling facilitating the default transitions or the ones chosen by the developer. Using React PropTypes all props are communicated to the developer for easy integration with your project.
 
 ```jsx
-let TransitionScrollTypes = TransitionScroll.propTypes = {
+let TransitionScrollTypes = (TransitionScroll.propTypes = {
   threshold: PropTypes.number, // The percentage of the element that needs to be in view before the animation is triggered
   reAnimate: PropTypes.bool, // Whether the element will animate again once it is scrolled out of view and back in
   children: PropTypes.node.isRequired, // The element to animate, and it's children
-  callBack: PropTypes.func, // A callback to be called when the element is in view
+  callBackBefore: PropTypes.func, // A callback to be called when the element is in view
+  callBackAfter: PropTypes.func, // A callback to be called when the element is in view
   baseStyle: PropTypes.object, // The base style of the element
   hiddenStyle: PropTypes.object, // The style of the element when it is not intersecting with the page
   showStyle: PropTypes.object, // The style of the element when it is intersecting with the page
-  className: PropTypes.string // Additional class names to be added to the element
-}
+  className: PropTypes.string, // Additional class names to be added to the element
+});
 
 TransitionScroll.defaultProps = {
   threshold: 0,
   reAnimate: false,
-  callBack: (entry) => {},
+  callBackBefore: (entry) => {},
+  callBackAfter: (entry) => {},
   baseStyle: {},
   hiddenStyle: {
-    opacity: .5,
-    translate: '0 12px',
-    filter: 'blur(4px)'
+    opacity: 0.5,
+    translate: "0 12px",
+    filter: "blur(4px)",
   },
   showStyle: {
     opacity: 1,
-    translate: '0 0',
-    filter: 'none'
+    translate: "0 0",
+    filter: "none",
   },
-  className: ''
-}
+  className: "",
+};
 
 /**
  *
@@ -105,76 +105,117 @@ TransitionScroll.defaultProps = {
  *
  */
 
-export function TransitionScroll({
+function TransitionScroll({
   threshold = 0,
   reAnimate = false,
   children,
-  callBack = (entry) => {},
+  callBackBefore = (entry) => {},
+  callBackAfter = (entry) => {},
   baseStyle = {},
   hiddenStyle = {
-    opacity: .5,
-    translate: '0 12px',
-    filter: 'blur(4px)'
+    opacity: 0.5,
+    translate: "0 12px",
+    filter: "blur(4px)",
   },
   showStyle = {
     opacity: 1,
-    translate: '0 0',
-    filter: 'none'
+    translate: "0 0",
+    filter: "none",
   },
-  className = ''
+  className = "",
 }) {
-  const elementRef = React.createRef()
-  const [style, setStyle] = useState(Object.assign({}, baseStyle, hiddenStyle))
-  const [didCallBack, setDidCallBack] = useState(false)
+  const elementRef = React.createRef();
+  const [style, setStyle] = useState(Object.assign({}, baseStyle, hiddenStyle));
+  const [didCallBack, setDidCallBack] = useState(false);
 
   useEffect(() => {
     const options = {
       root: null,
-      rootMargin: '0px',
-      threshold: threshold / 100
-    }
+      rootMargin: "0px",
+      threshold: threshold / 100,
+    };
 
     let observer;
 
-    if ('IntersectionObserver' in window) {
+    if ("IntersectionObserver" in window) {
       observer = new IntersectionObserver(
         (entries, observer) =>
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              setStyle(Object.assign({}, baseStyle, showStyle))
+              setStyle(Object.assign({}, baseStyle, showStyle));
               if (!reAnimate) {
-                observer.unobserve(entry.target)
+                observer.unobserve(entry.target);
               }
               if (!didCallBack) {
-                callBack(entry)
-                setDidCallBack(true)
+                callBackBefore(entry);
+                const transitionDuration = getComputedStyle(entry.target).transitionDuration.replace("s", "") * 1000;
+                setTimeout(() => callBackAfter(entry), transitionDuration);
+                setDidCallBack(true);
               }
             } else {
-              setStyle(Object.assign({}, baseStyle, hiddenStyle))
-              setDidCallBack(false)
+              setStyle(Object.assign({}, baseStyle, hiddenStyle));
+              setDidCallBack(false);
             }
           }),
-        options
-      )
+        options,
+      );
 
-      observer.observe(elementRef.current)
-    }  else {
-      setStyle(Object.assign({}, baseStyle, showStyle))
+      observer.observe(elementRef.current);
+    } else {
+      setStyle(Object.assign({}, baseStyle, showStyle));
     }
 
-    return () => observer?.disconnect()
-  }, [])
+    return () => observer?.disconnect();
+  }, []);
 
   return (
     <div ref={elementRef} style={style} className={`${styles.baseStyle} ${className}`}>
       {children}
     </div>
-  )
+  );
 }
 ```
 
 **Example usage code**\
 These code snippets demonstrate how to use the React-transition-scroll library in your React application.
 
+Zero config example, library comes with sane defaults for fade-in animations.
+
+```jsx
+<TransitionScroll>
+  <div> {...elementToAnimate} </div>
+</TransitionScroll>
+```
+
+More advanced configuration example
+
+```jsx
+ <TransitionScroll
+            reAnimate
+            baseStyle={{ marginBlock: "4em" }}
+            hiddenStyle={{ opacity: 0.2, translate: "84px 0" }}
+            showStyle={{ opacity: 0.8 }}
+            threshold={50}
+            callBackBefore={(entry) => alert("CallBackBefore" + JSON.stringify(entry))}
+            callBackAfter={(entry) => alert("CallBackAfter" + JSON.stringify(entry))}
+            className="customClass"
+            >
+    <div> {...elementToAnimate} </div>
+</TransitionScroll>
+
+```
+
 </div>
 </details>
+
+- - -
+
+### Check out the project!
+
+[<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/react-transition-scroll)
+[<button>![icon](/assets/react-transition-scroll_1.png) Documentation/Demo website</button>](https://alianza.github.io/react-transition-scroll/)
+
+Projects using the `React-transition-scroll` library
+
+[<button>![icon](/assets/portfolio_lea.png) Personal portfolio website Lea Shamaa</button>](https://leashamaa.nl/)
+[<button>![icon](/assets/jwvbremen.nl_5.png) Personal portfolio website v2</button>](https://jwvbremen.nl/)
