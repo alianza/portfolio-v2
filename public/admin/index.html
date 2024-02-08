@@ -66,7 +66,17 @@
                   ),
             ),
             h('img', { className: 'thumbnail', src: bg.toString() }),
-            h('div', { className: 'markdown' }, this.props.widgetFor('body')),
+            h(
+              'div',
+              { className: 'markdown' },
+              this.props.widgetFor('body') ||
+                h(
+                  'div',
+                  {},
+                  h('h1', {}, `Article for ${entry.getIn(['data', 'title'])} not written yet...`),
+                  h('p', {}, 'Check back later!'),
+                ),
+            ),
           );
         },
       });
