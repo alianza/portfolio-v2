@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
+import { disableScroll, enableScroll } from '@/lib/utils';
 
 export default function Header({}) {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   useEffect(() => {
-    menuOpen ? document.body.classList.add('no-scroll') : document.body.classList.remove('no-scroll');
+    menuOpen ? disableScroll() : enableScroll();
   }, [menuOpen]);
 
   const toggleMenu = () => setMenuOpen((wasOpen) => !wasOpen);
@@ -20,7 +21,7 @@ export default function Header({}) {
       ].map(([href, text]) => (
         <li key={href}>
           <Link href={href} className="link py-4">
-            {text}
+            <span className="shadow-2xl">{text}</span>
           </Link>
         </li>
       ))}
