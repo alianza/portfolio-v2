@@ -64,8 +64,12 @@
       }
     }
 
+    p code {
+      @apply rounded bg-neutral-300 p-1 dark:bg-neutral-700;
+    }
+
     pre {
-      @apply m-0 grid w-full p-0 shadow-sm;
+      @apply m-0 grid w-full p-0 shadow;
 
       code {
         @apply block overflow-x-auto p-4;
