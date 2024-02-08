@@ -207,6 +207,7 @@ More advanced configuration example
 ```
 
 
+
 </div>
 </details>
 
@@ -218,7 +219,7 @@ More advanced configuration example
 
 [<button>![icon](/assets/react-transition-scroll_1.png) Documentation/Demo website</button>](https://alianza.github.io/react-transition-scroll/)
 
-Projects using the `React-transition-scroll` library
+Projects using the `React-transition-scroll` library:
 
 [<button>![icon](/assets/portfolio_lea.png) Personal portfolio website Lea Shamaa</button>](https://leashamaa.nl/)
 
