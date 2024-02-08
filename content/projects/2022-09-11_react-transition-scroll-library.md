@@ -216,11 +216,9 @@ More advanced configuration example
 ### Check out the project!
 
 [<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/react-transition-scroll)
-
 [<button>![icon](/assets/react-transition-scroll_1.png) Documentation/Demo website</button>](https://alianza.github.io/react-transition-scroll/)
 
 Projects using the `React-transition-scroll` library:
 
 [<button>![icon](/assets/portfolio_lea.png) Personal portfolio website Lea Shamaa</button>](https://leashamaa.nl/)
-
 [<button>![icon](/assets/jwvbremen.nl_5.png) Personal portfolio website v2</button>](https://jwvbremen.nl/)
