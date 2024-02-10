@@ -2,7 +2,7 @@ import { TransitionScroll } from 'react-transition-scroll';
 import { baseStyle, hiddenStyle } from '@/lib/utils';
 import ProjectPreview from '@/components/previews/ProjectPreview';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const initialNumVisibleProjects = 6;
 let documentHeight = Infinity;
