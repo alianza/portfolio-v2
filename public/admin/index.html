@@ -38,210 +38,209 @@
   <body>
     <!-- Include the script that builds the page and powers Netlify CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
     <script type="module">
-            CMS.registerPreviewStyle('../styles/content.module.css');
-            CMS.registerPreviewStyle('../styles/globals.css');
+      CMS.registerPreviewStyle('../styles/content.module.css');
+      CMS.registerPreviewStyle('../styles/globals.css');
 
-            const projectPreview = createClass({
-              render() {
-                const entry = this.props.entry;
-                const image = entry.getIn(['data', 'thumbnail']);
-                const bg = this.props.getAsset(image);
-                return h(
+      const projectPreview = createClass({
+        render() {
+          const entry = this.props.entry;
+          const image = entry.getIn(['data', 'thumbnail']);
+          const bg = this.props.getAsset(image);
+          return h(
+            'div',
+            { className: 'content' },
+            h('h1', { className: 'mainTitle' }, entry.getIn(['data', 'title']) || 'Title'),
+            h(
+              'div',
+              { className: 'metaData' },
+              entry.getIn(['data', 'date'])
+                ? h('time', {}, entry.getIn(['data', 'date']))
+                : h(
+                    'div',
+                    { className: 'startEndDateLabel' },
+                    h('time', {}, entry.getIn(['data', 'startDate'])),
+                    h('span', {}, '-'),
+                    h('time', {}, entry.getIn(['data', 'endDate']) || 'Present'),
+                  ),
+            ),
+            h('img', { className: 'thumbnail', src: bg.toString() }),
+            h(
+              'div',
+              { className: 'markdown' },
+              this.props.widgetFor('body') ||
+                h(
                   'div',
-                  { className: 'content' },
-                  h('h1', { className: 'mainTitle' }, entry.getIn(['data', 'title']) || 'Title'),
-                  h(
-                    'div',
-                    { className: 'metaData' },
-                    entry.getIn(['data', 'date'])
-                      ? h('time', {}, entry.getIn(['data', 'date']))
-                      : h(
-                          'div',
-                          { className: 'startEndDateLabel' },
-                          h('time', {}, entry.getIn(['data', 'startDate'])),
-                          h('span', {}, '-'),
-                          h('time', {}, entry.getIn(['data', 'endDate']) || 'Present'),
-                        ),
-                  ),
-                  h('img', { className: 'thumbnail', src: bg.toString() }),
-                  h(
-                    'div',
-                    { className: 'markdown' },
-                    this.props.widgetFor('body') ||
-                      h(
-                        'div',
-                        {},
-                        h('h1', {}, `Article for ${entry.getIn(['data', 'title'])} not written yet...`),
-                        h('p', {}, 'Check back later!'),
-                      ),
-                  ),
-                );
-              },
-            });
+                  {},
+                  h('h1', {}, `Article for ${entry.getIn(['data', 'title'])} not written yet...`),
+                  h('p', {}, 'Check back later!'),
+                ),
+            ),
+          );
+        },
+      });
 
-            CMS.registerPreviewTemplate('projects', projectPreview);
+      CMS.registerPreviewTemplate('projects', projectPreview);
 
-            const getYoutubeFragment = (videoId) =>
-              `<div class="video-container"><iframe class="youtube-embed" src="https://www.youtube.com/embed/${videoId}" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen> </iframe></div>`;
+      const getYoutubeFragment = (videoId) =>
+        `<div class="video-container"><iframe class="youtube-embed" src="https://www.youtube.com/embed/${videoId}" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen> </iframe></div>`;
 
-            CMS.registerEditorComponent({
-              id: 'youtube',
-              label: 'Youtube video',
-              fields: [{ name: 'id', label: 'Youtube Video ID' }],
-              pattern: /^<div class="video-container"><iframe class="youtube-embed".*embed\/(.*?)".*<\/iframe><\/div>$/ms,
-              fromBlock: (match) => ({ id: match[1] }),
-              toBlock: (obj) => getYoutubeFragment(obj.id),
-              toPreview: (obj) => getYoutubeFragment(obj.id),
-            });
+      CMS.registerEditorComponent({
+        id: 'youtube',
+        label: 'Youtube video',
+        fields: [{ name: 'id', label: 'Youtube Video ID' }],
+        pattern: /^<div class="video-container"><iframe class="youtube-embed".*embed\/(.*?)".*<\/iframe><\/div>$/ms,
+        fromBlock: (match) => ({ id: match[1] }),
+        toBlock: (obj) => getYoutubeFragment(obj.id),
+        toPreview: (obj) => getYoutubeFragment(obj.id),
+      });
 
-            CMS.registerEditorComponent({
-              id: 'horizontal-rule',
-              label: 'Horizontal Rule',
-              pattern: /^<hr \/>$/ms,
-              collapsed: true,
-              toBlock: () => `<hr />`,
-              toPreview: () => `<hr />`,
-            });
+      CMS.registerEditorComponent({
+        id: 'horizontal-rule',
+        label: 'Horizontal Rule',
+        pattern: /^<hr \/>$/ms,
+        collapsed: true,
+        toBlock: () => `<hr />`,
+        toPreview: () => `<hr />`,
+      });
 
-            const getCollapsableNoteFragment = (summary, details, open) =>
-              `<details ${open ? 'open' : ''}>
-      <summary>${summary || 'Title...'}</summary>
-      <div>
+      const getCollapsableNoteFragment = (summary, details, open) =>
+        `<details ${open ? 'open' : ''}>
+<summary>${summary || 'Title...'}</summary>
+<div>
 
-      ${details || 'Details...'}
+${details || 'Details...'}
 
-      </div>
-      </details>`;
+</div>
+</details>`;
 
-            CMS.registerEditorComponent({
-              id: 'collapsable-note',
-              label: 'Collapsable Note',
-              fields: [
-                { name: 'summary', label: 'Summary', widget: 'string' },
-                { name: 'details', label: 'Details', widget: 'markdown' },
-              ],
-              pattern: /^<details[\s\S]*>\n<summary>(.*?)<\/summary>\n<div>\n*(.*?)\n<\/div>\n<\/details>/ms,
-              fromBlock: (match) => ({ summary: match[1], details: match[2] }),
-              toBlock: ({ details, summary }) => getCollapsableNoteFragment(summary, details, false),
-              toPreview: ({ details, summary }) => getCollapsableNoteFragment(summary, details, true),
-            });
+      CMS.registerEditorComponent({
+        id: 'collapsable-note',
+        label: 'Collapsable Note',
+        fields: [
+          { name: 'summary', label: 'Summary', widget: 'string' },
+          { name: 'details', label: 'Details', widget: 'markdown' },
+        ],
+        pattern: /^<details[\s\S]*>\n<summary>(.*?)<\/summary>\n<div>\n*(.*?)\n<\/div>\n<\/details>/ms,
+        fromBlock: (match) => ({ summary: match[1], details: match[2] }),
+        toBlock: ({ details, summary }) => getCollapsableNoteFragment(summary, details, false),
+        toPreview: ({ details, summary }) => getCollapsableNoteFragment(summary, details, true),
+      });
 
-            const getImagesGridFragment = (images) => {
-              const imagesHtml = images?.map((image) => `<img src="${image || '/assets/placeholder.jpg'}" />`).join('\n');
-              const fragment = `<div class="images-grid">
-      ${imagesHtml}
-      </div>`;
-              return fragment;
-            };
+      const getImagesGridFragment = (images) => {
+        const imagesHtml = images?.map((image) => `<img src="${image || '/assets/placeholder.jpg'}" />`).join('\n');
+        const fragment = `<div class="images-grid">
+${imagesHtml}
+</div>`;
+        return fragment;
+      };
 
-            CMS.registerEditorComponent({
-              id: 'images-grid',
-              label: 'Images Grid',
-              fields: [
-                {
-                  name: 'images',
-                  label: 'Images',
-                  label_singular: 'image',
-                  widget: 'list',
-                  field: { name: 'image', label: 'Image', widget: 'image' },
-                },
-              ],
-              pattern: /^<div class="images-grid">\n(.*?)<\/div>/ms,
-              fromBlock(match) {
-                const images = match[1].split('\n').filter(Boolean);
-                return {
-                  images: images.map((image) => image.match(/<img[\s\S]*src="(.*?)"[\s\S]*\/>/)?.[1]).filter(Boolean),
-                };
-              },
-              toBlock: ({ images }) => getImagesGridFragment(images),
-              toPreview: ({ images }) => getImagesGridFragment(images),
-            });
+      CMS.registerEditorComponent({
+        id: 'images-grid',
+        label: 'Images Grid',
+        fields: [
+          {
+            name: 'images',
+            label: 'Images',
+            label_singular: 'image',
+            widget: 'list',
+            field: { name: 'image', label: 'Image', widget: 'image' },
+          },
+        ],
+        pattern: /^<div class="images-grid">\n(.*?)<\/div>/ms,
+        fromBlock(match) {
+          const images = match[1].split('\n').filter(Boolean);
+          return {
+            images: images.map((image) => image.match(/<img[\s\S]*src="(.*?)"[\s\S]*\/>/)?.[1]).filter(Boolean),
+          };
+        },
+        toBlock: ({ images }) => getImagesGridFragment(images),
+        toPreview: ({ images }) => getImagesGridFragment(images),
+      });
 
-            const getVideoFragment = (video, autoplay) =>
-              `<video${autoplay ? ' autoplay muted loop' : ''} playsinline controls src="${video}"></video>`;
+      const getVideoFragment = (video, autoplay) =>
+        `<video${autoplay ? ' autoplay muted loop' : ''} playsinline controls src="${video}"></video>`;
 
-            CMS.registerEditorComponent({
-              id: 'video',
-              label: 'Video',
-              fields: [
-                { name: 'video', label: 'Video', widget: 'file' },
-                { name: 'autoplay', label: 'Autoplay', widget: 'boolean', default: false },
-              ],
-              pattern: /^<video(.*?) playsinline controls src="(.*?)"><\/video>/ms,
-              fromBlock: (match) => ({ autoplay: !!match[1], video: match[2] }),
-              toBlock: ({ autoplay, video }) => getVideoFragment(video, autoplay),
-              toPreview: ({ autoplay, video }) => getVideoFragment(video, autoplay),
-            });
-            const getIconButtonFragment = (icon, text, link) =>
-              `[<button>![icon](${icon || '/assets/placeholder.jpg'}) ${text || 'Text...'}</button>](${link || '#'})`;
+      CMS.registerEditorComponent({
+        id: 'video',
+        label: 'Video',
+        fields: [
+          { name: 'video', label: 'Video', widget: 'file' },
+          { name: 'autoplay', label: 'Autoplay', widget: 'boolean', default: false },
+        ],
+        pattern: /^<video(.*?) playsinline controls src="(.*?)"><\/video>/ms,
+        fromBlock: (match) => ({ autoplay: !!match[1], video: match[2] }),
+        toBlock: ({ autoplay, video }) => getVideoFragment(video, autoplay),
+        toPreview: ({ autoplay, video }) => getVideoFragment(video, autoplay),
+      });
+      const getIconButtonFragment = (icon, text, link) =>
+        `[<button>![icon](${icon || '/assets/placeholder.jpg'}) ${text || 'Text...'}</button>](${link || '#'})`;
 
-            CMS.registerEditorComponent({
-              id: 'icon-button',
-              label: 'Button with icon',
-              fields: [
-                { name: 'icon', label: 'Icon', widget: 'image' },
-                { name: 'text', label: 'Text', widget: 'string' },
-                { name: 'link', label: 'Link', widget: 'string' },
-              ],
-              pattern: /^\[<button>!\[icon]\((.*?)\) (.*?)<\/button>]\((.*?)\)/,
-              fromBlock: (match) => ({ icon: match[1], text: match[2], link: match[3] }),
-              toBlock: ({ icon, link, text }) => getIconButtonFragment(icon, text, link),
-              toPreview: ({ icon, link, text }) => marked.parse(getIconButtonFragment(icon, text, link)),
-            });
+      CMS.registerEditorComponent({
+        id: 'icon-button',
+        label: 'Button with icon',
+        fields: [
+          { name: 'icon', label: 'Icon', widget: 'image' },
+          { name: 'text', label: 'Text', widget: 'string' },
+          { name: 'link', label: 'Link', widget: 'string' },
+        ],
+        pattern: /^\[<button>!\[icon]\((.*?)\) (.*?)<\/button>]\((.*?)\)/,
+        fromBlock: (match) => ({ icon: match[1], text: match[2], link: match[3] }),
+        toBlock: ({ icon, link, text }) => getIconButtonFragment(icon, text, link),
+        toPreview: ({ icon, link, text }) => marked.parse(getIconButtonFragment(icon, text, link)),
+      });
 
-            const getIconLiFragment = (item) => {
-              item ??= {};
-              if (item.item) {
-                item = item.item;
-              }
-              return `<li>${item.text || 'Text...'} <a href="${item.link || '#'}"><img src="${
-                item.icon || '/assets/placeholder.jpg'
-              }" alt="icon"></a></li>`;
-            };
+      const getIconLiFragment = (item) => {
+        item ??= {};
+        if (item.item) {
+          item = item.item;
+        }
+        return `<li>${item.text || 'Text...'} <a href="${item.link || '#'}"><img src="${
+          item.icon || '/assets/placeholder.jpg'
+        }" alt="icon"></a></li>`;
+      };
 
-            CMS.registerEditorComponent({
-              id: 'icon-list',
-              label: 'Icon list',
-              fields: [
-                {
-                  name: 'list',
-                  label: 'List',
-                  widget: 'list',
-                  summary: '{{fields.text}}',
-                  label_singular: 'item',
-                  fields: [
-                    { name: 'text', label: 'text', widget: 'string', default: 'Text...' },
-                    { name: 'icon', label: 'Icon', widget: 'image', default: '/assets/placeholder.jpg' },
-                    { name: 'link', label: 'Link', widget: 'string', default: '#' },
-                  ],
-                },
-              ],
-              pattern: /^<ul class="icon-list">\n(.*?)\n<\/ul>/ms,
-              fromBlock: (match) => {
-                const list = match[1].split('\n').filter(Boolean);
-                return {
-                  list: list.map((item) => {
-                    const match = item.match(/^<li>(.*?) <a href="(.*?)"><img src="(.*?)" alt="icon"><\/a><\/li>/);
-                    const [_, text, link, icon] = match || [];
-                    return { text, link, icon };
-                  }),
-                };
-              },
-              toBlock: ({ list }) => `<ul class="icon-list">\n${list ? list.map(getIconLiFragment).join('\n') : ''}\n</ul>`,
-              toPreview: ({ list }) => `<ul class="icon-list">\n${list ? list.map(getIconLiFragment).join('\n') : ''}\n</ul>`,
-            });
+      CMS.registerEditorComponent({
+        id: 'icon-list',
+        label: 'Icon list',
+        fields: [
+          {
+            name: 'list',
+            label: 'List',
+            widget: 'list',
+            summary: '{{fields.text}}',
+            label_singular: 'item',
+            fields: [
+              { name: 'text', label: 'text', widget: 'string', default: 'Text...' },
+              { name: 'icon', label: 'Icon', widget: 'image', default: '/assets/placeholder.jpg' },
+              { name: 'link', label: 'Link', widget: 'string', default: '#' },
+            ],
+          },
+        ],
+        pattern: /^<ul class="icon-list">\n(.*?)\n<\/ul>/ms,
+        fromBlock: (match) => {
+          const list = match[1].split('\n').filter(Boolean);
+          return {
+            list: list.map((item) => {
+              const match = item.match(/^<li>(.*?) <a href="(.*?)"><img src="(.*?)" alt="icon"><\/a><\/li>/);
+              const [_, text, link, icon] = match || [];
+              return { text, link, icon };
+            }),
+          };
+        },
+        toBlock: ({ list }) => `<ul class="icon-list">\n${list ? list.map(getIconLiFragment).join('\n') : ''}\n</ul>`,
+        toPreview: ({ list }) => `<ul class="icon-list">\n${list ? list.map(getIconLiFragment).join('\n') : ''}\n</ul>`,
+      });
 
-            CMS.registerEditorComponent({
-              id: 'years-since-date',
-              label: 'Years since date',tricks.
-              fields: [{ name: 'date', label: 'Date', widget: 'date', date_format: 'DD-MM-YYYY', format: 'DD-MM-YYYY' }],
-              pattern: /^<span data-date-string="(.*?)" data-years-since-date>(.*?)<\/span>/ms,
-              fromBlock: (match) => ({ date: match[1] }),
-              toBlock: ({ date }) => `<span data-date-string="${date}" data-years-since-date>"Date since ${date}"</span>`,
-              toPreview: ({ date }) => `<span data-date-string="${date}" data-years-since-date>"Date since ${date}"</span>`,
-            });
+      CMS.registerEditorComponent({
+        id: 'years-since-date',
+        label: 'Years since date',
+        fields: [{ name: 'date', label: 'Date', widget: 'date', date_format: 'DD-MM-YYYY', format: 'DD-MM-YYYY' }],
+        pattern: /^<span data-date-string="(.*?)" data-years-since-date>(.*?)<\/span>/ms,
+        fromBlock: (match) => ({ date: match[1] }),
+        toBlock: ({ date }) => `<span data-date-string="${date}" data-years-since-date>"Date since ${date}"</span>`,
+        toPreview: ({ date }) => `<span data-date-string="${date}" data-years-since-date>"Date since ${date}"</span>`,
+      });
     </script>
   </body>
 </html>
