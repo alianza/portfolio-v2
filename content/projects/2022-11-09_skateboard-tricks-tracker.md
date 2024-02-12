@@ -2,7 +2,7 @@
 title: Skateboard Tricks Tracker
 startDate: 2022-11-09
 endDate: 2023-05-09
-thumbnail: /assets/tricks.jwvbremen.png
+thumbnail: /assets/tricks.jwvbremen.nl.png
 type: Personal
 description: This projects demonstrates using authentication and an external
   database for a highly interactive progressive web application. It is a
@@ -24,6 +24,9 @@ The application features multiple pages, forms to add new tricks, Dynamic tables
 
 <div class="images-grid">
 <img src="/assets/react-generic-table.png" />
+<img src="/assets/tricks.jwvbremen.nl_2.png" />
+<img src="/assets/tricks.jwvbremen.nl_3.png" />
+<img src="/assets/tricks.jwvbremen.nl_4.png" />
 </div>
 
 - - -

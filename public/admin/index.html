@@ -123,12 +123,9 @@ ${details || 'Details...'}
           { name: 'details', label: 'Details', widget: 'markdown' },
         ],
         pattern: /^<details[\s\S]*>\n<summary>(.*?)<\/summary>\n<div>\n*(.*?)\n<\/div>\n<\/details>/ms,
-        fromBlock: (match) => ({
-          summary: match[1],
-          details: match[2],
-        }),
-        toBlock: (data) => getCollapsableNoteFragment(data.summary, data.details, false),
-        toPreview: (data) => marked.parse(getCollapsableNoteFragment(data.summary, data.details, true)),
+        fromBlock: (match) => ({ summary: match[1], details: match[2] }),
+        toBlock: ({ details, summary }) => getCollapsableNoteFragment(summary, details, false),
+        toPreview: ({ details, summary }) => getCollapsableNoteFragment(summary, details, true),
       });
 
       const getImagesGridFragment = (images) => {
@@ -158,8 +155,8 @@ ${imagesHtml}
             images: images.map((image) => image.match(/<img[\s\S]*src="(.*?)"[\s\S]*\/>/)?.[1]).filter(Boolean),
           };
         },
-        toBlock: (data) => getImagesGridFragment(data.images),
-        toPreview: (data) => getImagesGridFragment(data.images),
+        toBlock: ({ images }) => getImagesGridFragment(images),
+        toPreview: ({ images }) => getImagesGridFragment(images),
       });
 
       const getVideoFragment = (video, autoplay) =>
