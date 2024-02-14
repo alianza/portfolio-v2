@@ -124,7 +124,7 @@ ${details || 'Details...'}
         pattern: /^<details[\s\S]*>\n<summary>(.*?)<\/summary>\n<div>\n*(.*?)\n<\/div>\n<\/details>/ms,
         fromBlock: (match) => ({ summary: match[1], details: match[2] }),
         toBlock: ({ details, summary }) => getCollapsableNoteFragment(summary, details, false),
-        toPreview: ({ details, summary }) => getCollapsableNoteFragment(summary, details, true),
+        toPreview: ({ details, summary }) => marked.parse(getCollapsableNoteFragment(summary, details, true)),
       });
 
       const getImagesGridFragment = (images) => {
