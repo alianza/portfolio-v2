@@ -72,7 +72,7 @@ Most effort though has been put into the Developer Experience as the code has be
 The following are some code snippets of front and back-end code for the skateboarding tricks tracker web application that are powerful, demonstrate good coding practices and that I'm proud of. The snippets demonstrate clean, concise and powerful code. *(Code has been compacted in some cases).*
 
 **Dashboard.jsx page**\
-This code snippet demonstrates the Dashboard page code. The dashboard page features 4 tables where all the saved tricks for each type of trick (Flatground, Grind, Manual and Combo's) of the current logged in user are displayed. The page uses client-side fetching to retrieve the data to fill the tables with. The tables are from my react component library *[react-generic-table](https://www.npmjs.com/package/react-generic-table)*. Also the delete action in handled in the component since it requires firing an Api call to the back-end of the application.
+This code snippet demonstrates the Dashboard page code. The dashboard page features 4 tables where all the saved tricks for each type of trick (Flatground, Grind, Manual and Combo's) of the current logged in user are displayed. The page uses client-side fetching to retrieve the data to fill the tables with. The tables are from my react component library [`react-generic-table`](https://www.npmjs.com/package/react-generic-table). Also the delete action in handled in the component since it requires firing an Api call to the back-end of the application.
 
 ```jsx
 export default function Index() {
