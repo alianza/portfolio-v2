@@ -562,8 +562,6 @@ const FlatgroundTrickForm = ({ flatgroundTrick, newFlatgroundTrick = true }) => 
 </div>
 </details>
 
-
-
 - - -
 
 ### Check out the project!
