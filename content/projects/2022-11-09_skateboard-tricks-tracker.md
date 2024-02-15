@@ -255,12 +255,312 @@ export default async function handler(req, res) {
 ```
 
 **FlatgroundTrick.js Mongoose Model**\
-This file is the Mongoose Data Model for the Flatground Trick documents. Each flatground trick contains the properties to describe the trick itself (trick name, stance, direction and rotation), and some properties to identify the associated user (preffered stance and user id).
+This file is the Mongoose Data Model for the Flatground Trick documents. Each flatground trick contains the properties to describe the trick itself (trick name, stance, direction and rotation), and some properties to identify the associated user (preferred stance and user id). Also there are some custom validators to ensure some business logic on the server-side as well as to make sure no duplicate tricks are created a unique index is created on each field including userId so across users duplicate tricks can be created.
+
+```javascript
+const FlatgroundTrickSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Please provide a name for this trick'],
+      enum: FLATGROUND_TRICKS_ENUM,
+    },
+    preferred_stance: {
+      type: String,
+      required: [true, 'Please provide your preferred stance'],
+      enum: PREFFERED_STANCES_ENUM,
+    },
+    stance: {
+      type: String,
+      required: [true, "Please provide the tricks' stance"],
+      enum: STANCES_ENUM,
+    },
+    direction: {
+      type: String,
+      enum: ['none', 'frontside', 'backside'],
+      validate: {
+        validator: function (value) {
+          return this.rotation === 0 || value !== 'none';
+        },
+        message: 'Must specify a direction if there is a rotation',
+      },
+    },
+    rotation: {
+      type: Number,
+      enum: [0, 180, 360, 540, 720],
+      validate: {
+        validator: function (value) {
+          return this.direction === 'none' || value !== 0;
+        },
+        message: 'Must specify a rotation if there is a direction',
+      },
+    },
+    userId: {
+      type: Number,
+      required: [true, 'Authentication error. Please log in again.'],
+    },
+  },
+  { timestamps: true },
+);
+
+FlatgroundTrickSchema.index({ userId: 1, name: 1, stance: 1, direction: 1, rotation: 1 }, { unique: true });
+
+export default mongoose.models.FlatgroundTrick || mongoose.model('FlatgroundTrick', FlatgroundTrickSchema);
+```
+
+**ServerUtils.js File**\
+This file contains a collection of server-side oriented functions used throughout the back-end of the application. Like checking if a trick is used in an existing Combo, keeping it from being able to be deleted. Or requiring authentication to access a server-side resource and immediately supplying a query to make sure only user owned documents are retrieved. As wel as additional wrapper functions around the MongoDB querying methods aiding in retrieving certain document types and facilitating data serialization in order to allow documents to be used for statically pre-rendering web pages.
+
+```javascript
+export const checkForUsedCombos = async (_id, trickType) => {
+  const combos = await Combo.countDocuments({ 'trickArray.trick': _id });
+
+  if (combos) throw new Error(`This ${trickType} is used in ${combos} combo${sOrNoS(combos.length)}`);
+};
+
+export async function requireAuth(req, res) {
+  let session = await getServerSession(req, res, authOptions);
+  if (!session) return res.status(401).json({ success: false, error: 'Unauthorized' });
+  const authQuery = { userId: parseInt(session.user.id) };
+  return { authQuery, session };
+}
+
+export function notFoundHandler(res, { entity, _id, id = _id, label }) {
+  return res.status(400).json({ success: false, error: label || `${entity} with id ${id} not found.` });
+}
+
+/**
+ * Perform an operation on a model and serialize the result
+ * @param model {mongoose.Model}
+ * @param operation {function}
+ * @param query {object}
+ * @param options {object}
+ * @param populateFields {string[]}
+ * @returns {{}}
+ */
+export default async function findAndSerializeDoc(
+  model,
+  operation,
+  query = {},
+  { args = [], populateFields = [] } = {},
+) {
+  const result = await findDoc(model, operation, query, { args, populateFields });
+  return serialize(result);
+}
+
+/**
+ * Find a document and optionally populate fields
+ * @param model {mongoose.Model} - Mongoose model
+ * @param operation {function} - Mongoose operation to perform
+ * @param query {object} - Query to pass to the operation
+ * @param args {array} - Array of arguments to pass to the operation (e.g. sort, limit, etc.)
+ * @param populateFields {string[]} - Array of fields to populate
+ * @param fullDoc=false {boolean} - Return the full mongo document or a lean js object
+ * @returns {Promise<*>} - The result of the operation
+ */
+const findDoc = async (model, operation, query = {}, { args = [], populateFields = [], fullDoc = false }) => {
+  let find = operation.bind(model)(query, ...args);
+
+  if (!fullDoc) find = find.lean();
+
+  if (populateFields.length) populateFields.forEach((field) => (find = find.populate(field)));
+
+  return find.exec();
+};
+
+/**
+ * Get a trick type and populate the name
+ * @param model {mongoose.Model}
+ * @param operation {function}
+ * @param query {object}
+ * @param args {object}
+ * @returns {object}
+ */
+export async function getTricks(model, operation, query = {}, args = []) {
+  const tricks = await findDoc(model, operation, query, { ...args });
+
+  if (!tricks) return null;
+
+  const returnTrick = (trick) => ({ ...trick, trick: getFullName(trick, model.collection.collectionName) });
+  const data = Array.isArray(tricks) ? tricks.map(returnTrick) : returnTrick(tricks);
+
+  return serialize(data);
+}
+
+/**
+ * Get a combo and populate the name of every trick in the combo and the name of the combo itself
+ * @param model {mongoose.Model}
+ * @param operation {function}
+ * @param query {object}
+ * @param args {array}
+ * @returns {object} - The combo
+ */
+export async function getCombos(model, operation, query = {}, args = []) {
+  let combos = await findDoc(model, operation, query, { args, populateFields: ['trickArray.trick'] });
+
+  if (!combos) return null;
+
+  combos = Array.isArray(combos) ? combos.map(populateComboTrickName) : populateComboTrickName(combos); // Populate every trick name in the combo
+  combos = Array.isArray(combos) ? combos.map(populateComboName) : populateComboName(combos); // Populate every combo name
+  return serialize(combos);
+}
+
+/**
+ * Gets a profile or creates one if it doesn't exist and returns it
+ * @param query {object} - Query to find the profile
+ * @returns {Promise<Profile>} - The profile
+ */
+export const ensureProfile = async (query) => await Profile.findOneAndUpdate(query, {}, { new: true, upsert: true });
+
+/**
+ * Serialize an object by parsing it to JSON and then back to an object
+ * @param obj
+ * @returns {object}
+ */
+const serialize = (obj) => JSON.parse(JSON.stringify(obj));
+```
+
+**FlatgroundTrickForm.jsx File**\
+This file contains the form responsible for creating new flatground tricks and editing existing flatground tricks. The same form is used for both functionalities ensuring the same interface is always displayed ensuring user experience consistency and improving maintainability.
+
+```jsx
+const FlatgroundTrickForm = ({ flatgroundTrick, newFlatgroundTrick = true }) => {
+  const router = useRouter();
+  const closeAfterAdd = useCloseOnUrlParam('closeAfterAdd');
+
+  const [fullTrickName, setFullTrickName] = useState(null);
+  const [trickNameRef] = useAutoAnimate();
+  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    name: flatgroundTrick.name,
+    preferred_stance: flatgroundTrick.preferred_stance,
+    stance: flatgroundTrick.stance,
+    direction: flatgroundTrick.direction,
+    rotation: flatgroundTrick.rotation,
+  });
+
+  const { name, preferred_stance, stance, direction, rotation } = form;
+
+  useAsyncEffect(async () => {
+    if (!newFlatgroundTrick) return;
+    const { data } = await apiCall('profiles/mine/preferred_stance'); // Set the preferred stance to the user's preferred stance
+    setForm((oldForm) => ({ ...oldForm, preferred_stance: data.preferred_stance }));
+  }, []);
+
+  useEffect(() => {
+    setFullTrickName(getFullTrickName(form));
+  }, [form]);
+
+  const patchData = async (form) => {
+    try {
+      const { _id } = router.query;
+      await apiCall('flatgroundtricks', { _id, method: 'PATCH', data: form });
+      await router.back();
+    } catch (error) {
+      toast.error(`Failed to update flatground trick: ${error.message}`);
+    }
+  };
+
+  const postData = async (form) => {
+    try {
+      await apiCall('flatgroundtricks', { method: 'POST', data: form });
+      await router.back();
+      closeAfterAdd();
+    } catch (error) {
+      toast.error(`Failed to add flatground trick: ${error.message}`);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { target } = e;
+    let { value, name } = target;
+
+    if (target.type === 'checkbox') {
+      value = target.checked;
+    }
+
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    newFlatgroundTrick ? await postData(form) : await patchData(form);
+    setLoading(false);
+  };
+
+  return (
+    <TransitionScroll hiddenStyle={hiddenStyle} baseStyle={baseStyle}>
+      <form onSubmit={handleSubmit} className={`${styles.form} max-w-xl`}>
+        <h1 className="text-3xl">{newFlatgroundTrick ? 'New Flatground Trick' : 'Edit Flatground Trick'}</h1>
+        <label>
+          Preferred stance
+          <select name={VN({ preferred_stance })} value={preferred_stance} onChange={handleChange} required>
+            <option value="regular">Regular</option>
+            <option value="goofy">Goofy</option>
+          </select>
+        </label>
+        <div className="flex justify-between gap-1">
+          <label>
+            Stance
+            <select name={VN({ stance })} value={stance} onChange={handleChange} required>
+              <option value="regular">-</option>
+              <option value="fakie">Fakie</option>
+              <option value="switch">Switch</option>
+              <option value="nollie">Nollie</option>
+            </select>
+          </label>
+
+          <label>
+            Direction
+            <select name={VN({ direction })} value={direction} onChange={handleChange}>
+              <option value="none">-</option>
+              <option value="frontside">Frontside</option>
+              <option value="backside">Backside</option>
+            </select>
+          </label>
+
+          <label>
+            Rotation
+            <select name={VN({ rotation })} value={rotation} onChange={handleChange} required>
+              <option value={0}>-</option>
+              <option value={180}>180</option>
+              <option value={360}>360</option>
+              <option value={540}>540</option>
+              <option value={720}>720</option>
+            </select>
+          </label>
+
+          <label>
+            Name
+            <select name={VN({ name })} value={name} onChange={handleChange} required>
+              {FLATGROUND_TRICKS_ENUM.map((trick) => (
+                <option key={trick} value={trick}>
+                  {capitalize(trick)}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <p className="my-4">
+          Full trick name:{' '}
+          <b ref={trickNameRef}>
+            {fullTrickName?.split('').map((letter, index) => (
+              <span key={index} className="inline-block whitespace-pre">
+                {letter}
+              </span>
+            ))}
+          </b>
+        </p>
+        <LoaderButton isLoading={loading} />
+      </form>
+    </TransitionScroll>
+  );
+};
+```
 
 </div>
 </details>
-
-- - -
 
 - - -
 
@@ -268,7 +568,7 @@ This file is the Mongoose Data Model for the Flatground Trick documents. Each fl
 
 [<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/tricks)
 
-[<button>![icon](/assets/tricks.jwvbremen.nl_1.png) Check out the site!</button>](https://leashamaa.nl/)
+[<button>![icon](/assets/tricks.jwvbremen.nl_1.png) Check out the site!</button>](https://tricks.jwvbremen.nl/)
 
 [<button>![icon](/assets/lighthouse.png) Lighthouse Audit</button>](/assets/lighthouse_tricks.html)
 
