@@ -65,6 +65,12 @@ Most effort though has been put into the Developer Experience as the code has be
 
 - - -
 
+## Lighthouse Audit Score ![icon](/assets/lighthouse.png)
+
+![Lighthouse Audit Score](/assets/lighthouse_tricks.png "Lighthouse Audit Score")
+
+- - -
+
 <details >
 <summary>Code Snippets</summary>
 <div>
@@ -184,6 +190,65 @@ export default function Index() {
       </TransitionScroll>
     </div>
   );
+}
+```
+
+**\[_id].js flatgroundTricks Api endpoint**\
+This file resides in the Api folder of the application causing it to be treated as a back-end endpoint by the Next.js framework. This endpoint is responsible for handling functionality surrounding individual flatground tricks where the id is a query parameter in the url. This endpoint handles the retrieval of an individual flatground trick, updating the data of an existing flatground trick and deleting an existing flatground trick. There are checks in place for verifying the supplied ObjectId in the url, ensuring authentication and handlers for if a flatground trick cannot be found which communicates descriptive errors to the front-end.
+
+```javascript
+export default async function handler(req, res) {
+  const {
+    query: { _id },
+    method,
+  } = req;
+
+  if (!isValidObjectId(_id)) return notFoundHandler(res, { entity: 'Flatground trick', _id });
+
+  await dbConnect();
+  const { authQuery } = await requireAuth(req, res);
+
+  switch (method) {
+    case 'GET':
+      try {
+        const flatgroundTrick = await FlatGroundTrick.findOne({ _id, ...authQuery }).lean();
+        if (!flatgroundTrick) return notFoundHandler(res, { entity: 'Flatground trick', _id });
+        const data = { ...flatgroundTrick, trick: getFullTrickName(flatgroundTrick) };
+        res.status(200).json({ success: true, data });
+      } catch (error) {
+        console.error(error);
+        res.status(400).json({ success: false, error: error.message });
+      }
+      break;
+
+    case 'PATCH':
+      try {
+        const flatgroundTrick = await FlatGroundTrick.findOneAndUpdate({ _id, ...authQuery }, req.body, { new: true });
+        if (!flatgroundTrick) return notFoundHandler(res, { entity: 'Flatground trick', _id });
+        const data = { ...flatgroundTrick.toObject(), trick: getFullTrickName(flatgroundTrick) };
+        res.status(200).json({ success: true, data });
+      } catch (error) {
+        console.error(error);
+        res.status(400).json({ success: false, error: error.message });
+      }
+      break;
+
+    case 'DELETE':
+      try {
+        await checkForUsedCombos(_id, 'Flatground Trick');
+        const deletedTrick = await FlatGroundTrick.deleteOne({ _id, ...authQuery });
+        if (!deletedTrick) return notFoundHandler(res, { entity: 'Flatground trick', _id });
+        res.status(200).json({ success: true, data: {} });
+      } catch (error) {
+        console.error(error);
+        res.status(400).json({ success: false, error: error.message });
+      }
+      break;
+
+    default:
+      res.status(400).json({ success: false, error: `Unhandled request method: ${method}` });
+      break;
+  }
 }
 ```
 
