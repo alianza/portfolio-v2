@@ -34,7 +34,7 @@ The application features multiple pages, forms to add new tricks, Dynamic tables
 <li>Progressive Web App <a href="#"><img src="/assets/pwa.png" alt="icon"></a></li>
 <li>MongoDB <a href="https://www.mongodb.com/"><img src="/assets/mongodb.png" alt="icon"></a></li>
 <li>Mongoose <a href="https://mongoosejs.com/"><img src="/assets/mongoose.png" alt="icon"></a></li>
-<li>AuthJs <a href="https://authjs.dev/"><img src="/assets/authjs.webp" alt="icon"></a></li>
+<li>AuthJs <a href="https://authjs.dev/"><img src="/assets/authJs.webp" alt="icon"></a></li>
 </ul>
 
 - - -
