@@ -256,3 +256,15 @@ export default async function handler(req, res) {
 </details>
 
 - - -
+
+- - -
+
+### Check out the project!
+
+[<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/tricks)
+
+[<button>![icon](/assets/tricks.jwvbremen.nl_1.png) Check out the site!</button>](https://leashamaa.nl/)
+
+[<button>![icon](/assets/lighthouse.png) Lighthouse Audit</button>](/assets/lighthouse_tricks.html)
+
+- - -
