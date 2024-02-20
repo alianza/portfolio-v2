@@ -10,7 +10,7 @@ description: This projects demonstrates using authentication and an external
   and mutliple OAuth services to sign in with and persistent data in a NoSql
   database.
 ---
-I wanted to take my personal projects to the next level as I'm starting to discover what general tech stack seems to suit me. Also using skills acquired during my project at Road.io (Formerly E-Flux) and implementing them to create a highly interactive progressive web application.
+I wanted to take my personal projects to the next level as I'm starting to discover what general tech stack seems to suit me and that I like to work with. I also want to use skills that I've  acquired during my project at Road.io (Formerly E-Flux) and implement them to create a highly interactive progressive web application.
 
 This project was a personal challenge and learning experience to build a full-stack web application in a domain I'm familiar with. The purpose of the application is for skateboarders to be able to track what tricks they've learned and log them in their personal dashboard. The goal was to gain experience building a full stack application featuring a rich and dynamic front-end with user Authentication and persisted storage with a Database powered by a back-end featuring an Api with all necessary endpoints to power the entire application. 
 
@@ -61,6 +61,7 @@ Most effort though has been put into the Developer Experience as the code has be
 * [nextjs-progressbar](https://www.npmjs.com/package/nextjs-progressbar)
 * [dotenv](https://www.npmjs.com/package/dotenv)
 * [react-transition-scroll](https://www.npmjs.com/package/react-transition-scroll)
+* [react-generic-table](https://www.npmjs.com/package/react-generic-table)
 * [react-toastify](https://www.npmjs.com/package/react-toastify)
 * [heroicons](https://github.com/tailwindlabs/heroicons)
 * [next-pwa](https://www.npmjs.com/package/next-pwa)
