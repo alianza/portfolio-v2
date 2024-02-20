@@ -2,7 +2,7 @@
 title: Portfolio v2
 startDate: 2023-05-09
 endDate: 2023-07-09
-thumbnail: /assets/jwvbremen.nl_5.png
+thumbnail: /assets/portfolio-v2.png
 type: Personal
 description: This project is a rework of my original personal portfolio website
   reimagined with a more modern and robust stack featuring a CMS and static site
@@ -33,10 +33,12 @@ I decided that the website should have very good performance, editing contant sh
 ## Screens
 
 <div class="images-grid">
-<img src="/assets/react-generic-table.png" />
-<img src="/assets/tricks.jwvbremen.nl_2.png" />
-<img src="/assets/tricks.jwvbremen.nl_3.png" />
-<img src="/assets/tricks.jwvbremen.nl_4.png" />
+<img src="/assets/portfolio-v2_1.png" />
+<img src="/assets/portfolio-v2_2.png" />
+<img src="/assets/portfolio-v2_3.png" />
+<img src="/assets/portfolio-v2_4.png" />
+<img src="/assets/portfolio-v2_5.png" />
+<img src="/assets/portfolio-v2_6.png" />
 </div>
 
 - - -
@@ -61,7 +63,7 @@ Most effort though has been put into the Developer Experience as the code has be
 
 ## Lighthouse Audit Score ![icon](/assets/lighthouse.png)
 
-![Lighthouse Audit Score](/assets/lighthouse_tricks.png "Lighthouse Audit Score")
+![Lighthouse Audit Score](/assets/lighthouse_portfolio-v2.png "Lighthouse Audit Score")
 
 - - -
 
@@ -113,12 +115,8 @@ This file contains the form responsible for creating new flatground tricks and e
 
 ### Check out the project!
 
-[<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/tricks)
-
-[<button>![icon](/assets/tricks.jwvbremen.nl_1.png) Check out the site!</button>](https://tricks.jwvbremen.nl/)
-
-[<button>![icon](/assets/lighthouse.png) Lighthouse Audit</button>](/assets/lighthouse_tricks.html)
-
-
+[<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/portfolio-v2)
+[<button>![icon](/assets/portfolio-v2.png) Check out the site!</button>](https://jwvbremen.nl/)
+[<button>![icon](/assets/lighthouse.png) Lighthouse Audit</button>](/assets/lighthouse_portfolio-v2.html)
 
 - - -

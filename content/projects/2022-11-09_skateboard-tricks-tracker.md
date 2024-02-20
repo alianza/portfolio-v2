@@ -48,7 +48,7 @@ The application features multiple pages, forms to add new tricks, Dynamic tables
 <img src="/assets/tricks.jwvbremen.nl_4.png" />
 </div>
 
-<video autoplay muted loop playsinline controls src="/assets/desktop-2024.02.20-19.05.17.04.mp4"></video>
+<video autoplay muted loop playsinline controls src="/assets/tricks.jwvbremen.nl.mp4"></video>
 
 - - -
 
