@@ -48,6 +48,8 @@ The application features multiple pages, forms to add new tricks, Dynamic tables
 <img src="/assets/tricks.jwvbremen.nl_4.png" />
 </div>
 
+<video autoplay muted loop playsinline controls src="/assets/desktop-2024.02.20-19.05.17.04.mp4"></video>
+
 - - -
 
 To enhance the user experience the application also works as a native app and is installable on the users device (Progressive Web Application). The app also has a simple and easy to use user interface fully styled with TailwindCSS. No UI libraries were used. Though I used my own [`react-transition-scroll`](https://www.jwvbremen.nl/projects/2022-09-11_react-transition-scroll-library) library for adding pleasant animations when elements are scrolled into the viewport.
@@ -568,7 +570,9 @@ const FlatgroundTrickForm = ({ flatgroundTrick, newFlatgroundTrick = true }) => 
 ### Check out the project!
 
 [<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/tricks)
+
 [<button>![icon](/assets/tricks.jwvbremen.nl_1.png) Check out the site!</button>](https://tricks.jwvbremen.nl/)
+
 [<button>![icon](/assets/lighthouse.png) Lighthouse Audit</button>](/assets/lighthouse_tricks.html)
 
 - - -
