@@ -42,7 +42,7 @@ const Projects = ({ projects }) => {
           onClick={() =>
             allProjectsVisible
               ? router.push('/projects')
-              : () => setNumVisibleProjects((prevNumVisibleProjects) => prevNumVisibleProjects + 6)
+              : setNumVisibleProjects((prevNumVisibleProjects) => prevNumVisibleProjects + 6)
           }
         >
           <span className="m-2">{allProjectsVisible ? 'See all...' : 'See more...'}</span>
