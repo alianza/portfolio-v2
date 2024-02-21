@@ -9,9 +9,9 @@ description: This project is a rework of my original personal portfolio website
   generation resulting much better performance and a way smoother user and
   administrative experience!
 ---
-This project was a rework of my original personal portfolio website which was built using vanilla JavaScript (No Frameworks) which served as introduction to me as a professional software engineer and as a person. The original portfolio website was not so easy to maintain and adding new projects to is was a chore. Taking inspiration from other projects I've completed since and the tech-stacks I've used there I decided to use a similar stack to realize version 2 of my personal portfolio website.
+This project was a rework of my original personal portfolio website which was built using vanilla JavaScript (No Frameworks) which served as introduction to me as a professional software engineer and as a person. The original portfolio website was not so easy to maintain and adding new projects to it was a chore. Taking inspiration from other projects I've completed since and the tech-stacks I've used there I decided to use a similar stack to realize version 2 of my personal portfolio website.
 
-I decided that the website should have very good performance, editing contant should be easy and accessible and it should support many convenient features like custom widgets in the content editor, preview mode in the CMS, high compatibility and support for modern features such as dark mode, static site generation and smooth animations.
+I decided that the website should have very good performance, editing contant should be easy and accessible, and it should support many convenience features like custom widgets in the content editor, preview mode in the CMS, high compatibility and support for modern features such as dark mode, static site generation and smooth animations.
 
 - - -
 
@@ -43,21 +43,24 @@ I decided that the website should have very good performance, editing contant sh
 
 - - -
 
-To enhance the user experience the application also works as a native app and is installable on the users device (Progressive Web Application). The app also has a simple and easy to use user interface fully styled with TailwindCSS. No UI libraries were used. Though I used my own [`react-transition-scroll`](https://www.jwvbremen.nl/projects/2022-09-11_react-transition-scroll-library) library for adding pleasant animations when elements are scrolled into the viewport.
+## Summary
 
-Most effort though has been put into the Developer Experience as the code has been written as modularly and readable as possible. I have not opted to use TypeScript since the benefits don't outweigh the disatvantages to me as using JavaScript with JSDoc annotations got me 90% there. I personally really enjoy working in this (type of) codebase.
+The goal of this project was to rework my personal portfolio website to be more modern and robust. I wanted to use a modern tech-stack to facilitate a better user experience and a better administrative experience. I decided to use Next.js for the front-end and TailwindCSS for the styling. I also decided to use a CMS to facilitate easy content editing and to support modern features like dark mode and static site generation. I chose Decap CMS for this purpose. I also wanted to make sure the website was hosted on a platform that supported modern features and had good performance. I chose Netlify for this purpose. The website is now much easier to maintain and adding new projects to it is a breeze.
 
 - - -
 
 ## Additional Libraries
 
 * [nextjs-progressbar](https://www.npmjs.com/package/nextjs-progressbar)
+* [gray-matter](https://www.npmjs.com/package/gray-matter)
+* [js-yaml](https://www.npmjs.com/package/js-yaml)
 * [dotenv](https://www.npmjs.com/package/dotenv)
 * [react-transition-scroll](https://www.npmjs.com/package/react-transition-scroll)
-* [react-generic-table](https://www.npmjs.com/package/react-generic-table)
-* [react-toastify](https://www.npmjs.com/package/react-toastify)
-* [heroicons](https://github.com/tailwindlabs/heroicons)
-* [next-pwa](https://www.npmjs.com/package/next-pwa)
+* [marked](https://www.npmjs.com/package/marked)
+* [marked-highlight](https://www.npmjs.com/package/marked-highlight)
+* [prettier](https://www.npmjs.com/package/prettier)
+* [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss)
+* [prop-types](https://www.npmjs.com/package/prop-types)
 
 - - -
 
@@ -73,38 +76,229 @@ Most effort though has been put into the Developer Experience as the code has be
 
 The following are some code snippets of front and back-end code for the skateboarding tricks tracker web application that are powerful, demonstrate good coding practices and that I'm proud of. The snippets demonstrate clean, concise and powerful code. *(Code has been compacted in some cases).*
 
-**Dashboard.jsx page**\
-This code snippet demonstrates the Dashboard page code. The dashboard page features 4 tables where all the saved tricks for each type of trick (Flatground, Grind, Manual and Combo's) of the current logged in user are displayed. The page uses client-side fetching to retrieve the data to fill the tables with. The tables are from my react component library [`react-generic-table`](https://www.npmjs.com/package/react-generic-table). Also the delete action in handled in the component since it requires firing an Api call to the back-end of the application.
+**Index.jsx page**\
+The code snippet below demonstrates the home index page of the website. It uses the `getStaticProps` function to fetch the projects and intros from the CMS through the filesystem services and then passes them as props to the `Home` component. The \`Home\` component then renders the appropriate components to display the application.
 
 ```jsx
+export async function getStaticProps() {
+  const projects = await getProjects({ content: false });
+  const intros = await getIntros();
 
+  return {
+    props: {
+      projects,
+      intros,
+    },
+  };
+}
+
+function Home({ projects, intros }) {
+  useNetlifyIdentityRedirect();
+
+  return (
+    <>
+      <CoverVideo />
+
+      <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
+        <section className="w-full">
+          <AboutMe intros={intros} />
+        </section>
+
+        <section className="w-full">
+          <Projects projects={projects} />
+        </section>
+
+        <section className="w-full">
+          <Contact />
+        </section>
+      </div>
+    </>
+  );
+}
+
+Home.getLayout = (page) => <Layout>{page}</Layout>;
 ```
 
-**\[_id].js flatgroundTricks Api endpoint**\
-This file resides in the Api folder of the application causing it to be treated as a back-end endpoint by the Next.js framework. This endpoint is responsible for handling functionality surrounding individual flatground tricks where the id is a query parameter in the url. This endpoint handles the retrieval of an individual flatground trick, updating the data of an existing flatground trick and deleting an existing flatground trick. There are checks in place for verifying the supplied ObjectId in the url, ensuring authentication and handlers for if a flatground trick cannot be found which communicates descriptive errors to the front-end.
+**ProjectsService.jsx File**
+The code snippet below demonstrates the back-end code for the projects service. It uses the `fs` and `gray-matter` libraries to read the project markdown files from the file system and parse them into JavaScript objects. 
 
-```javascript
-
-```
-
-**FlatgroundTrick.js Mongoose Model**\
-This file is the Mongoose Data Model for the Flatground Trick documents. Each flatground trick contains the properties to describe the trick itself (trick name, stance, direction and rotation), and some properties to identify the associated user (preferred stance and user id). Also there are some custom validators to ensure some business logic on the server-side as well as to make sure no duplicate tricks are created a unique index is created on each field including userId so across users duplicate tricks can be created.
-
-```javascript
-
-```
-
-**ServerUtils.js File**\
-This file contains a collection of server-side oriented functions used throughout the back-end of the application. Like checking if a trick is used in an existing Combo, keeping it from being able to be deleted. Or requiring authentication to access a server-side resource and immediately supplying a query to make sure only user owned documents are retrieved. As wel as additional wrapper functions around the MongoDB querying methods aiding in retrieving certain document types and facilitating data serialization in order to allow documents to be used for statically pre-rendering web pages.
-
-```javascript
-
-```
-
-**FlatgroundTrickForm.jsx File**\
-This file contains the form responsible for creating new flatground tricks and editing existing flatground tricks. The same form is used for both functionalities ensuring the same interface is always displayed ensuring user experience consistency and improving maintainability.
+The projects service contains functions for fetching all projects, fetching a single project by id and fetching all project ids. The `getProjects` function fetches all projects and sorts them by start date. The `getProjectIds` function fetches all project ids and the `getProject` function fetches a single project by id.
 
 ```jsx
+const projectsUri = path.join(process.cwd(), 'content/projects');
+
+async function parseProject(fileName, options = { content: true }) {
+  const fileContents = await readFile(fileName, projectsUri);
+
+  const project = matter(fileContents, {
+    engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) },
+  });
+
+  if (options.content) {
+    const marked = ensureMarkedInstance();
+    project.content = marked.parse(project.content) || '';
+  } else {
+    delete project.content;
+  }
+
+  project.id = fileName.replace('.md', '');
+
+  return project;
+}
+
+export async function getProjects(options = { content: true, limit: 0 }) {
+  const fileNames = (await fs.readdir(projectsUri).catch(() => [])).reverse();
+
+  const projects = await Promise.all(fileNames.map(async (fileName) => await parseProject(fileName, options)));
+
+  projects.sort((a, b) => {
+    if (a.data.startDate > b.data.startDate) return -1;
+    if (a.data.startDate < b.data.startDate) return 1;
+    return 0;
+  });
+
+  if (options.limit > 0) {
+    return projects.slice(0, options.limit);
+  }
+
+  return projects;
+}
+
+export async function getProjectIds() {
+  const fileNames = await fs.readdir(projectsUri).catch(() => []);
+  return fileNames.map((fileName) => fileName.replace('.md', ''));
+}
+
+export async function getProject(projectId, options = { content: true }) {
+  const fileName = `${projectId}.md`;
+  const project = await parseProject(fileName, options);
+
+  return {
+    ...project,
+    ...project.data,
+    content: project.content,
+  };
+}
+```
+
+**MdContent.jsx Component**
+The code snippet below demonstrates the `MdContent` component which is used to render the markdown content of the website. It uses a number of custom hooks to listen for dark mode changes, animate the tags, zoom images, handle external links, highlight code, update the last updated GitHub repository date and resolves the years since date tags. It then renders the markdown content using the `dangerouslySetInnerHTML` prop.
+
+```jsx
+const MdContent = ({ content: { title, date, startDate, endDate, thumbnail, content }, noDate }) => {
+  const darkMode = useDarkMode();
+  useDetailTagsAnimation(contentId);
+  useImageZoom(contentId);
+  useExternalLinks(contentId);
+  useCodeHighlightStyles(darkMode);
+  useGithubLastUpdated(contentId);
+  useYearsSinceDateTags();
+
+  if (!content) {
+    content = `<h1>Article for ${title} not written yet...</h1>
+    <p>Check back later!</p>`;
+  }
+
+  return (
+    <article className={contentStyles.content}>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h1 className={contentStyles.mainTitle}>{title}</h1>
+      </div>
+      <div className={contentStyles.metaData}>
+        {!noDate && date && <time className="m-0">{date}</time>}
+        {startDate && <StartEndDateLabel startDate={startDate} endDate={endDate} />}
+      </div>
+      {thumbnail && (
+        <Image
+          width={700}
+          height={700}
+          className={contentStyles.thumbnail}
+          alt={`${title} thumbnail`}
+          src={thumbnail}
+          placeholder="blur"
+          blurDataURL={`/_next/image?url=${thumbnail}&w=16&q=1`}
+        />
+      )}
+      <div id={contentId} className={contentStyles.markdown} dangerouslySetInnerHTML={{ __html: content }} />
+    </article>
+  );
+};
+```
+
+**Decap CMS Configuration File**
+The code snippet below demonstrates the configuration file for the Decap CMS. It configures a number of properties to facilitate correct CMS configuration such as the backend, the site url, the display url, the media folder, the public folder, the publishing mode, the logo url and the collections.
+
+The collections property is an array of objects that represent the collections in the CMS. Each collection object has a name, a label, a delete property, an editor object and a files array. The files array contains objects that represent the files in the collection. Each file object has a name, a label, a file, a description and a fields array. The fields array contains objects that represent the fields in the file. Each field object has a label, a name, a widget and other properties. Together they represent the fields in the file and so the properties of the objects in the collection.
+
+The `local_backend` property is set to the value of the `CMS_LOCAL_BACKEND` environment variable or `false` if the environment variable is not set. This property is used to determine if the CMS should use a local backend or not during development.
+
+```yaml
+
+backend:
+  name: git-gateway
+  branch: main
+  repo: alianza/portfolio-v2
+
+local_backend: ${CMS_LOCAL_BACKEND:-false}
+site_url: https://jwvbremen.nl/
+display_url: https://jwvbremen.nl/
+media_folder: public/assets
+public_folder: /assets
+publish_mode: editorial_workflow
+logo_url: https://jwvbremen.nl/admin/cms_img.jpg
+
+collections:
+  - name: "config"
+    label: "Config"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "config"
+        label: "Site Config"
+        file: "content/config.json"
+        description: "General site settings"
+        fields:
+          - { label: "Site heading", name: "siteHeading", widget: "string" }
+          - { label: "Site title", name: "siteTitle", widget: "string", hint: "The title of the site (Also tab bar)" }
+          - { label: "Site description", name: "siteDescription", widget: "text", hint: "Used for meta description" }
+          - label: "Online accounts"
+            name: "accounts"
+            label_singular: "Online account"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Social media name", name: "name", widget: "string" }
+              - { label: "Url", name: "url", widget: "string" }
+              - { label: "Icon", name: "icon", widget: "image", required: false }
+          - label: 'Introductions'
+            name: 'introductions'
+            label_singular: 'Introduction'
+            widget: 'list'
+            allow_add: false
+            min: 3
+            max: 3
+            summary: '{{fields.title}}'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'Media', name: 'media', widget: 'image' }
+              - { label: 'Body', name: 'body', widget: 'markdown', editor_components: ['years-since-date'] }
+
+  - label: 'Projects'
+    name: 'projects'
+    label_singular: 'Project'
+    folder: 'content/projects'
+    create: true
+    slug: '{{startDate}}_{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Start Date', name: 'startDate', widget: 'datetime', format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: 'End Date', name: 'endDate', widget: 'datetime', format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, default: "", hint: "Leave empty if still working (present)" }
+      - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
+      - { label: 'Type', name: 'type', widget: 'select', options: ['Personal', 'Professional', "Academic"], default: 'Professional', required: false }
+      - { label: 'Description', name: 'description', widget: 'text', required: false }
+      - { label: 'Body', name: 'body', widget: 'markdown', required: false }
+
 
 ```
 

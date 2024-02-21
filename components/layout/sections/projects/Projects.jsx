@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const initialNumVisibleProjects = 6;
-let documentHeight = Infinity;
+// let documentHeight = Infinity;
 
 const Projects = ({ projects }) => {
   const [numVisibleProjects, setNumVisibleProjects] = useState(initialNumVisibleProjects);
@@ -20,6 +20,7 @@ const Projects = ({ projects }) => {
   //   const difference = document.documentElement.scrollHeight - documentHeight;
   //   setTimeout(() => window.scrollBy({ top: difference, behavior: 'smooth' }), 200);
   // }, [numVisibleProjects]);
+  // documentHeight = document.documentElement.scrollHeight; When pressing view more projects button
 
   return (
     <>
@@ -41,10 +42,7 @@ const Projects = ({ projects }) => {
           onClick={() =>
             allProjectsVisible
               ? router.push('/projects')
-              : (() => {
-                  documentHeight = document.documentElement.scrollHeight;
-                  setNumVisibleProjects((prevNumVisibleProjects) => prevNumVisibleProjects + 6);
-                })()
+              : () => setNumVisibleProjects((prevNumVisibleProjects) => prevNumVisibleProjects + 6)
           }
         >
           <span className="m-2">{allProjectsVisible ? 'See all...' : 'See more...'}</span>
