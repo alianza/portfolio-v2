@@ -91,8 +91,6 @@ The flatground trick model is used to describe the structure of the documents th
 | direction        | String | <span style="display: flex; justify-content: center">✅</span> | The direction of the trick                     |
 | rotation         | Number | <span style="display: flex; justify-content: center">✅</span> | The rotation of the trick                      |
 | userId           | Number | <span style="display: flex; justify-content: center">✅</span> | The user id of the user that created the trick |
-| createdAt        | Date   | <span style="display: flex; justify-content: center">✅</span> | The date the trick was created                 |
-| updatedAt        | Date   | <span style="display: flex; justify-content: center">✅</span> | The date the trick was last updated            |
 
 ### Combo
 The combo model is used to describe the structure of the documents that represent combos in the MongoDB database. A combo is a sequence of tricks of any trick type that are performed in a row. The model contains the properties to describe the combo itself (name and trickArray), and some properties to identify the associated user (user id).
@@ -103,8 +101,6 @@ The combo model is used to describe the structure of the documents that represen
 | trickArray | Array  | <span style="display: flex; justify-content: center">✅</span> | The array of tricks that make up the combo                                                                                                                                                                                                                                                                                                                           |
 |            |        |                                                               | <table style="margin: 0"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td>trick</td><td>ObjectId</td><td>✅</td><td>ObjectId of the trick that makes up the combo</td></tr><tr><td>trickRef</td><td>String</td><td>✅</td><td>The type of trick that makes up the combo (ModelName)</td></tr></tbody></table> |
 | userId     | Number | <span style="display: flex; justify-content: center">✅</span> | The user id of the user that created the combo                                                                                                                                                                                                                                                                                                                       |
-| createdAt  | Date   | <span style="display: flex; justify-content: center">✅</span> | The date the combo was created                                                                                                                                                                                                                                                                                                                                       |
-| updatedAt  | Date   | <span style="display: flex; justify-content: center">✅</span> | The date the combo was last updated                                                                                                                                                                                                                                                                                                                                  |
 
 - - -
 
