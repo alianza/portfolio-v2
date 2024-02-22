@@ -22,8 +22,6 @@ export default function ProjectPreview({ project, ...props }) {
       case 'Academic':
         projectTypeImageBgClass = 'after:bg-academic';
         break;
-      default:
-        projectTypeImageBgClass = '';
     }
 
     projectTypeImageBgClass = `${projectTypeImageBgClass} ${pseudoElementBaseClass}`;

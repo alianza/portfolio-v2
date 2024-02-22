@@ -3,25 +3,13 @@ import { baseStyle, hiddenStyle } from '@/lib/utils';
 import ProjectPreview from '@/components/previews/ProjectPreview';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Head from 'next/head';
 
 const initialNumVisibleProjects = 6;
 // let documentHeight = Infinity;
 
-const preLoadImages = (sources) => (
-  <Head>
-    {sources.map((src) => (
-      <link key={src} rel="preload prefetch" as="image" href={src} />
-    ))}
-  </Head>
-);
-
 const Projects = ({ projects }) => {
   const router = useRouter();
   const [numVisibleProjects, setNumVisibleProjects] = useState(initialNumVisibleProjects);
-  const sources = projects
-    .slice(numVisibleProjects, initialNumVisibleProjects + numVisibleProjects)
-    .map((p) => p.data.thumbnail);
   const allProjectsVisible = projects.length <= numVisibleProjects;
 
   const revealNextProjects = () => {
@@ -42,8 +30,6 @@ const Projects = ({ projects }) => {
 
   return (
     <>
-      {preLoadImages(sources)}
-
       <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
         <h2 id="experiences" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
           Experiences & Projects
@@ -51,9 +37,12 @@ const Projects = ({ projects }) => {
       </TransitionScroll>
 
       <div className="mb-4 grid h-full w-full grid-cols-1 grid-rows-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-        {projects.map((project, i) =>
-          i >= numVisibleProjects ? null : <ProjectPreview key={project.id} project={project} />,
-        )}
+        {projects.slice(0, numVisibleProjects).map((project) => (
+          <ProjectPreview key={project.id} project={project} />
+        ))}
+        {projects.slice(numVisibleProjects, initialNumVisibleProjects + numVisibleProjects).map((project) => (
+          <ProjectPreview key={project.id} project={project} className="invisible h-0" />
+        ))}
       </div>
 
       <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
