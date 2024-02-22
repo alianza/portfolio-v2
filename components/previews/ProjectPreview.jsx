@@ -12,14 +12,20 @@ export default function ProjectPreview({ project, ...props }) {
   let projectTypeImageBgClass = '';
 
   if (data.type) {
-    projectTypeImageBgClass =
-      data.type === 'Professional'
-        ? 'after:bg-pro'
-        : data.type === 'Personal'
-          ? 'after:bg-personal'
-          : data.type === 'Academic'
-            ? 'after:bg-academic'
-            : '';
+    switch (data.type) {
+      case 'Professional':
+        projectTypeImageBgClass = 'after:bg-pro';
+        break;
+      case 'Personal':
+        projectTypeImageBgClass = 'after:bg-personal';
+        break;
+      case 'Academic':
+        projectTypeImageBgClass = 'after:bg-academic';
+        break;
+      default:
+        projectTypeImageBgClass = '';
+    }
+
     projectTypeImageBgClass = `${projectTypeImageBgClass} ${pseudoElementBaseClass}`;
   }
 

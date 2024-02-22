@@ -3,19 +3,32 @@ import { baseStyle, hiddenStyle } from '@/lib/utils';
 import ProjectPreview from '@/components/previews/ProjectPreview';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import Head from 'next/head';
 
 const initialNumVisibleProjects = 6;
 // let documentHeight = Infinity;
 
-const Projects = ({ projects }) => {
-  const [numVisibleProjects, setNumVisibleProjects] = useState(initialNumVisibleProjects);
-  const router = useRouter();
+const preLoadImages = (sources) => (
+  <Head>
+    {sources.map((src) => (
+      <link key={src} rel="preload prefetch" as="image" href={src} />
+    ))}
+  </Head>
+);
 
+const Projects = ({ projects }) => {
+  const router = useRouter();
+  const [numVisibleProjects, setNumVisibleProjects] = useState(initialNumVisibleProjects);
+  const sources = projects
+    .slice(numVisibleProjects, initialNumVisibleProjects + numVisibleProjects)
+    .map((p) => p.data.thumbnail);
   const allProjectsVisible = projects.length <= numVisibleProjects;
 
   const revealNextProjects = () => {
     if (allProjectsVisible) return;
-    [...Array(6).keys()].forEach((i) => setTimeout(() => setNumVisibleProjects((prev) => prev + 1), 100 * i));
+    [...Array(initialNumVisibleProjects).keys()].forEach((i) =>
+      setTimeout(() => setNumVisibleProjects((prev) => prev + 1), 100 * i),
+    );
   };
 
   // useEffect(() => {
@@ -29,6 +42,8 @@ const Projects = ({ projects }) => {
 
   return (
     <>
+      {preLoadImages(sources)}
+
       <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
         <h2 id="experiences" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
           Experiences & Projects
