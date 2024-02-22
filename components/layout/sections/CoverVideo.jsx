@@ -19,13 +19,7 @@ const CoverVideo = () => {
         <h1 className="text-5xl font-bold drop-shadow-lg">Jan-Willem van Bremen</h1>
         <h2 className="text-3xl drop-shadow-lg">Software engineer, Skateboarder & Model!</h2>
       </TransitionScroll>
-      <video
-        className="pointer-events-none h-[calc(100vh-theme(spacing.header))] w-full object-cover"
-        autoPlay
-        playsInline
-        muted
-        loop
-      >
+      <video className="pointer-events-none h-screen w-full object-cover" autoPlay playsInline muted loop>
         {videoId &&
           [[`cover_video_${videoId}.webm`], [`cover_video_${videoId}.mp4`]].map(([src]) => (
             <source key={src} src={`/${src}`} type={`video/${src.split('.').pop()}`} />

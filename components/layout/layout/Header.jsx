@@ -29,7 +29,7 @@ export default function Header({}) {
   );
 
   return (
-    <header className="sticky top-0 z-10 flex h-header items-center justify-between gap-2 bg-neutral-800 px-4 text-neutral-50">
+    <header className="fixed top-0 z-10 flex h-header w-full items-center justify-between gap-2 bg-neutral-800 bg-opacity-65 px-4 text-neutral-50 backdrop-blur-lg">
       <Link href="/" className="link whitespace-nowrap text-3xl font-extrabold">
         <h1 className="sm:hidden">J.W.</h1>
         <h1 className="hidden sm:block md:hidden">J.W. van Bremen</h1>

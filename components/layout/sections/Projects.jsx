@@ -13,6 +13,11 @@ const Projects = ({ projects }) => {
 
   const allProjectsVisible = projects.length <= numVisibleProjects;
 
+  const revealNextProjects = () => {
+    if (allProjectsVisible) return;
+    [...Array(6).keys()].forEach((i) => setTimeout(() => setNumVisibleProjects((prev) => prev + 1), 100 * i));
+  };
+
   // useEffect(() => {
   //   if (numVisibleProjects === initialNumVisibleProjects) return;
   //   if (window.innerWidth < 1024) return;
@@ -39,11 +44,7 @@ const Projects = ({ projects }) => {
       <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
         <button
           className="button button-green"
-          onClick={() =>
-            allProjectsVisible
-              ? router.push('/projects')
-              : setNumVisibleProjects((prevNumVisibleProjects) => prevNumVisibleProjects + 6)
-          }
+          onClick={() => (allProjectsVisible ? router.push('/projects') : revealNextProjects())}
         >
           <span className="m-2">{allProjectsVisible ? 'See all...' : 'See more...'}</span>
         </button>
