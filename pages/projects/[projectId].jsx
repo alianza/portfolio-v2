@@ -26,7 +26,7 @@ export const getStaticProps = async ({ params }) => {
 const Project = ({ project }) => {
   return (
     <div className="mx-auto max-w-screen-xl p-2 sm:p-6">
-      <Head title={`${config.title} ${project.title}`} description={project.description} />
+      <Head title={`${config.siteTitle} ${project.title}`} description={project.description} />
       <MdContent content={project} />
     </div>
   );
