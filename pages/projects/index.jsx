@@ -16,7 +16,7 @@ export async function getStaticProps() {
 
 function projectPage({ projects }) {
   return (
-    <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
+    <div className="mx-auto mt-header flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
       <Head title={config.siteTitle} description={config.siteDescription} />
 
       <section className="w-full">
