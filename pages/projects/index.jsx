@@ -1,6 +1,8 @@
 import Layout from '@/components/layout/layout/Layout';
 import { getProjects } from '@/lib/services/projectsService';
 import ProjectPreview from '@/components/previews/ProjectPreview';
+import Head from '@/components/layout/layout/Head';
+import config from '@/content/config.json';
 
 export async function getStaticProps() {
   const projects = await getProjects({ content: false });
@@ -15,6 +17,8 @@ export async function getStaticProps() {
 function projectPage({ projects }) {
   return (
     <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
+      <Head title={config.siteTitle} description={config.siteDescription} />
+
       <section className="w-full">
         <h2 id="experiences" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
           Experiences & Projects

@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <body>
         <Main />

@@ -2,10 +2,12 @@ import Layout from '@/components/layout/layout/Layout';
 import { useNetlifyIdentityRedirect } from '@/lib/customHooks';
 import { getProjects } from '@/lib/services/projectsService';
 import { getIntros } from '@/lib/services/introService';
-import CoverVideo from '@/components/layout/sections/coverVideo/CoverVideo';
-import AboutMe from '@/components/layout/sections/aboutMe/AboutMe';
-import Contact from '@/components/layout/sections/contact/Contact';
-import Projects from '@/components/layout/sections/projects/Projects';
+import CoverVideo from '@/components/layout/sections/CoverVideo';
+import AboutMe from '@/components/layout/sections/AboutMe';
+import Contact from '@/components/layout/sections/Contact';
+import Projects from '@/components/layout/sections/Projects';
+import Head from '@/components/layout/layout/Head';
+import config from '@/content/config.json';
 
 export async function getStaticProps() {
   const projects = await getProjects({ content: false });
@@ -24,6 +26,8 @@ function Home({ projects, intros }) {
 
   return (
     <>
+      <Head title={config.siteTitle} description={config.siteDescription} />
+
       <CoverVideo />
 
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">

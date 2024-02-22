@@ -1,7 +1,8 @@
 import Layout from '../../components/layout/layout/Layout';
 import MdContent from '../../components/mdContent/MdContent';
 import { getProject, getProjectIds } from '@/lib/services/projectsService';
-import Head from '@/components/layout/head/Head';
+import Head from '@/components/layout/layout/Head';
+import config from '@/content/config.json';
 
 export const getStaticPaths = async () => {
   const projectIds = await getProjectIds();
@@ -24,12 +25,10 @@ export const getStaticProps = async ({ params }) => {
 
 const Project = ({ project }) => {
   return (
-    <>
-      <Head item={project} />
-      <div className="mx-auto max-w-screen-xl p-2 sm:p-6">
-        <MdContent content={project} />
-      </div>
-    </>
+    <div className="mx-auto max-w-screen-xl p-2 sm:p-6">
+      <Head title={`${config.title} ${project.title}`} description={project.description} />
+      <MdContent content={project} />
+    </div>
   );
 };
 

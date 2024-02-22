@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../../../content/config.json';
+import config from '@/content/config.json';
 import { isExternalLink } from '@/lib/utils';
 import Link from 'next/link';
 
