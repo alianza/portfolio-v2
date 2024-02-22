@@ -41,6 +41,8 @@ After realizing the tables in the Skateboarding Tricks Tracker Web Application c
 <img src="/assets/react-generic-table_2.png" />
 </div>
 
+<video autoplay muted loop playsinline controls src="/assets/react-generic-table.webm"></video>
+
 - - -
 
 ## Summary
