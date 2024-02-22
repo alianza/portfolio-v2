@@ -81,7 +81,7 @@
     }
 
     button {
-      @apply my-1 inline-flex items-center gap-2 rounded-lg bg-neutral-600 px-5 py-2.5 text-sm font-medium text-neutral-100 underline decoration-transparent transition-colors duration-300 ease-in-out hover:bg-neutral-700 hover:decoration-inherit hover:duration-100 focus:outline-none focus:ring-4 focus:ring-neutral-600/50;
+      @apply my-1 inline-flex items-center gap-2 rounded-lg bg-neutral-400 px-5 py-2.5 text-sm font-medium text-neutral-100 underline decoration-transparent transition-colors duration-300 ease-in-out hover:bg-neutral-500 hover:decoration-inherit hover:duration-100 focus:outline-none focus:ring-4 focus:ring-neutral-600/50 dark:bg-neutral-600 hover:dark:bg-neutral-700;
       contain: content;
 
       img[alt='icon'] {
