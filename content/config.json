@@ -33,7 +33,8 @@
     {
       "title": "Who I am",
       "body": "My name is **Jan-Willem van Bremen**. I'm a\n\n<span data-date-string=\"10-10-1998\" data-years-since-date>\"Date since 10-10-1998\"</span>\n\nyear old *full-stack software engineer*, *skateboarder* and *model* from Amsterdam! I'm a very social, diligent and precise person who can concentrate for long periods of time. I work well both solo and in (multidisciplinary) development teams!",
-      "media": "/assets/portrait.jpg"
+      "media": "/assets/portrait.webp",
+      "fallbackMedia": "/assets/portrait.jpg"
     },
     {
       "title": "What I do professionally",
@@ -44,7 +45,8 @@
     {
       "title": "What I do for fun",
       "body": "For fun I have been practicing **skateboarding** for \n\n<span data-date-string=\"01-07-2011\" data-years-since-date>\"Date since 01-07-2011\"</span>\n\nyears on an amateur level. During my skateboarding career I have been sponsored by different brands and shops. Next to that I also do some model work for various street wear brands in **Amsterdam**.",
-      "media": "/assets/fun.webp"
+      "media": "/assets/fun.webp",
+      "fallbackMedia": "/assets/fun.jpg"
     }
   ]
 }

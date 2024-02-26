@@ -203,10 +203,7 @@ More advanced configuration example
             >
     <div> {...elementToAnimate} </div>
 </TransitionScroll>
-
 ```
-
-
 
 </div>
 </details>
@@ -222,3 +219,4 @@ Projects using the `React-transition-scroll` library:
 
 [<button>![icon](/assets/portfolio_lea.png) Personal portfolio website Lea Shamaa</button>](https://leashamaa.nl/)
 [<button>![icon](/assets/jwvbremen.nl_5.png) Personal portfolio website v2</button>](https://jwvbremen.nl/)
+[<button>![icon](/assets/everyorigin.png) EveryOrigin CORS Proxy</button>](https://everyorigin.jwvbremen.nl/)
