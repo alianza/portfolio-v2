@@ -45,7 +45,8 @@ collections:
             summary: '{{fields.title}}'
             fields:
               - { label: 'Title', name: 'title', widget: 'string' }
-              - { label: 'Media', name: 'media', widget: 'image' }
+              - { label: 'Media', name: 'media', widget: 'file' }
+              - { label: 'Fallback Media', name: 'fallbackMedia', widget: 'file', required: false }
               - { label: 'Body', name: 'body', widget: 'markdown', editor_components: ['years-since-date'] }
 
   - label: 'Projects'

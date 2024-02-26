@@ -235,7 +235,7 @@ ${imagesHtml}
       CMS.registerEditorComponent({
         id: 'years-since-date',
         label: 'Years since date',
-        fields: [{ name: 'date', label: 'Date', widget: 'date', date_format: 'DD-MM-YYYY', format: 'DD-MM-YYYY' }],
+        fields: [{ name: 'date', label: 'Date', widget: 'datetime', date_format: 'DD-MM-YYYY', format: 'DD-MM-YYYY' }],
         pattern: /^<span data-date-string="(.*?)" data-years-since-date>(.*?)<\/span>/ms,
         fromBlock: (match) => ({ date: match[1] }),
         toBlock: ({ date }) => `<span data-date-string="${date}" data-years-since-date>"Date since ${date}"</span>`,
