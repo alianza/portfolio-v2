@@ -1,5 +1,6 @@
 import { TransitionScroll } from 'react-transition-scroll';
 import { baseStyle, hiddenStyle } from '@/lib/utils';
+import { cloneElement, useEffect, useRef, useState } from 'react';
 
 const Contact = () => {
   return (
@@ -18,46 +19,13 @@ const Contact = () => {
           data-netlify="true"
         >
           <input type="hidden" name="form-name" value="contact" />
-          <div className="relative">
-            <input
-              placeholder="Name"
-              name="name"
-              id="name"
-              className="inputAnimation peer h-12 w-full p-2 indent-12"
-              required
-            />
-            <label htmlFor="name" className="labelAnimation">
-              Name
-            </label>
-          </div>
-
-          <div className="relative row-span-2">
-            <textarea
-              placeholder="Message"
-              name="message"
-              id="message"
-              className="inputAnimation peer max-h-96 min-h-[100%] w-full p-2 py-3 indent-[4.25em]"
-              required
-            />
-            <label htmlFor="message" className="labelAnimation">
-              Message
-            </label>
-          </div>
-
-          <div className="relative order-first sm:order-none">
-            <input
-              placeholder="Email"
-              name="email"
-              id="email"
-              className="inputAnimation peer mt-auto h-12 w-full p-2 indent-12"
-              required
-            />
-            <label htmlFor="email" className="labelAnimation">
-              Email
-            </label>
-          </div>
-
-          <button className={`button button-green col-span-full mx-auto h-12 w-full sm:w-auto`} type="submit">
+          {FormInput(<input placeholder="Name" className="h-12 w-full p-2" />)}
+          {FormInput(
+            <textarea placeholder="Message" className="max-h-96 min-h-[100%] w-full p-2 py-3" />,
+            'row-span-2',
+          )}
+          {FormInput(<input placeholder="Email" className="mt-auto h-12 w-full p-2" />, 'order-first sm:order-none')}
+          <button className="button button-green col-span-full mx-auto h-12 w-full sm:w-auto" type="submit">
             Send
           </button>
         </form>
@@ -77,6 +45,37 @@ const Contact = () => {
         </TransitionScroll>
       </div>
     </>
+  );
+};
+
+const FormInput = (input, className = '', required = true) => {
+  const labelRef = useRef(null);
+  const [labelWidth, setLabelWidth] = useState(0);
+  const [style, setStyle] = useState({});
+
+  useEffect(() => {
+    if (labelRef.current && !labelWidth) setLabelWidth(labelRef.current.offsetWidth + 6);
+  }, [labelWidth]);
+
+  const { placeholder, id, name, className: inputClassNameProp } = input.props;
+
+  const newInput = cloneElement(input, {
+    style,
+    className: `inputAnimation peer ${inputClassNameProp}`,
+    name: name || placeholder.toLowerCase(),
+    id: id || placeholder.toLowerCase(),
+    required,
+    onFocus: () => setStyle({ textIndent: '0' }),
+    onBlur: () => setStyle({ textIndent: `${labelWidth}px` }),
+  });
+
+  return (
+    <div className={`relative ${className}`}>
+      {newInput}
+      <label ref={labelRef} htmlFor={id} className="labelAnimation">
+        {placeholder}
+      </label>
+    </div>
   );
 };
 
