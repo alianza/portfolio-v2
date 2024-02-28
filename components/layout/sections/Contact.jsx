@@ -1,5 +1,5 @@
 import { TransitionScroll } from 'react-transition-scroll';
-import { baseStyle, hiddenStyle } from '@/lib/utils';
+import { baseStyle, capitalize, hiddenStyle } from '@/lib/utils';
 import { cloneElement, useEffect, useRef, useState } from 'react';
 
 const Contact = () => {
@@ -19,12 +19,9 @@ const Contact = () => {
           data-netlify="true"
         >
           <input type="hidden" name="form-name" value="contact" />
-          {FormInput(<input placeholder="Name" className="h-12 w-full p-2" />)}
-          {FormInput(
-            <textarea placeholder="Message" className="max-h-96 min-h-[100%] w-full p-2 py-3" />,
-            'row-span-2',
-          )}
-          {FormInput(<input placeholder="Email" className="mt-auto h-12 w-full p-2" />, 'order-first sm:order-none')}
+          {FormInput(<input id="name" className="h-12 w-full p-2" />)}
+          {FormInput(<textarea id="message" className="max-h-96 min-h-[100%] w-full p-2 py-3" />, 'row-span-2')}
+          {FormInput(<input id="email" className="mt-auto h-12 w-full p-2" />, 'order-first sm:order-none')}
           <button className="button button-green col-span-full mx-auto h-12 w-full sm:w-auto" type="submit">
             Send
           </button>
@@ -54,20 +51,24 @@ const FormInput = (input, className = '', required = true) => {
   const [style, setStyle] = useState({});
 
   useEffect(() => {
-    if (labelRef.current && !labelWidth) setLabelWidth(labelRef.current.offsetWidth + 6);
+    if (labelRef.current && !labelWidth) setLabelWidth(labelRef.current.offsetWidth + 6); // Determine label width to set textIndent
   }, [labelWidth]);
 
-  const { placeholder, id, name, className: inputClassNameProp } = input.props;
+  let { placeholder, id, name, className: inputClassNameProp } = input.props;
+
+  if (!name) name = id;
+  if (!placeholder) placeholder = capitalize(id);
 
   const newInput = cloneElement(input, {
     style,
     className: `inputAnimation peer ${inputClassNameProp}`,
-    name: name || placeholder.toLowerCase(),
-    id: id || placeholder.toLowerCase(),
+    name,
+    placeholder,
+    id,
     required,
     onFocus: () => setStyle({ textIndent: '0' }),
     onBlur: () => setStyle({ textIndent: `${labelWidth}px` }),
-  });
+  }); // Clone input element and add event listeners and props
 
   return (
     <div className={`relative ${className}`}>
