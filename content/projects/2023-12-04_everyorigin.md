@@ -64,7 +64,7 @@ EveryOrigin is a free CORS proxy service that allows developers to circumvent CO
 
 This is useful for developers who want to access the HTML content of a website from any origin. For instance if you want to fetch the HTML content of a website using Node.js (but you don't have a back-end server), you can use EveryOrigin to fetch the HTML content and then use the HTML content in your application.
 
-- - - 
+- - -
 
 <details >
 <summary>Code Snippets</summary>
@@ -72,7 +72,7 @@ This is useful for developers who want to access the HTML content of a website f
 
 The following are some code snippets of the project that are powerful, demonstrate good coding practices and that I'm proud of. The snippets demonstrate clean, concise and powerful code. *(Code has been compacted in some cases).*
 
-**Index.jsx page**\ 
+**Index.jsx page** 
 The code snippet below demonstrates the home index page of the website. It's a simple page that allows users to input a URL and fetch the HTML content of the website. The page also displays the HTML content and a code snippet of how to fetch the HTML content with Node.js using the fetch Api.
 
 Styling was done using TailwindCSS and code highlighting was done using [Highlight.js](https://highlightjs.org/).
@@ -275,7 +275,9 @@ export default async function handler(req, res) {
 ### Check out the project!
 
 [<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/everyorigin)
+
 [<button>![icon](/assets/everyorigin.png) Check out the site!</button>](https://everyorigin.jwvbremen.nl/)
+
 [<button>![icon](/assets/lighthouse.png) Lighthouse Audit</button>](/assets/lighthouse_everyorigin.html)
 
 Projects using EveryOrigin CORS Proxy
