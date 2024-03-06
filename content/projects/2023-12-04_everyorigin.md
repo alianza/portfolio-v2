@@ -49,6 +49,8 @@ The service is completely free to use and doesn't require any API key or rate li
 * [prettier](https://www.npmjs.com/package/prettier)
 * [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss)
 * [highlight.js](https://highlightjs.org/)
+* [heroicons](https://heroicons.com/)
+* [React-Toastify](https://github.com/fkhadra/react-toastify)
 
 - - -
 
@@ -85,6 +87,9 @@ export default function Home() {
   const [error, setError] = useState(null);
   const [key, setKey] = useState(Date.now());
   const router = useRouter();
+  const sampleCode = `const response = await fetch("https://${baseUrl}/get?url=${encodeURIComponent(
+    url,
+  )}");\nconst result = await response.text();`;
 
   useEffect(() => {
     if (!htmlContent) return;
@@ -96,13 +101,13 @@ export default function Home() {
     const start = Date.now();
     try {
       if (!url) throw new Error("URL is required");
-      triggerLoader(router);
       const validUrl = new URL(!url.includes("http://") && !url.includes("https://") ? `https://${url}` : url);
       setLoading(true);
       const response = await fetch(`/api/get?url=${encodeURIComponent(validUrl.toString())}`);
       const { html } = await response.json();
       if (!html) throw new Error("No HTML content found");
       if (html === htmlContent) return;
+      triggerLoader(router);
       setKey(Date.now());
       setHtmlContent(html);
     } catch (error) {
@@ -115,6 +120,16 @@ export default function Home() {
       if (duration < 1000) await new Promise((resolve) => setTimeout(resolve, 1000 - duration));
       setLoading(false);
     }
+  };
+
+  const copySampleCode = async () => {
+    await navigator.clipboard.writeText(sampleCode);
+    const selection = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(document.getElementById("sampleCode"));
+    selection.removeAllRanges();
+    selection.addRange(range);
+    toast.success("Code copied to clipboard");
   };
 
   return (
@@ -141,7 +156,7 @@ export default function Home() {
         </p>
       </header>
 
-      <div className="relative m-auto place-items-center after:absolute after:top-0 after:-z-20 after:h-[180px] after:w-[180px] after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] after:sm:w-[360px] before:lg:h-[360px] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40">
+      <div className="relative m-auto place-items-center after:absolute after:top-0 after:-z-20 after:h-[180px] after:w-[180px] after:animate-[pulse_10s_ease-in-out_infinite] after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] after:sm:w-[360px] before:lg:h-[360px] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40">
         <h1 className="inline-block text-4xl font-bold sm:text-6xl" style={{ overflowWrap: "anywhere" }}>
           EveryOrigin
         </h1>
@@ -210,7 +225,7 @@ export default function Home() {
               className="absolute right-2 top-2 origin-center transition-transform hover:scale-110 active:scale-95"
               onClick={() => setHtmlContent("")}
             >
-              ✖️
+              <XMarkIcon className="h-8 w-8 stroke-2 text-neutral-900" />
             </button>
             <code className="language-html max-w-[calc(100vw-4em)] overflow-hidden rounded bg-neutral-100 p-2 text-neutral-800">
               {htmlContent}
@@ -219,9 +234,20 @@ export default function Home() {
 
           <h2 className="mb-2 mt-6 text-lg font-bold">Node Fetch Example Code:</h2>
           <pre className="relative shadow-lg">
-            <code className="language-javascript overflow-hidden rounded bg-neutral-100 p-2 text-neutral-800">
-              {`const response = await fetch("https://${baseUrl}/get?url=${encodeURIComponent(url)}"); \n`}
-              {`const result = await response.text();`}
+            <div className="flex justify-between rounded-t bg-slate-700 px-2 py-1">
+              <span>Language: JavaScript</span>
+              <ClipboardDocumentListIcon
+                title="Copy code to clipboard"
+                className="h-6 w-6 cursor-pointer text-neutral-100 transition-transform hover:scale-110 active:scale-95"
+                onClick={copySampleCode}
+              />
+            </div>
+            <code
+              id="sampleCode"
+              className="language-javascript overflow-hidden rounded-b bg-neutral-100 p-2 text-neutral-800"
+              onDoubleClick={copySampleCode}
+            >
+              {sampleCode}
             </code>
           </pre>
         </TransitionScroll>
