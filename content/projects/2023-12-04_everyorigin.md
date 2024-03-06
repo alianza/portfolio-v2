@@ -301,9 +301,7 @@ export default async function handler(req, res) {
 ### Check out the project!
 
 [<button>![icon](/assets/github.png) GitHub</button>](https://github.com/alianza/everyorigin)
-
 [<button>![icon](/assets/everyorigin.png) Check out the site!</button>](https://everyorigin.jwvbremen.nl/)
-
 [<button>![icon](/assets/lighthouse.png) Lighthouse Audit</button>](/assets/lighthouse_everyorigin.html)
 
 Projects using EveryOrigin CORS Proxy
