@@ -306,6 +306,6 @@ export default async function handler(req, res) {
 
 Projects using EveryOrigin CORS Proxy
 
-[<button>![icon](/assets/nu.nl.webp) Nu.nl Clone</button>](https://nu.jwvbremen.nl/)
+[<button>![icon](/assets/nu.nl.webp) Nu.nl Clone</button>](https://www.nu.jwvbremen.nl/)
 
 - - -
