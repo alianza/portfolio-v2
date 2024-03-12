@@ -1,17 +1,7 @@
 const fs = require('fs');
 const yaml = require('js-yaml');
-const bundleAnalyzer = require('@next/bundle-analyzer');
 
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-};
-
-(config = () => {
+function buildCmsConfig() {
   const config = process.env;
 
   const configPath = './public/admin/';
@@ -26,6 +16,4 @@ const nextConfig = {
   const parsedConfig = yaml.load(interpolatedYamlContent);
   fs.writeFileSync(configPath + fileName, yaml.dump(parsedConfig));
   console.info(`CMS config written to ${configPath + fileName}`);
-})();
-
-module.exports = withBundleAnalyzer({ ...nextConfig });
+}
