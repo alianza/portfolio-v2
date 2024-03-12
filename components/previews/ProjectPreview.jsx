@@ -7,9 +7,10 @@ import StartEndDateLabel from '@/components/common/StartEndDateLabel';
 const pseudoElementBaseClass =
   'after:bg-48px bg-no-repeat after:absolute after:left-1 after:top-1 after:h-12 after:w-12  after:object-cover after:drop-shadow-xl after:content-[""] after:pointer-events-none';
 
-export default function ProjectPreview({ project, preLoad, ...props }) {
+export default function ProjectPreview({ project, preLoad }) {
   const { id, data } = project;
   let projectTypeImageBgClass = '';
+  let className = '';
 
   if (data.type) {
     switch (data.type) {
@@ -28,11 +29,17 @@ export default function ProjectPreview({ project, preLoad, ...props }) {
   }
 
   if (preLoad) {
-    props.className = `${props.className} pointer-events-none invisible absolute h-0 opacity-0`;
+    className = `pointer-events-none invisible absolute h-0 overflow-hidden`;
   }
 
   return (
-    <TransitionScroll key={id} baseStyle={baseStyle} hiddenStyle={hiddenStyle} {...props}>
+    <TransitionScroll
+      key={id}
+      baseStyle={baseStyle}
+      hiddenStyle={hiddenStyle}
+      {...(preLoad && { showStyle: { opacity: 0 } })}
+      {...{ className }}
+    >
       <Link href={`/projects/${id}`} className={`${projectTypeImageBgClass} hoverSlight relative block`}>
         <Image
           className="aspect-square w-full rounded object-cover shadow-lg"
