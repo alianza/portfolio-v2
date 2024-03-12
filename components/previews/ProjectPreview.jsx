@@ -7,7 +7,7 @@ import StartEndDateLabel from '@/components/common/StartEndDateLabel';
 const pseudoElementBaseClass =
   'after:bg-48px bg-no-repeat after:absolute after:left-1 after:top-1 after:h-12 after:w-12  after:object-cover after:drop-shadow-xl after:content-[""] after:pointer-events-none';
 
-export default function ProjectPreview({ project, ...props }) {
+export default function ProjectPreview({ project, preLoad, ...props }) {
   const { id, data } = project;
   let projectTypeImageBgClass = '';
 
@@ -25,6 +25,10 @@ export default function ProjectPreview({ project, ...props }) {
     }
 
     projectTypeImageBgClass = `${projectTypeImageBgClass} ${pseudoElementBaseClass}`;
+  }
+
+  if (preLoad) {
+    props.className = `${props.className} pointer-events-none invisible absolute h-0 opacity-0`;
   }
 
   return (

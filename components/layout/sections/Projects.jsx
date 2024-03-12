@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const initialNumVisibleProjects = 6;
-// let documentHeight = Infinity;
 
 const Projects = ({ projects }) => {
   const router = useRouter();
@@ -18,15 +17,6 @@ const Projects = ({ projects }) => {
       setTimeout(() => setNumVisibleProjects((prev) => prev + 1), 100 * i),
     );
   };
-
-  // useEffect(() => {
-  //   if (numVisibleProjects === initialNumVisibleProjects) return;
-  //   if (window.innerWidth < 1024) return;
-  //   if ('ontouchstart' in window || navigator.maxTouchPoints) return;
-  //   const difference = document.documentElement.scrollHeight - documentHeight;
-  //   setTimeout(() => window.scrollBy({ top: difference, behavior: 'smooth' }), 200);
-  // }, [numVisibleProjects]);
-  // documentHeight = document.documentElement.scrollHeight; When pressing view more projects button
 
   return (
     <>
@@ -41,7 +31,7 @@ const Projects = ({ projects }) => {
           <ProjectPreview key={project.id} project={project} />
         ))}
         {projects.slice(numVisibleProjects, initialNumVisibleProjects + numVisibleProjects).map((project) => (
-          <ProjectPreview key={project.id} project={project} className="invisible h-0" />
+          <ProjectPreview key={project.id} project={project} preLoad />
         ))}
       </div>
 
