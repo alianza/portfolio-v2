@@ -1,4 +1,4 @@
-import { TransitionScroll } from 'react-transition-scroll';
+import TransitionScroll from 'react-transition-scroll';
 import { baseStyle, capitalize, hiddenStyle } from '@/lib/utils';
 import { cloneElement, useEffect, useRef, useState } from 'react';
 

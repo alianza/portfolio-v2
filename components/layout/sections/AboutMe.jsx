@@ -1,4 +1,4 @@
-import { TransitionScroll } from 'react-transition-scroll';
+import TransitionScroll from 'react-transition-scroll';
 import { baseStyle, hiddenStyle, isImage, isVideo } from '@/lib/utils';
 import Image from 'next/image';
 import { useYearsSinceDateTags } from '@/lib/markdownEnrichment';

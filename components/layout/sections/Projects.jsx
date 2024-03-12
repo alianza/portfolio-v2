@@ -1,4 +1,4 @@
-import { TransitionScroll } from 'react-transition-scroll';
+import TransitionScroll from 'react-transition-scroll';
 import { baseStyle, hiddenStyle } from '@/lib/utils';
 import ProjectPreview from '@/components/previews/ProjectPreview';
 import { useRouter } from 'next/router';

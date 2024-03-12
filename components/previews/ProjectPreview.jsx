@@ -1,4 +1,4 @@
-import { TransitionScroll } from 'react-transition-scroll';
+import TransitionScroll from 'react-transition-scroll';
 import { hiddenStyle, baseStyle } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
