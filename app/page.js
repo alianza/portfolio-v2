@@ -1,33 +1,22 @@
-import Layout from '@/components/layout/layout/Layout';
-import { useNetlifyIdentityRedirect } from '@/lib/customHooks';
-import { getProjects } from '@/lib/services/projectsService';
-import { getIntros } from '@/lib/services/introService';
+import config from '@/content/config.json';
 import CoverVideo from '@/components/layout/sections/CoverVideo';
 import AboutMe from '@/components/layout/sections/AboutMe';
-import Contact from '@/components/layout/sections/Contact';
 import Projects from '@/components/layout/sections/Projects';
-import Head from '@/components/layout/layout/Head';
-import config from '@/content/config.json';
+import Contact from '@/components/layout/sections/Contact';
+import { getProjects } from '@/lib/services/projectsService';
+import { getIntros } from '@/lib/services/introService';
 
-export async function getStaticProps() {
+export const metadata = {
+  title: config.siteTitle,
+  description: config.siteDescription,
+};
+
+async function Page() {
   const projects = await getProjects({ content: false });
   const intros = await getIntros();
 
-  return {
-    props: {
-      projects,
-      intros,
-    },
-  };
-}
-
-function Home({ projects, intros }) {
-  useNetlifyIdentityRedirect();
-
   return (
     <>
-      <Head title={config.siteTitle} description={config.siteDescription} />
-
       <CoverVideo />
 
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
@@ -47,6 +36,4 @@ function Home({ projects, intros }) {
   );
 }
 
-Home.getLayout = (page) => <Layout>{page}</Layout>;
-
-export default Home;
+export default Page;

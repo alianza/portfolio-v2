@@ -1,7 +1,9 @@
+'use client';
+
 import TransitionScroll from 'react-transition-scroll';
 import { baseStyle, hiddenStyle } from '@/lib/utils';
 import ProjectPreview from '@/components/previews/ProjectPreview';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const initialNumVisibleProjects = 6;

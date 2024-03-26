@@ -17,3 +17,5 @@ function buildCmsConfig() {
   fs.writeFileSync(configPath + fileName, yaml.dump(parsedConfig));
   console.info(`CMS config written to ${configPath + fileName}`);
 }
+
+module.exports = buildCmsConfig;

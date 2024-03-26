@@ -1,3 +1,5 @@
+'use client';
+
 import TransitionScroll from 'react-transition-scroll';
 import { baseStyle, hiddenStyle } from '@/lib/utils';
 import { useEffect, useState } from 'react';

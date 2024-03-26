@@ -1,3 +1,5 @@
+'use client';
+
 import TransitionScroll from 'react-transition-scroll';
 import { baseStyle, hiddenStyle, isImage, isVideo } from '@/lib/utils';
 import Image from 'next/image';
