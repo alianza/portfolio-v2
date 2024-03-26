@@ -18,7 +18,6 @@ async function Page() {
   return (
     <>
       <CoverVideo />
-
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
         <section className="w-full">
           <AboutMe intros={intros} />
