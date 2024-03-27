@@ -2,13 +2,16 @@ import '@/styles/globals.scss';
 import Script from 'next/script';
 import Header from '@/components/layout/layout/Header';
 import Footer from '@/components/layout/layout/Footer';
-import ProgressBarProvider from '@/components/progressBar';
+import Providers from '@/components/progressBar';
+import config from '@/content/config.json';
 
 export const metadata = {
   icons: {
     icon: '/favicon.ico',
   },
   applicationName: 'Portfolio Jan-Willem van Bremen',
+  title: config.siteTitle,
+  description: config.siteDescription,
 };
 
 function RootLayout({ children }) {
@@ -22,7 +25,7 @@ function RootLayout({ children }) {
             {children}
           </main>
           <Footer />
-          <ProgressBarProvider />
+          <Providers />
         </div>
       </body>
     </html>

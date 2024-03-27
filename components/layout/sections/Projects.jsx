@@ -1,24 +1,14 @@
-'use client';
-
-import TransitionScroll from 'react-transition-scroll';
 import { baseStyle, hiddenStyle } from '@/lib/utils';
 import ProjectPreview from '@/components/previews/ProjectPreview';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { getProjects } from '@/lib/services/projectsService';
+import TransitionScroll from '@/components/transitionScroll/TransitionScroll';
+import Link from 'next/link';
 
-const initialNumVisibleProjects = 6;
+export const initialNumShownProjects = 6;
 
-const Projects = ({ projects }) => {
-  const router = useRouter();
-  const [numVisibleProjects, setNumVisibleProjects] = useState(initialNumVisibleProjects);
-  const allProjectsVisible = projects.length <= numVisibleProjects;
-
-  const revealNextProjects = () => {
-    if (allProjectsVisible) return;
-    [...Array(initialNumVisibleProjects).keys()].forEach((i) =>
-      setTimeout(() => setNumVisibleProjects((prev) => prev + 1), 100 * i),
-    );
-  };
+async function Projects({ shownProjects = initialNumShownProjects }) {
+  const projects = await getProjects({ content: false });
+  const allProjectsVisible = projects.length <= shownProjects;
 
   return (
     <>
@@ -29,24 +19,31 @@ const Projects = ({ projects }) => {
       </TransitionScroll>
 
       <div className="mb-4 grid h-full w-full grid-cols-1 grid-rows-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-        {projects.slice(0, numVisibleProjects).map((project) => (
+        {projects.slice(0, shownProjects).map((project) => (
           <ProjectPreview key={project.id} project={project} />
         ))}
-        {projects.slice(numVisibleProjects, initialNumVisibleProjects + numVisibleProjects).map((project) => (
+        {projects.slice(shownProjects, initialNumShownProjects + shownProjects).map((project) => (
           <ProjectPreview key={project.id} project={project} preLoad />
         ))}
       </div>
 
       <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle} className="flex justify-center">
-        <button
-          className="button button-green"
-          onClick={() => (allProjectsVisible ? router.push('/projects') : revealNextProjects())}
-        >
-          <span className="m-2">{allProjectsVisible ? 'See all...' : 'See more...'}</span>
-        </button>
+        {allProjectsVisible ? (
+          <Link className="button button-green" href={`/projects`}>
+            See all...
+          </Link>
+        ) : (
+          <Link
+            className="button button-green"
+            scroll={false}
+            href={`?shownProjects=${shownProjects + initialNumShownProjects}`}
+          >
+            See more...
+          </Link>
+        )}
       </TransitionScroll>
     </>
   );
-};
+}
 
 export default Projects;

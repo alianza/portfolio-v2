@@ -1,8 +1,8 @@
-import TransitionScroll from 'react-transition-scroll';
 import { hiddenStyle, baseStyle } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import StartEndDateLabel from '@/components/common/StartEndDateLabel';
+import TransitionScroll from '@/components/transitionScroll/TransitionScroll';
 
 const pseudoElementBaseClass =
   'after:bg-48px bg-no-repeat after:absolute after:left-1 after:top-1 after:h-12 after:w-12  after:object-cover after:drop-shadow-xl after:content-[""] after:pointer-events-none';
@@ -12,21 +12,19 @@ export default function ProjectPreview({ project, preLoad }) {
   let projectTypeImageBgClass = '';
   let className = '';
 
-  if (type) {
-    switch (type) {
-      case 'Professional':
-        projectTypeImageBgClass = 'after:bg-pro';
-        break;
-      case 'Personal':
-        projectTypeImageBgClass = 'after:bg-personal';
-        break;
-      case 'Academic':
-        projectTypeImageBgClass = 'after:bg-academic';
-        break;
-    }
-
-    projectTypeImageBgClass = `${projectTypeImageBgClass} ${pseudoElementBaseClass}`;
+  switch (type) {
+    case 'Professional':
+      projectTypeImageBgClass = 'after:bg-pro';
+      break;
+    case 'Personal':
+      projectTypeImageBgClass = 'after:bg-personal';
+      break;
+    case 'Academic':
+      projectTypeImageBgClass = 'after:bg-academic';
+      break;
   }
+
+  projectTypeImageBgClass = `${projectTypeImageBgClass} ${pseudoElementBaseClass}`;
 
   if (preLoad) {
     className = `pointer-events-none invisible absolute h-0 overflow-hidden`;

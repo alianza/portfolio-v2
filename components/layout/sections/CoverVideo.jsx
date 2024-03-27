@@ -1,15 +1,8 @@
-'use client';
-
-import TransitionScroll from 'react-transition-scroll';
+import TransitionScroll from '@/components/transitionScroll/TransitionScroll';
 import { baseStyle, hiddenStyle } from '@/lib/utils';
-import { useEffect, useState } from 'react';
 
 const CoverVideo = () => {
-  const [videoId, setVideoId] = useState(null);
-
-  useEffect(() => {
-    setVideoId(Math.floor(Math.random() * 2) + 1); // 1 or 2
-  }, []);
+  const videoId = Math.floor(Math.random() * 2) + 1; // 1 or 2
 
   return (
     <div className="w-full">
