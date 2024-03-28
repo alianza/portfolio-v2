@@ -16,7 +16,7 @@ export const metadata = {
 
 function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-pt-header">
       <Script strategy="lazyOnload" src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
       <body>
         <div id="app" className="flex min-h-screen flex-col">
