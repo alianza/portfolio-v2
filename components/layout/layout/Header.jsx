@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { disableScroll, enableScroll } from '@/lib/utils';
+import { useNetlifyIdentityRedirect } from '@/lib/customHooks';
 
 export default function Header({}) {
-  const [menuOpen, setMenuOpen] = React.useState(false);
+  useNetlifyIdentityRedirect();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     menuOpen ? disableScroll() : enableScroll();

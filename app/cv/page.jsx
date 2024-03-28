@@ -1,6 +1,4 @@
-import Layout from '@/components/layout/layout/Layout';
-
-function Cv() {
+function Page() {
   return (
     <iframe
       src={'/Curriculum Vitae Jan-Willem van Bremen - English.pdf'}
@@ -11,5 +9,4 @@ function Cv() {
   );
 }
 
-Cv.getLayout = (page) => <Layout>{page}</Layout>;
-export default Cv;
+export default Page;
