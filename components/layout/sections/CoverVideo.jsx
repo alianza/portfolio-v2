@@ -1,6 +1,3 @@
-import TransitionScroll from '@/components/transitionScroll/TransitionScroll';
-import { baseStyle, hiddenStyle } from '@/lib/utils';
-
 const CoverVideo = () => {
   const videoId = Math.floor(Math.random() * 2) + 1; // 1 or 2
 
