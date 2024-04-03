@@ -1,6 +1,6 @@
 import '@/styles/globals.scss';
 import Script from 'next/script';
-import Header from '@/components/layout/layout/Header';
+import Header from '@/components/layout/layout/header/Header';
 import Footer from '@/components/layout/layout/Footer';
 import Providers from '@/components/progressBar';
 import config from '@/content/config.json';

@@ -1,4 +1,4 @@
-import Header from './Header';
+import Header from './header/Header';
 import Footer from './Footer';
 import dynamic from 'next/dynamic';
 import { useDarkMode } from '@/lib/customHooks';

@@ -4,7 +4,7 @@ import Projects, { initialNumShownProjects } from '@/components/layout/sections/
 import Contact from '@/components/layout/sections/contact/Contact';
 
 async function Page({ searchParams }) {
-  const numVisibleProjects = parseInt(searchParams?.shownProjects, 10) || initialNumShownProjects;
+  const shownProjects = parseInt(searchParams?.shownProjects, 10) || initialNumShownProjects;
 
   return (
     <>
@@ -15,7 +15,7 @@ async function Page({ searchParams }) {
         </section>
 
         <section className="w-full">
-          <Projects shownProjects={numVisibleProjects} />
+          <Projects shownProjects={shownProjects} />
         </section>
 
         <section className="w-full">
