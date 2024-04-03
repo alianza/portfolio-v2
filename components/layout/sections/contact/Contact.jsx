@@ -6,7 +6,7 @@ const Contact = ({}) => {
   return (
     <>
       <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
-        <h2 id="contact" className="scroll-header-offset mt-5 text-center text-4xl font-bold sm:text-left">
+        <h2 id="contact" className="mt-5 text-center text-4xl font-bold sm:text-left">
           Contact me
         </h2>
       </TransitionScroll>

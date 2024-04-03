@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { disableScroll, enableScroll } from '@/lib/utils';
 import { useNetlifyIdentityRedirect } from '@/lib/customHooks';
+import { useSearchParams } from 'next/navigation';
 
 export default function Header({}) {
   useNetlifyIdentityRedirect();
   const [menuOpen, setMenuOpen] = useState(false);
+  const shownProjects = useSearchParams().get('shownProjects');
 
   useEffect(() => {
     menuOpen ? disableScroll() : enableScroll();
@@ -24,7 +26,14 @@ export default function Header({}) {
         ['/#contact', 'Contact'],
       ].map(([href, text]) => (
         <li key={href}>
-          <Link href={href} className="link py-4">
+          <Link
+            href={{
+              pathname: href.split('#')[0], // Add pathname if it is not a hash
+              ...(shownProjects && { query: { shownProjects } }),
+              hash: href.split('#')[1], // Add hash if it exists
+            }}
+            className="link py-4"
+          >
             <span className="shadow-2xl">{text}</span>
           </Link>
         </li>

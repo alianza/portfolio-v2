@@ -13,7 +13,7 @@ async function Projects({ shownProjects = initialNumShownProjects }) {
   return (
     <>
       <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
-        <h2 id="experiences" className="scroll-header-offset my-5 text-center text-4xl font-bold sm:text-left">
+        <h2 id="experiences" className="my-5 text-center text-4xl font-bold sm:text-left">
           Experiences & Projects
         </h2>
       </TransitionScroll>

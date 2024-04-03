@@ -14,7 +14,7 @@ module.exports = {
         academic: 'url("/academic.png")',
       },
       spacing: {
-        header: '64px',
+        header: '4em',
       },
       screens: {
         xs: '480px',
