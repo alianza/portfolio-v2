@@ -10,17 +10,10 @@ async function Page({ searchParams }) {
     <>
       <CoverVideo />
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
-        <section className="w-full">
-          <AboutMe />
-        </section>
-
-        <section className="w-full">
-          <Projects shownProjects={shownProjects} />
-        </section>
-
-        <section className="w-full">
-          <Contact />
-        </section>
+        <div className="sr-only">Anchor</div>
+        <AboutMe />
+        <Projects shownProjects={shownProjects} />
+        <Contact />
       </div>
     </>
   );

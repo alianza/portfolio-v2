@@ -17,8 +17,11 @@ const AboutMe = async () => {
   const intros = await getIntros();
 
   return (
-    <>
-      <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
+    <section className="w-full">
+      <TransitionScroll
+        baseStyle={{ ...baseStyle, transitionDuration: '1s' }}
+        hiddenStyle={{ ...hiddenStyle, transform: 'none' }}
+      >
         <h2 id="about" className="my-5 text-center text-4xl font-bold sm:text-left">
           About me
         </h2>
@@ -45,7 +48,7 @@ const AboutMe = async () => {
           </TransitionScroll>
         ))}
       </div>
-    </>
+    </section>
   );
 };
 

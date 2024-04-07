@@ -4,8 +4,11 @@ import FormInput from '@/components/common/FormInput';
 
 const Contact = ({}) => {
   return (
-    <>
-      <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
+    <section className="w-full">
+      <TransitionScroll
+        baseStyle={{ ...baseStyle, transitionDuration: '1s' }}
+        hiddenStyle={{ ...hiddenStyle, transform: 'none' }}
+      >
         <h2 id="contact" className="mt-5 text-center text-4xl font-bold sm:text-left">
           Contact me
         </h2>
@@ -51,7 +54,7 @@ const Contact = ({}) => {
           </h3>
         </TransitionScroll>
       </div>
-    </>
+    </section>
   );
 };
 

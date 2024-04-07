@@ -11,8 +11,11 @@ async function Projects({ shownProjects = initialNumShownProjects }) {
   const allProjectsVisible = projects.length <= shownProjects;
 
   return (
-    <>
-      <TransitionScroll baseStyle={baseStyle} hiddenStyle={hiddenStyle}>
+    <section className="w-full">
+      <TransitionScroll
+        baseStyle={{ ...baseStyle, transitionDuration: '1s' }}
+        hiddenStyle={{ ...hiddenStyle, transform: 'none' }}
+      >
         <h2 id="experiences" className="my-5 text-center text-4xl font-bold sm:text-left">
           Experiences & Projects
         </h2>
@@ -42,7 +45,7 @@ async function Projects({ shownProjects = initialNumShownProjects }) {
           </Link>
         )}
       </TransitionScroll>
-    </>
+    </section>
   );
 }
 
