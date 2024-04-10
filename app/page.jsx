@@ -8,6 +8,8 @@ async function Page({ searchParams }) {
 
   const mistake = 'This is a mistake';
 
+  const mistakeAsWell = 'This is also a mistake';
+
   return (
     <>
       <CoverVideo />
