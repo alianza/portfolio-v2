@@ -6,8 +6,6 @@ import Contact from '@/components/layout/sections/contact/Contact';
 async function Page({ searchParams }) {
   const shownProjects = parseInt(searchParams?.shownProjects, 10) || initialNumShownProjects;
 
-  const mistake = 'This is a mistake';
-
   return (
     <>
       <CoverVideo />
