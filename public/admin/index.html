@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Content Manager</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity.js"></script>
+    <script>
+      const APIUrl = 'https://wonderful-roentgen-f3230c.netlify.app/.netlify/identity';
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => netlifyIdentity.init({ APIUrl }));
+      } else {
+        netlifyIdentity.init({ APIUrl });
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <style>

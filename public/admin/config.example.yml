@@ -3,7 +3,8 @@ backend:
   branch: main
   repo: alianza/portfolio-v2
   preview_context: alianza/portfolio-v2
-  base_url: https://jw-portfolio-v2.vercel.app/
+  identity_url: "https://wonderful-roentgen-f3230c.netlify.app/.netlify/identity"
+  gateway_url: "https://wonderful-roentgen-f3230c.netlify.app/.netlify/git"
 
 local_backend: ${CMS_LOCAL_BACKEND:-false}
 site_url: https://jwvbremen.nl/
