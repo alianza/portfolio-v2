@@ -12,7 +12,7 @@ description: My first project via Team Rockstars IT was working as a Full-Stack
 ---
 # Road.io (Formerly E-Flux)
 
-My first project via Team Rockstars IT was at Road.io (Formerly E-Flux). My position at Road.io was full-stack web developer within their initially small development team. E-Flux is a company that makes software to support and manage the charging of electric vehicles by facilitating communication between chargers with thousands of customers and various providers who license (whitelabel) our software. 
+My first project via Team Rockstars IT was at Road.io (Formerly E-Flux). My position at Road.io was full-stack web developer within their initially small development team. E-Flux is a company that makes software to support and manage the charging of electric vehicles by facilitating communication between chargers with thousands of customers and various providers who license (whitelabel) our software!
 
 - - -
 
