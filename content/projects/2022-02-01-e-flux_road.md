@@ -622,11 +622,6 @@ export class MspRemoteSessionStatusManager {
 }
 ```
 
-
-
-
-
-
 </div>
 </details>
 
@@ -636,21 +631,23 @@ export class MspRemoteSessionStatusManager {
 
 During my time at Road.io (Formerly E-Flux) I was able to contribute hugely to the development of the platform spanning across the back-end and front-end. Here are some notable key achievements and contributions of mine:
 
-- **Created an Audit Entry Facility in the platform** to log changes to documents in the database and store them in a new collection so we have an Audit Trail of all changes in the system without too much overhead. This was a crucial feature for the company to have a clear overview of all changes made to the system and to be able to track back changes if necessary.
-- **Developed Remote Sessions Facility** to handle active remote sessions. Remote sessions are sessions triggered by a Mobility Service Provider on a charger of another remote Charge Point Operator. This requires authentication and communication between the systems of both parties and updating status towards the user. The job checks for active remote sessions and handles them by updating the status through finding the corresponding active session that the Charge Point Operator sends. The functionality as well as testing for this feature was developed by me.
-- **Developed the Smart Charging functionality with Stekker.app** to allow user to charge their electric vehicle according to their preferences in terms of time, price and green energy availability. This was a crucial feature for the company to be able to offer a more flexible and sustainable charging experience to their users and to elevate the load on the electricity grid during peak times. Also for this feature I was responsible for the development and testing together with the 3rd party Stekker.app.
-- **Developed a VAT assignment Facility for international charge sessions** to assign the correct VAT percentage to charge sessions based on the country of the user or the country of the charging station where the electricity is consumed. This was a crucial feature for the company to be able to correctly calculate the VAT for international charge sessions and to be able to comply with international tax laws and perform billing correctly. I was responsible for the development and testing of this feature.
-- **Developed an integration with the Gireve Roaming Hub** to aid in the expansion of the company's charging network in France. This was a crucial feature for the company to be able to expand their charging network and to be able to offer their services to a larger audience. I was responsible for the development and testing of this feature together with Johan Otten from the Roaming Team. 
-- **Developed an integration and migration to a new ERP system (NetSuite)** to aid the company in their expansion and to be able to handle the growing amount of data, users and transactions/invoices in a more efficient way and to migrate away from the old ERP system. I was responsible for the development and testing of this feature together with a 3rd party called Rsult.
-- **Overhauled their billing system and PDF rendering** to facilitate additional use cases in the platform and increase the flexibility of the billing system.
-- **Performed Data Migrations** to increase the performance in consistency of the database and to be able to handle the growing amount of data and users efficiently.
-- **Contributed to a new Event-Based approach to handling CDR's** to increase the performance and consistency of the system and to be able to handle the growing amount of data and sessions effectively. This was a step towards a more scalable and efficient system. I was responsible for the development and testing of this feature together with the Roaming Team.
-- **Developed a Tariff note Facility** in order to create Tariff notes for specific charge station operators displayed on the charge stations map and in the app. This was a crucial feature for the company to be able to offer more reliable and transparent information to their users and to be able to comply with the requirements of the charge station operators. I was responsible for the development and testing of this feature.
+* **Created an Audit Entry Facility in the platform** to log changes to documents in the database and store them in a new collection so we have an Audit Trail of all changes in the system without too much overhead. This was a crucial feature for the company to have a clear overview of all changes made to the system and to be able to track back changes if necessary.
+* **Developed Remote Sessions Facility** to handle active remote sessions. Remote sessions are sessions triggered by a Mobility Service Provider on a charger of another remote Charge Point Operator. This requires authentication and communication between the systems of both parties and updating status towards the user. The job checks for active remote sessions and handles them by updating the status through finding the corresponding active session that the Charge Point Operator sends. The functionality as well as testing for this feature was developed by me.
+* **Developed the Smart Charging functionality with Stekker.app** to allow user to charge their electric vehicle according to their preferences in terms of time, price and green energy availability. This was a crucial feature for the company to be able to offer a more flexible and sustainable charging experience to their users and to elevate the load on the electricity grid during peak times. Also for this feature I was responsible for the development and testing together with the 3rd party Stekker.app.
+* **Developed a VAT assignment Facility for international charge sessions** to assign the correct VAT percentage to charge sessions based on the country of the user or the country of the charging station where the electricity is consumed. This was a crucial feature for the company to be able to correctly calculate the VAT for international charge sessions and to be able to comply with international tax laws and perform billing correctly. I was responsible for the development and testing of this feature.
+* **Developed an integration with the Gireve Roaming Hub** to aid in the expansion of the company's charging network in France. This was a crucial feature for the company to be able to expand their charging network and to be able to offer their services to a larger audience. I was responsible for the development and testing of this feature together with Johan Otten from the Roaming Team. 
+* **Developed an integration and migration to a new ERP system (NetSuite)** to aid the company in their expansion and to be able to handle the growing amount of data, users and transactions/invoices in a more efficient way and to migrate away from the old ERP system. I was responsible for the development and testing of this feature together with a 3rd party called Rsult.
+* **Overhauled their billing system and PDF rendering** to facilitate additional use cases in the platform and increase the flexibility of the billing system.
+* **Performed Data Migrations** to increase the performance in consistency of the database and to be able to handle the growing amount of data and users efficiently.
+* **Contributed to a new Event-Based approach to handling CDR's** to increase the performance and consistency of the system and to be able to handle the growing amount of data and sessions effectively. This was a step towards a more scalable and efficient system. I was responsible for the development and testing of this feature together with the Roaming Team.
+* **Developed a Tariff note Facility** in order to create Tariff notes for specific charge station operators displayed on the charge stations map and in the app. This was a crucial feature for the company to be able to offer more reliable and transparent information to their users and to be able to comply with the requirements of the charge station operators. I was responsible for the development and testing of this feature.
 
 - - -
 
 ### Check out the project!
 
 [<button>![icon](/assets/e-flux-logo-150x150.jpeg) E-Flux Website</button>](https://e-flux.io/)
+
 [<button>![icon](/assets/this_is_road_logo.jpg) Road.io Website</button>](https://road.io/)
+
 [<button>![icon](/assets/github.png) E-Flux GitHub</button>](https://github.com/e-flux-platform)
