@@ -647,7 +647,5 @@ During my time at Road.io (Formerly E-Flux) I was able to contribute hugely to t
 ### Check out the project!
 
 [<button>![icon](/assets/e-flux-logo-150x150.jpeg) E-Flux Website</button>](https://e-flux.io/)
-
 [<button>![icon](/assets/this_is_road_logo.jpg) Road.io Website</button>](https://road.io/)
-
 [<button>![icon](/assets/github.png) E-Flux GitHub</button>](https://github.com/e-flux-platform)
