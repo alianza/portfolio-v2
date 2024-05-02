@@ -1,5 +1,5 @@
 backend:
-  name: github
+  name: git-gateway
   branch: main
   repo: alianza/portfolio-v2
   preview_context: alianza/portfolio-v2
