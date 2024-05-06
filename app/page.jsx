@@ -9,6 +9,7 @@ async function Page({ searchParams }) {
   return (
     <>
       <CoverVideo />
+
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-12 p-4 sm:px-12">
         <div className="sr-only">Anchor</div>
         <AboutMe />
