@@ -20,6 +20,11 @@ export async function generateMetadata({ params }) {
 async function Project({ params }) {
   const project = await getProject(params.projectId);
 
+  project.content = project.content.replaceAll(
+    /<a href="([^"]+)">/g,
+    '<a href="$1" target="_blank" rel="noopener noreferrer">',
+  );
+
   return (
     <div className="mx-auto mt-header max-w-screen-xl p-2 sm:p-6">
       <MdContent content={project} />
