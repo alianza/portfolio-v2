@@ -4,7 +4,6 @@ import contentStyles from '@/components/mdContent/mdContent.module.scss';
 import {
   useCodeHighlightStyles,
   useDetailTagsAnimation,
-  useExternalLinks,
   useGithubLastUpdated,
   useImageZoom,
   useYearsSinceDateTags,
@@ -15,7 +14,6 @@ const contentId = 'article-content';
 function ArticleContent({ content }) {
   useDetailTagsAnimation(contentId);
   useImageZoom(contentId);
-  useExternalLinks(contentId);
   useCodeHighlightStyles();
   useGithubLastUpdated(contentId);
   useYearsSinceDateTags();
