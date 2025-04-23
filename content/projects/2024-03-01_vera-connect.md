@@ -12,7 +12,7 @@ description: My second project via Team Rockstars IT was working as a Full-Stack
 ---
 # Vera Connect
 
-My first project via Team Rockstars IT was at Road.io (Formerly E-Flux). My position at Road.io was full-stack web developer within their initially small development team. E-Flux is a company that makes software to support and manage the charging of electric vehicles by facilitating communication between chargers with thousands of customers and various providers who license (whitelabel) our software!
+My second project via Team Rockstars IT was at Vera Connect B.V. My position at Vera Connect was Full-Stack web & native engineer within their small development team. Vera Connect makes software for every day people aimed at safely and securely collecting personal information, creating groups/communities and organizing events. I worked closely together with the founders of the company [Robin Gordijn](https://www.linkedin.com/in/robin-gordijn-aaab4517/) and [Paul van Erp](https://www.linkedin.com/in/paul-van-erp-0b9a4126/) to expand their software offerings and build new features for their users.
 
 - - -
 
@@ -33,5 +33,11 @@ My first project via Team Rockstars IT was at Road.io (Formerly E-Flux). My posi
 - - -
 
 ## Screens
+
+<div class="images-grid">
+<img src="/assets/placeholder.jpg" />
+</div>
+
+<video autoplay muted loop playsinline controls src="/assets/whatsapp-video-2025-04-23-at-15.36.54.mp4"></video>
 
 ![Vera Connect Team](/assets/www.veraconnect.com_about.png "Vera Connect Team")
