@@ -10,7 +10,7 @@ description: My second project via Team Rockstars IT was working as a Full-Stack
   front-ends and an Api. The main stack consisted of React (Native), Express,
   Prisma ORM and PostgreSQL.
 ---
-# Road.io (Formerly E-Flux)
+# Vera Connect
 
 My first project via Team Rockstars IT was at Road.io (Formerly E-Flux). My position at Road.io was full-stack web developer within their initially small development team. E-Flux is a company that makes software to support and manage the charging of electric vehicles by facilitating communication between chargers with thousands of customers and various providers who license (whitelabel) our software!
 
@@ -26,6 +26,8 @@ My first project via Team Rockstars IT was at Road.io (Formerly E-Flux). My posi
 <li>Expo <a href="https://expo.dev/"><img src="/assets/expo.png" alt="icon"></a></li>
 <li>Font Awesome <a href="https://fontawesome.com/"><img src="/assets/font_awesome.png" alt="icon"></a></li>
 <li>Express <a href="https://expressjs.com/"><img src="/assets/express.png" alt="icon"></a></li>
+<li>Prisma ORM <a href="https://www.prisma.io/"><img src="/assets/prisma.png" alt="icon"></a></li>
+<li>Prettier <a href="https://prettier.io/"><img src="/assets/prettier.png" alt="icon"></a></li>
 </ul>
 
 - - -
