@@ -35,7 +35,10 @@ My second project via Team Rockstars IT was at Vera Connect B.V. My position at 
 ## Screens
 
 <div class="images-grid">
-<img src="/assets/placeholder.jpg" />
+<img src="/assets/veraconnect_1.png" />
+<img src="/assets/veraconnect_2.png" />
+<img src="/assets/veraconnect_3.png" />
+<img src="/assets/veraconnect_4.png" />
 </div>
 
 <video autoplay muted loop playsinline controls src="/assets/whatsapp-video-2025-04-23-at-15.36.54.mp4"></video>
